@@ -146,3 +146,6 @@ h1 .edition{font-family:var(--font-ui);font-weight:600;font-size:10px;letter-spa
 button:focus-visible,a:focus-visible{outline:2px solid var(--accent)}
 .vignette{background:radial-gradient(ellipse at 51% 43%,transparent 40%,rgba(60,40,25,.07) 100%)}
 @media(max-width:767px){h1{font-size:28px}.layers-panel.mobile-open,.bottom-dock,.detail-sheet{background:var(--panel)}.about-sheet{border-radius:0}}
+
+/* Patient view (?patient=1): identifiers and reference chrome go, the anatomy stays. */
+.patient .structure-meta,.patient .context-note,.patient .source-link,.patient .top-actions kbd,.patient .system-count,.patient .panel-heading .small-number,.patient .studio-footer button,.patient .top-actions .icon-button{display:none}
