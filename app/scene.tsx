@@ -86,9 +86,12 @@ export default function AnatomyScene({atlas,state,onSelect,onFrame,onProgress,on
    const [kind,ci]=key.split(':');const chunk=kind==='overview'?atlas.overview!.chunks[+ci]:kind==='context'?atlas.chunks[atlas.contexts![ci].chunk]:atlas.chunks[+ci];
    // Only the gzipped chunks ship (GitHub Pages serves them as raw bytes), so decoding is not optional.
    if(!chunk.gzip)throw new Error('This anatomy catalogue has no compressed geometry.');if(typeof DecompressionStream==='undefined')throw new Error('This browser cannot decompress the anatomy files. Please use a current browser.');
-   const response=await fetch(assetUrl(chunk.gzip),{signal:abort.signal});const buffer=await decodeModelResponse(response,chunk.bytes,true);if(disposed||!(wantedKeys.includes(key)||wantedContext.includes(key)))return;
+   const t0=performance.now();
+   const response=await fetch(assetUrl(chunk.gzip),{signal:abort.signal});const t1=performance.now();const buffer=await decodeModelResponse(response,chunk.bytes,true);const t2=performance.now();if(disposed||!(wantedKeys.includes(key)||wantedContext.includes(key)))return;
    const groups=new Map<string,T.BufferGeometry[]>(),own:T.BufferGeometry[]=[],parts:number[]=[];
-   for(const [i,l] of layoutsIn(key)){
+   const layouts=layoutsIn(key);
+   if(kind==='context'&&!layouts.length){console.error('context set '+key+' names no parts: atlas.contexts is out of step with atlas.parts');throw new Error('context set '+key+' is empty');}
+   for(const [i,l] of layouts){
     if(partLoaded[i])continue;const p=atlas.parts[i];
     const g=new T.BufferGeometry();g.setAttribute('position',new T.BufferAttribute(new Float32Array(buffer,l.positions,l.vertexCount*3),3));
     // GPU normalized signed-short normals keep the complete atlas compact in memory.
@@ -100,7 +103,10 @@ export default function AnatomyScene({atlas,state,onSelect,onFrame,onProgress,on
    const meshes:T.Mesh[]=[];
    groups.forEach((gs,system)=>{const geometry=mergeGeometries(gs,false);if(!geometry)throw new Error('Could not assemble anatomy geometry.');own.push(geometry);const mesh=new T.Mesh(geometry,(kind==='context'?contextMats:mats).get(system as never));mesh.frustumCulled=false;if(kind==='context')mesh.renderOrder=-1;scene.add(mesh);meshes.push(mesh);});
    loadedSets.set(key,{meshes,geometries:own,parts});lastState=null;layoutKey='';lineKey='';dirty=true;
+   // timing per chunk set, readable as performance.getEntriesByName('chunk') and in window.__atlas.timings
+   const t3=performance.now();timings.push({key,parts:parts.length,fetchMs:Math.round(t1-t0),decodeMs:Math.round(t2-t1),buildMs:Math.round(t3-t2)});performance.measure('chunk',{start:t0,end:t3,detail:key});
   };
+  const timings:{key:string;parts:number;fetchMs:number;decodeMs:number;buildMs:number}[]=[];
   // The region's context is fetched only once every one of its own chunks has been drawn.
   const syncContext=(keys:string[])=>{
    wantedContext=keys;
@@ -123,7 +129,7 @@ export default function AnatomyScene({atlas,state,onSelect,onFrame,onProgress,on
   };
   let lastKeys='',lastContextKeys='',lineKey='',lastFrame=-1;
   // inspection hook for the browser console: which sets are held and how each part is loaded
-  (window as unknown as {__atlas?:unknown}).__atlas={loaded:()=>[...loadedSets.entries()].map(([k,v])=>[k,v.parts.length,v.meshes.length]),kinds:()=>{const c=[0,0,0,0];partLoaded.forEach(v=>c[v]++);return c;},visible:()=>{let n=0;for(let i=0;i<atlas.parts.length;i++)if(data[i*4+3]>.5)n++;return n;}};
+  (window as unknown as {__atlas?:unknown}).__atlas={loaded:()=>[...loadedSets.entries()].map(([k,v])=>[k,v.parts.length,v.meshes.length]),kinds:()=>{const c=[0,0,0,0];partLoaded.forEach(v=>c[v]++);return c;},visible:()=>{let n=0;for(let i=0;i<atlas.parts.length;i++)if(data[i*4+3]>.5)n++;return n;},timings:()=>timings.slice()};
   let lineMesh:T.Mesh|null=null;
   // A fascial line: for each station, the loaded parts that stand for it; the point is the vertex of those parts
   // nearest the centre of their joint bounds, so the line rides on the surface it names. Whole body only, and

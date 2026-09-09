@@ -3,6 +3,7 @@
 // lines resolved to concept ids on this body. Run after merge-layers.mjs and rechunk-bp3d.mjs.
 //   node scripts/build-index.mjs <anatomy.json from mvmt-program> <structure-meshes.json>
 import fs from 'node:fs';
+import {DEPTH_MATCHES} from './overrides.mjs';
 const dir=new URL('../public/models/',import.meta.url);
 const [anatomyPath,joinPath]=process.argv.slice(2);
 if(!anatomyPath||!joinPath)throw new Error('usage: build-index.mjs <anatomy.json> <structure-meshes.json>');
@@ -24,7 +25,10 @@ let matchedStructures=0,unmatched=[];
 for(const s of anatomy){
  if(s.system!=='muscular'||!s.layer)continue;
  const own=byId.get(s.id);if(own)for(const e of own.elements)note(e,s.layer);          // our own exported meshes it claims
- const c=conceptFor(s.name);if(c){matchedStructures++;for(const e of c.elements)note(e,s.layer);}else unmatched.push(s.name);
+ const manual=DEPTH_MATCHES[s.name];
+ const cs=manual?manual.map(n=>byNorm.get(norm(n))).filter(Boolean):[conceptFor(s.name)].filter(Boolean);
+ if(manual&&manual.length&&cs.length!==manual.length)throw new Error(`${s.name}: DEPTH_MATCHES names a concept this atlas lacks: ${manual.filter(n=>!byNorm.get(norm(n))).join(', ')}`);
+ if(cs.length){matchedStructures++;for(const c of cs)for(const e of c.elements)note(e,s.layer);}else unmatched.push(s.name);
 }
 const muscles=atlas.parts.filter(p=>p.system==='muscular');
 const classified=muscles.filter(p=>depth[p.id]).length;
