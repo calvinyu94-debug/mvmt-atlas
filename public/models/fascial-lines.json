@@ -385,7 +385,28 @@
     {
      "structure": "thoracic-intercostals",
      "name": "Intercostals",
-     "resolve": []
+     "resolve": [
+      {
+       "kind": "bp3d",
+       "id": "FMA13354",
+       "name": "intercostal muscle"
+      },
+      {
+       "kind": "bp3d",
+       "id": "FMA9756",
+       "name": "external intercostal muscle"
+      },
+      {
+       "kind": "bp3d",
+       "id": "FMA9757",
+       "name": "internal intercostal muscle"
+      },
+      {
+       "kind": "bp3d",
+       "id": "FMA9758",
+       "name": "innermost intercostal muscle"
+      }
+     ]
     },
     {
      "structure": "cervical-splenius-capitis",
@@ -917,6 +938,11 @@
       {
        "kind": "mvmt",
        "id": "elbow-biceps"
+      },
+      {
+       "kind": "bp3d",
+       "id": "FMA37682",
+       "name": "short head of biceps brachii"
       }
      ]
     },
@@ -1089,6 +1115,11 @@
       {
        "kind": "mvmt",
        "id": "elbow-triceps"
+      },
+      {
+       "kind": "bp3d",
+       "id": "FMA37692",
+       "name": "long head of triceps brachii"
       }
      ]
     },
@@ -1288,13 +1319,5 @@
    ]
   }
  ],
- "unresolved": [
-  {
-   "line": "LL",
-   "structure": "thoracic-intercostals",
-   "name": "Intercostals",
-   "latin": "mm. intercostales",
-   "system": "muscular"
-  }
- ]
+ "unresolved": []
 }

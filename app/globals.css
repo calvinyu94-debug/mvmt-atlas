@@ -149,3 +149,34 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--accent)}
 
 /* Patient view (?patient=1): identifiers and reference chrome go, the anatomy stays. */
 .patient .structure-meta,.patient .context-note,.patient .source-link,.patient .top-actions kbd,.patient .system-count,.patient .panel-heading .small-number,.patient .studio-footer button,.patient .top-actions .icon-button{display:none}
+
+/* Phase 3: regions, grouped systems, muscle depth, fascial lines, the schematic label. */
+.layers-panel{top:180px}
+.region-chips{display:flex;flex-wrap:wrap;gap:4px;padding:8px 0 10px;border-bottom:1px solid var(--line-2)}
+.chip{border:1px solid var(--line);background:var(--panel);border-radius:99px;padding:4px 10px;font-family:var(--font-ui);font-size:10px;letter-spacing:.06em;text-transform:uppercase;font-weight:600;color:var(--ink-2);cursor:pointer}
+.chip:hover{background:var(--hover)}.chip.active{background:var(--ink);border-color:var(--ink);color:var(--panel)}
+.layers-panel .panel-heading+.panel-heading{margin-top:12px}
+.sub-row{padding-left:14px}.sub-row .system-name{font-size:11px}
+.group-row .system-name svg{margin-left:4px;color:var(--ink-3)}
+.depth-seg{display:flex;border:1px solid var(--line);border-radius:var(--radius-sm);overflow:hidden;margin:0 0 6px 18px}
+.depth-seg button{flex:1;border:0;border-left:1px solid var(--line);background:var(--panel);color:var(--ink-2);font-family:var(--font-ui);font-size:10px;padding:5px 4px;cursor:pointer;text-transform:uppercase;letter-spacing:.04em;font-weight:600}
+.depth-seg button:first-child{border-left:0}.depth-seg button[aria-pressed=true]{background:var(--ink);color:var(--panel)}
+.fold-toggle{display:flex;align-items:center;gap:6px;width:100%;padding:8px 5px;margin-top:4px;border:0;border-top:1px solid var(--line-2);background:none;color:var(--ink-3);font-family:var(--font-ui);font-size:10px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;cursor:pointer}
+.fold-toggle:hover{color:var(--ink)}.fold-toggle .system-count{margin-left:auto}
+.line-block{padding:4px 0 8px 18px}
+.line-list{display:grid;grid-template-columns:repeat(4,1fr);gap:3px}
+.line-list button{border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--panel);color:var(--ink-2);font-family:var(--font-ui);font-size:10px;font-weight:700;padding:5px 2px;cursor:pointer}
+.line-list button:hover{background:var(--hover)}.line-list button[aria-pressed=true]{background:#7A3E9D;border-color:#7A3E9D;color:#fff}
+.line-info{margin-top:8px;font-size:12px;color:var(--ink-2)}.line-info strong{display:block;font-family:var(--font-display);font-size:14px;color:var(--ink);margin-bottom:4px}
+.line-caveat{margin:0 0 6px;padding:6px 8px;border-radius:var(--radius-sm);background:var(--accent-wash);color:var(--ink-2);font-size:11px;line-height:1.45}
+.line-info ol{margin:0;padding-left:16px;font-size:11px;line-height:1.5}.line-info ol button{border:0;background:none;padding:0;color:var(--ink-2);font:inherit;cursor:pointer;text-align:left}.line-info ol button:hover{color:var(--accent-dk);text-decoration:underline}
+.line-missing{margin-left:6px;color:var(--warn);font-size:10px}.line-note{margin:6px 0 0;font-size:11px;color:var(--ink-3)}
+.schematic-label{position:absolute;left:50%;top:112px;transform:translateX(-50%);z-index:3;pointer-events:none;background:var(--ink);color:var(--panel);padding:6px 12px;border-radius:var(--radius-sm);font-family:var(--font-ui);font-size:10px;letter-spacing:.08em;text-transform:uppercase;font-weight:700}
+.schematic-inline{font-family:var(--font-ui);font-size:10px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:var(--warn)}
+.confidence-note{font-size:11px;line-height:1.45;color:var(--warn)}
+.eyebrow-region{color:var(--ink-3)}
+.top-actions .icon-button.active{background:var(--chrome-btn)}
+.detail-actions{flex-direction:row;flex-wrap:wrap}.detail-actions .primary-action{flex:1 1 100%}
+@media(max-width:767px){.layers-panel{top:auto}.line-list{grid-template-columns:repeat(6,1fr)}}
+.layers-panel{top:150px;bottom:150px;max-height:none;width:262px}.region-chips{padding:6px 0 8px}.chip{padding:3px 8px;font-size:9px}.layers-panel .layer-presets{margin:8px 0 6px}
+@media(min-width:1400px){.layers-panel{top:160px;bottom:160px}}

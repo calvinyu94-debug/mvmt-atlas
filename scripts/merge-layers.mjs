@@ -46,32 +46,5 @@ const match=[...seen.values()].sort((a,b)=>a.sourceName.localeCompare(b.sourceNa
 const matchSummary={};for(const m of match){const s=matchSummary[m.system]=matchSummary[m.system]||{names:0,fma:0};s.names++;if(m.fma)s.fma++;}
 fs.writeFileSync(new URL('mvmt-fma-match.json',dir),JSON.stringify({note:'Our source names (side stripped) matched to BodyParts3D concepts by normalised token set (content words, colli = cervicis, order-free). null = no BP3D concept of that name.',summary:matchSummary,matches:match},null,1));
 
-// ---- fascial lines: named-structure storage, each station resolved to concept ids on this atlas
-const anat=new Map(anatomy.map(s=>[s.id,s]));
-const MANUAL={ // MVMT structure id -> BP3D concept names, where the structure is a group BP3D names differently
- 'knee-hamstrings':['biceps femoris','semitendinosus','semimembranosus'],
- 'spine-erector-spinae':['iliocostalis','longissimus','spinalis'],
- 'ankle-foot-layer-1':['abductor hallucis','flexor digitorum brevis','abductor digiti minimi of foot'],
- 'ankle-achilles':['calcaneal tendon'],
- 'hip-gluteus-maximus':['gluteus maximus'],'hip-tfl':['tensor fasciae latae'],'hip-it-band':['iliotibial tract'],
- 'shoulder-rotator-cuff':['supraspinatus','infraspinatus','teres minor','subscapularis'],
- 'thoracic-pectoralis-major':['pectoralis major'],'thoracic-latissimus':['latissimus dorsi'],
- 'elbow-wrist-flexors':['flexor carpi radialis','flexor carpi ulnaris','palmaris longus','flexor digitorum superficialis'],
- 'elbow-wrist-extensors':['extensor carpi radialis longus','extensor carpi radialis brevis','extensor digitorum','extensor carpi ulnaris'],
- 'hip-adductors':['adductor longus','adductor brevis','adductor magnus','gracilis','pectineus'],
-};
-const conceptByNorm=new Map();for(const c of atlas.concepts)if(!conceptByNorm.has(norm(c.name)))conceptByNorm.set(norm(c.name),c);
-const lines=[],unresolved=[];
-for(const [k,line] of Object.entries(join.fascialLines)){
- const stations=line.structures.map(sid=>{
-  const s=anat.get(sid);const name=s?s.name:sid;const resolve=[];
-  if(byId.has(sid))resolve.push({kind:'mvmt',id:sid});                       // our exported meshes claimed by it
-  const direct=s&&conceptByNorm.get(norm(s.name));if(direct&&!direct.source)resolve.push({kind:'bp3d',id:direct.id,name:direct.name});
-  for(const n of MANUAL[sid]||[]){const c=conceptByNorm.get(norm(n));if(c&&!c.source)resolve.push({kind:'bp3d',id:c.id,name:c.name});}
-  if(!resolve.length)unresolved.push({line:k,structure:sid,name,latin:s?.latin??null,system:s?.system??null});
-  return {structure:sid,name,resolve};
- });
- lines.push({id:k,name:line.name,stations});
-}
-fs.writeFileSync(new URL('fascial-lines.json',dir),JSON.stringify({note:'Twelve myofascial lines as ordered lists of MVMT structures; each station resolves at load to the concept ids listed (mvmt = our exported meshes, bp3d = BodyParts3D concepts). Stations with no resolution are listed under unresolved.',lines,unresolved},null,1));
-console.log(JSON.stringify({parts:atlas.parts.length,addedParts:layers.parts.length,concepts:atlas.concepts.length,addedConcepts:added,extendedConcepts:extended,chunks:atlas.chunks.length,triangles:atlas.triangles,fmaMatch:matchSummary,fascialLines:lines.length,unresolvedStations:unresolved.length},null,1));
+// fascial lines and muscle depth: scripts/build-index.mjs, run after the re-chunk
+console.log(JSON.stringify({parts:atlas.parts.length,addedParts:layers.parts.length,concepts:atlas.concepts.length,addedConcepts:added,extendedConcepts:extended,chunks:atlas.chunks.length,triangles:atlas.triangles,fmaMatch:matchSummary},null,1));
