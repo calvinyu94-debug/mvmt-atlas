@@ -10,6 +10,30 @@ export const SYSTEM_OVERRIDES=[
  {match:/\biliotibial tract$/i,system:'fascia',why:'a fascial band, filed as skeletal in BP3D; MVMT files it under fascia'},
 ];
 
+// BP3D parts the landmark-distance assignment homes in the wrong region. BodyParts3D holds each
+// intercostal layer as one mesh with no Z-Anatomy name to match, and its centroid, on the midline
+// of the rib cage, is nearer the shoulder anchors (the acromia) than the thoracic ones; the same for
+// the levatores costarum and the thoracic rotators. They are the thoracic wall and go there. Filed
+// with the shoulder they reached the thoracic context as 4 MB of copies (the whole growth the
+// section 4 audit was asked about, and then some). The internal intercostals matched by name.
+export const REGION_OVERRIDES=[
+ {match:/\b(intercostal muscle|levatores costarum (breves|longi)|thoracic rotator)$/i,region:'thoracic',why:'the thoracic wall, homed with the shoulder by landmark distance'},
+];
+
+// Which MVMT regions touch, as mvmt-anatomy's tools/regions.py has it. A region's context is drawn
+// from these: a part whose home is a neighbour and that reaches into the region.
+export const NEIGHBOURS={
+ 'head-jaw':['cervical'],
+ 'cervical':['head-jaw','shoulder','thoracic'],
+ 'shoulder':['cervical','thoracic','elbow-wrist'],
+ 'elbow-wrist':['shoulder'],
+ 'thoracic':['cervical','shoulder','lumbar'],
+ 'lumbar':['thoracic','hip'],
+ 'hip':['lumbar','knee'],
+ 'knee':['hip','ankle-foot'],
+ 'ankle-foot':['knee'],
+};
+
 // MVMT structures whose names do not match a BodyParts3D concept by token set, or match the wrong
 // one, with the BP3D concept names that stand for them. build-index.mjs reads this twice: for the
 // muscle depth (so a structure's superficial / deep reaches BP3D's muscles) and for the fascial

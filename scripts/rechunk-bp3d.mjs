@@ -12,7 +12,7 @@
 //   node scripts/rechunk-bp3d.mjs [mvmt-anatomy/region-assignment.csv]
 import fs from 'node:fs';
 import {gunzipSync} from 'node:zlib';
-import {SYSTEM_OVERRIDES} from './overrides.mjs';
+import {NEIGHBOURS,REGION_OVERRIDES,SYSTEM_OVERRIDES} from './overrides.mjs';
 const dir=new URL('../public/models/',import.meta.url);
 const atlas=JSON.parse(fs.readFileSync(new URL('atlas.json',dir),'utf8'));
 // BP3D's own mislabels first, so region and chunk decisions see the right system
@@ -24,6 +24,11 @@ if(!atlas.regions?.every(r=>r.anchors?.length))throw new Error('atlas.regions[].
 const sigma=atlas.layers?.blend?.sigma??0.12;
 
 const source=atlas.chunks.map(c=>{const raw=new URL(c.url.split('/').pop(),dir);if(fs.existsSync(raw))return fs.readFileSync(raw);return gunzipSync(fs.readFileSync(new URL(c.gzip.split('/').pop(),dir)));});
+// every read of a part's geometry goes through its layout as loaded: packInto rewrites the offsets as it packs, and
+// the context copy below used to read the old chunk at the new offset - which only agreed because a re-run repacks
+// identically, and crashed the first time a part changed region
+const loadedLayout=new Map(atlas.parts.map(p=>[p.id,{chunk:p.chunk,positions:p.positions,normals:p.normals,indices:p.indices}]));
+const readPart=p=>{const o=loadedLayout.get(p.id);const b=source[o.chunk];return {pos:new Float32Array(b.buffer,b.byteOffset+o.positions,p.vertexCount*3),nor:new Int16Array(b.buffer,b.byteOffset+o.normals,p.vertexCount*3),idx:new Uint32Array(b.buffer,b.byteOffset+o.indices,p.indexCount)};};
 const weightsAt=p=>Object.fromEntries(atlas.regions.map(r=>{let d2=Infinity;for(const a of r.anchors){const d=(p[0]-a[0])**2+(p[1]-a[1])**2+(p[2]-a[2])**2;if(d<d2)d2=d;}return [r.id,Math.exp(-d2/(sigma*sigma))];}));
 const argmax=w=>Object.entries(w).sort((a,b)=>b[1]-a[1])[0][0];
 
@@ -42,12 +47,13 @@ const aliases=name=>{ // BP3D's words in Z-Anatomy's: "Tenth thoracic vertebra" 
  const c=name.match(/^(?:Left|Right) (\w+) costal cartilage$/i);if(c)out.push('Costal cartilage of '+c[1].toLowerCase()+' rib');   // "Left second costal cartilage" is "Costal cartilage of second rib.l"
  return out;
 };
-const assigned={};let byName=0,byLandmark=0;
+const assigned={};let byName=0,byLandmark=0,byOverride=0;const overridden=[];
 for(const p of atlas.parts){
  if(p.source||!REGIONAL.has(p.system))continue;
  const [lo,hi]=p.bounds;const c=[(lo[0]+hi[0])/2,(lo[1]+hi[1])/2,(lo[2]+hi[2])/2];
  let home=null;for(const a of aliases(p.name)){const r=ourRegion.get(norm(a));if(r){home=r;break;}}
- if(home)byName++;else{home=argmax(weightsAt(c));byLandmark++;}
+ if(home)byName++;
+ else{const o=REGION_OVERRIDES.find(o=>o.match.test(p.name));if(o){home=o.region;byOverride++;overridden.push(p.name+' -> '+o.region);}else{home=argmax(weightsAt(c));byLandmark++;}}
  assigned[p.id]={home,spans:[]};
 }
 // spanning: a part reaches into another region when its centroid lies inside that region's box or
@@ -79,27 +85,30 @@ for(const r of atlas.regions){
 }
 const inside=(pt,[lo,hi])=>pt[0]>=lo[0]&&pt[0]<=hi[0]&&pt[1]>=lo[1]&&pt[1]<=hi[1]&&pt[2]>=lo[2]&&pt[2]<=hi[2];
 const SPAN_FRACTION=0.15;
+// returns the regions the part spans and, for every region whose box its bounds touch, the fraction of its
+// triangles inside that box - the context cap below reads the fraction, so it is measured for every box, not
+// only until the first hit
 const spansOf=(p,home)=>{
- const b=source[p.chunk];const pos=new Float32Array(b.buffer,b.byteOffset+p.positions,p.vertexCount*3),idx=new Uint32Array(b.buffer,b.byteOffset+p.indices,p.indexCount);
+ const {pos,idx}=readPart(p);
  const [lo,hi]=p.bounds;const c=[(lo[0]+hi[0])/2,(lo[1]+hi[1])/2,(lo[2]+hi[2])/2];
- const out=[];
+ const out=[],fractions={};
  for(const [rid,boxes] of Object.entries(regionBox)){
   if(rid===home)continue;
-  let hit=false;
+  let hit=false,frac=0;
   for(const box of boxes){
    if(!(lo[0]<=box[1][0]&&hi[0]>=box[0][0]&&lo[1]<=box[1][1]&&hi[1]>=box[0][1]&&lo[2]<=box[1][2]&&hi[2]>=box[0][2]))continue;   // boxes do not even touch
-   if(inside(c,box)){hit=true;break;}
    let n=0;const tris=idx.length/3;
    for(let t=0;t<idx.length;t+=3){const a=idx[t]*3,bb=idx[t+1]*3,cc=idx[t+2]*3;const tc=[(pos[a]+pos[bb]+pos[cc])/3,(pos[a+1]+pos[bb+1]+pos[cc+1])/3,(pos[a+2]+pos[bb+2]+pos[cc+2])/3];if(inside(tc,box))n++;}
-   if(n/tris>=SPAN_FRACTION){hit=true;break;}
+   frac=Math.max(frac,n/tris);
+   if(inside(c,box)||n/tris>=SPAN_FRACTION)hit=true;
   }
-  if(hit)out.push(rid);
+  if(hit){out.push(rid);fractions[rid]=frac;}
  }
- return out;
+ return {spans:out,fractions};
 };
 for(const p of atlas.parts){
- if(p.source){p.spans=spansOf(p,p.region);continue;}
- if(assigned[p.id])assigned[p.id].spans=spansOf(p,assigned[p.id].home);
+ if(p.source){const s=spansOf(p,p.region);p.spans=s.spans;p.spanFractions=s.fractions;continue;}
+ if(assigned[p.id]){const s=spansOf(p,assigned[p.id].home);assigned[p.id].spans=s.spans;assigned[p.id].fractions=s.fractions;}
 }
 for(const r of atlas.regions)r.spanningParts=atlas.parts.filter(p=>p.source&&p.spans.includes(r.id)).map(p=>p.id);
 
@@ -115,7 +124,7 @@ const packInto=(name,parts,meta)=>{ // one or more chunks named name-<n>.bin, sp
  let w=writer(),n=0,tris=0,count=0;
  const flush=()=>{if(!w.bytes())return;const url=`/models/${name}-${n++}.bin`;fs.writeFileSync(new URL(url.split('/').pop(),dir),w.buffer());chunks.push({url,bytes:w.bytes(),...meta,triangles:tris,parts:count});w=writer();tris=0;count=0;};
  for(const p of parts){
-  const b=source[p.chunk];const pos=new Float32Array(b.buffer,b.byteOffset+p.positions,p.vertexCount*3),nor=new Int16Array(b.buffer,b.byteOffset+p.normals,p.vertexCount*3),idx=new Uint32Array(b.buffer,b.byteOffset+p.indices,p.indexCount);
+  const {pos,nor,idx}=readPart(p);
   if(w.bytes()>4_000_000)flush();
   p.positions=w.append(pos);p.normals=w.append(nor);p.indices=w.append(idx);chunkOf.set(p.id,chunks.length);
   tris+=p.indexCount/3;count++;
@@ -128,21 +137,30 @@ packInto('body-organs',atlas.parts.filter(p=>!p.source&&!REGIONAL.has(p.system)&
 // context chunks: for each region, a copy of the parts that reach into it from its neighbours
 // (BP3D spanning parts and MVMT spanning parts), so a region view can draw its surroundings
 // dimmed without fetching a whole neighbour. Copies, so atlas.contexts carries their own layouts.
+// The cap: a part whose home is a neighbour, that has under 15% of its triangles inside the region (it is in the
+// context because its centroid fell in the box) and that is larger than 200 KB is left out of the context and
+// listed under atlas.contexts[region].excluded. The thoracic context had grown to 6.35 MB gzipped on the
+// centroid rule: the long back and chest sheets whose centroid sits in the thorax with most of their triangles
+// in the lumbar spine or the shoulder.
+const CONTEXT_CAP_BYTES=200_000;
+const partBytes=p=>p.vertexCount*18+p.indexCount*4;
 const contexts={};
 const mvmtSpanning=Object.fromEntries(atlas.regions.map(r=>[r.id,new Set(r.spanningParts||[])]));
 const layoutOf=new Map();
 for(const r of atlas.regions){
  const bp3dSpan=new Set(atlas.parts.filter(p=>!p.source&&assigned[p.id]?.spans.includes(r.id)).map(p=>p.id));
- const parts=atlas.parts.filter(p=>bp3dSpan.has(p.id)||(p.source&&mvmtSpanning[r.id].has(p.id)));
+ const candidates=atlas.parts.filter(p=>bp3dSpan.has(p.id)||(p.source&&mvmtSpanning[r.id].has(p.id)));
+ const excluded=[];
+ const parts=candidates.filter(p=>{const home=p.source?p.region:assigned[p.id].home;const frac=(p.source?p.spanFractions:assigned[p.id].fractions)?.[r.id]??0;const bytes=partBytes(p);if((NEIGHBOURS[r.id]||[]).includes(home)&&frac<SPAN_FRACTION&&bytes>CONTEXT_CAP_BYTES){excluded.push({id:p.id,name:p.name,home,fraction:+frac.toFixed(3),bytes});return false;}return true;});
  if(!parts.length)continue;
  let w=writer(),tris=0;const layouts={};
  for(const p of parts){
-  const b=source[p.chunk];const pos=new Float32Array(b.buffer,b.byteOffset+p.positions,p.vertexCount*3),nor=new Int16Array(b.buffer,b.byteOffset+p.normals,p.vertexCount*3),idx=new Uint32Array(b.buffer,b.byteOffset+p.indices,p.indexCount);
+  const {pos,nor,idx}=readPart(p);
   layouts[p.id]={chunk:chunks.length,positions:w.append(pos),normals:w.append(nor),indices:w.append(idx),vertexCount:p.vertexCount,indexCount:p.indexCount};tris+=p.indexCount/3;
  }
  const url=`/models/body-${r.id}-context.bin`;fs.writeFileSync(new URL(url.split('/').pop(),dir),w.buffer());
  chunks.push({url,bytes:w.bytes(),context:r.id,triangles:tris,parts:parts.length});
- contexts[r.id]={chunk:chunks.length-1,parts:layouts,count:parts.length,bp3d:bp3dSpan.size,mvmt:parts.length-bp3dSpan.size};
+ contexts[r.id]={chunk:chunks.length-1,parts:layouts,count:parts.length,bp3d:parts.filter(p=>!p.source).length,mvmt:parts.filter(p=>p.source).length,bytes:w.bytes(),excluded,excludedBytes:excluded.reduce((n,e)=>n+e.bytes,0)};
 }
 atlas.contexts=contexts;
 // keep the MVMT chunks, re-indexed after the new BP3D chunks
@@ -150,7 +168,7 @@ const base=chunks.length;
 for(const c of oldMvmt)chunks.push(c);
 for(const p of atlas.parts){if(p.source){const old=atlas.chunks[p.chunk];p.chunk=base+oldMvmt.indexOf(old);}else p.chunk=chunkOf.get(p.id);}
 for(const r of atlas.regions){r.chunk=base+oldMvmt.findIndex(c=>c.region===r.id);r.bp3dChunks=chunks.map((c,i)=>c.bp3dRegion===r.id?i:-1).filter(i=>i>=0);r.bp3dParts=atlas.parts.filter(p=>!p.source&&assigned[p.id]?.home===r.id).length;r.bp3dSpanningParts=atlas.parts.filter(p=>!p.source&&assigned[p.id]?.spans.includes(r.id)).map(p=>p.id);}
-for(const p of atlas.parts)if(assigned[p.id]){p.region=assigned[p.id].home;p.spans=assigned[p.id].spans;}
+for(const p of atlas.parts)if(assigned[p.id]){p.region=assigned[p.id].home;p.spans=assigned[p.id].spans;p.spanFractions=assigned[p.id].fractions;}   // the fraction of triangles in each spanned region, for the record
 atlas.chunks=chunks;
 atlas.chunkSets={
  note:'Chunk indices to fetch. A region needs its BP3D chunk(s) and its MVMT chunk; whole body needs the overview instead; arteries, veins and organs load only when toggled on.',
@@ -161,7 +179,8 @@ atlas.chunkSets={
 atlas.triangles=atlas.parts.reduce((n,p)=>n+p.indexCount/3,0);
 delete atlas.overview; // its offsets refer to the old chunk files; build-overview.mjs rebuilds it
 fs.writeFileSync(new URL('atlas.json',dir),JSON.stringify(atlas));
-const summary=atlas.regions.map(r=>({region:r.id,bp3dParts:r.bp3dParts,spanning:r.bp3dSpanningParts.length,bp3dBytes:r.bp3dChunks.reduce((n,i)=>n+chunks[i].bytes,0)}));
+const summary=atlas.regions.map(r=>({region:r.id,bp3dParts:r.bp3dParts,spanning:r.bp3dSpanningParts.length,bp3dBytes:r.bp3dChunks.reduce((n,i)=>n+chunks[i].bytes,0),contextParts:contexts[r.id]?.count??0,contextBytes:contexts[r.id]?.bytes??0,contextExcluded:contexts[r.id]?.excluded.length??0,contextExcludedBytes:contexts[r.id]?.excludedBytes??0}));
 atlas.layers=atlas.layers||{};atlas.layers.systemOverrides={note:'BP3D parts moved out of the system BP3D files them under (scripts/overrides.mjs); bp3dSystem on the part keeps the original',moved};
+atlas.layers.regionOverrides={note:'BP3D parts homed by scripts/overrides.mjs REGION_OVERRIDES rather than by name or landmark distance',parts:overridden};
 fs.writeFileSync(new URL('atlas.json',dir),JSON.stringify(atlas));
-console.log(JSON.stringify({chunks:chunks.length,regional:Object.keys(assigned).length,assignedByName:byName,assignedByLandmark:byLandmark,systemOverrides:moved,spanning:atlas.regions.map(r=>r.id+':'+r.bp3dSpanningParts.length+'+'+r.spanningParts.length),vessels:chunks.filter(c=>Array.isArray(c.systems)).reduce((n,c)=>n+c.parts,0),organs:chunks.filter(c=>c.systems==='organs').reduce((n,c)=>n+c.parts,0),summary},null,1));
+console.log(JSON.stringify({chunks:chunks.length,regional:Object.keys(assigned).length,assignedByName:byName,assignedByOverride:byOverride,assignedByLandmark:byLandmark,regionOverrides:overridden,systemOverrides:moved,spanning:atlas.regions.map(r=>r.id+':'+r.bp3dSpanningParts.length+'+'+r.spanningParts.length),vessels:chunks.filter(c=>Array.isArray(c.systems)).reduce((n,c)=>n+c.parts,0),organs:chunks.filter(c=>c.systems==='organs').reduce((n,c)=>n+c.parts,0),summary},null,1));

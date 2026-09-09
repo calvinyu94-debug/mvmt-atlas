@@ -57,8 +57,35 @@ decompresses them itself. The pipeline after a new export from mvmt-anatomy:
   measured before settling on this one - the union of every assigned part
   (12.8 MB of context for elbow-wrist), the landmark anchors plus 50 mm (the
   cervical anchors on the acromia put both shoulders in its box), a single
-  box for a paired region (both arms' box spans the whole trunk). Thoracic
-  and shoulder contexts are still 5 to 6 MB: that is what surrounds them.
+  box for a paired region (both arms' box spans the whole trunk).
+- **The thoracic context's growth was the intercostals homed in the shoulder.**
+  BodyParts3D holds each intercostal layer as one mesh with no Z-Anatomy
+  name to match, and its centroid on the rib cage's midline is nearer the
+  acromia than the thoracic anchors, so the external and innermost layers
+  (3.5 MB raw), the levatores costarum and the thoracic rotators were shoulder
+  parts reaching into the thorax as copies. `REGION_OVERRIDES` in
+  `scripts/overrides.mjs` homes the thoracic wall in the thorax; the thoracic
+  context went from 7.66 to 5.57 MB gzipped and the shoulder's from 5.48 to
+  7.57, because the same sheets span 71% of the shoulder's two bone boxes.
+  The contexts are now head-jaw 1.23, cervical 2.34, shoulder 7.57, thoracic
+  5.57, lumbar 3.05, hip 0.48, knee 1.26, elbow-wrist 0.03, ankle-foot 0.01 MB.
+- **The context cap (`CONTEXT_CAP_BYTES`, `SPAN_FRACTION` in
+  `rechunk-bp3d.mjs`) is a guard that currently catches nothing.** It drops a
+  neighbour's part from a context when under 15% of its triangles are inside
+  the region and it is larger than 200 KB, and lists it under
+  `atlas.contexts[region].excluded`. But a part with under 15% inside is in
+  a context only by the centroid test, and no large part is: everything
+  large in the thoracic context is 42 to 88% inside it (the abdominal wall,
+  serratus anterior, the latissimus). Every part carries `spanFractions` per
+  spanned region now, so a different threshold is a number to change and a
+  table to read, not a rebuild to guess at.
+- **`rechunk-bp3d.mjs` repacks a part's offsets as it packs, so every read
+  of geometry goes through the layout as loaded (`readPart`).** The context
+  copy used to read the old chunk at the new offset, which agreed only
+  because a re-run repacks identically, and crashed the first time a part
+  changed region - after the old chunk files had been deleted, so the
+  chunks came back from git. The deletion before packing is by design (see
+  above); do not run the script on uncommitted chunks.
 - `scripts/overrides.mjs` holds the hand-kept tables: BP3D's mislabels
   (sixteen muscles and the iliotibial tract filed as skeletal) and
   `CONCEPT_MATCHES`, the BP3D concept names that stand for MVMT structures
