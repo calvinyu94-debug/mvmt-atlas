@@ -19,10 +19,10 @@ MVMT Program hosts the viewer in an iframe. The viewer reads these keys as URL p
 
 | Key | Values | Effect |
 |---|---|---|
-| `model` | `bp3d`, `zanatomy` | Which manifest to load. `zanatomy` reports that the model is not built yet until it ships. |
+| `model` | `bp3d` | Which manifest to load. Only the BodyParts3D body exists; the MVMT layers are fitted onto it. A second body is a future option, and the comparison between engines is the Model switch in mvmt-program. |
 | `region` | a region key | Held on the root element as `data-region` for the region filter, which does not exist yet. |
 | `systems` | comma-separated system ids (`skeletal,muscular,...`), or an array by message | The systems to show. |
-| `select` | an FMA concept id, a part id, or one of our ids once merged | Selects and opens the detail panel. |
+| `select` | an FMA concept id, a BP3D part id, or an MVMT id (`knee-acl`, `lm-asis`, `ZA-iliotibial-tract`) | Selects and opens the detail panel. |
 | `view` | `anterior`, `posterior`, `left`, `right`, `superior` | Camera preset. |
 | `patient` | `1` or `0` | Patient view: hides identifiers, counts, the source link and credits. |
 
@@ -31,6 +31,12 @@ The viewer posts back to its parent: `{type:'ready', model, parts}` once a manif
 ```
 https://calvinyu94-debug.github.io/mvmt-atlas/?systems=skeletal,muscular&view=posterior&select=FMA7088&patient=1
 ```
+
+## MVMT layers
+
+`atlas.json` also carries the MVMT layers fitted onto the BodyParts3D body by [mvmt-anatomy](https://github.com/calvinyu94-debug/mvmt-anatomy) (`tools/bp3d_fit.py`, `tools/bp3d_export.py`): fascia, joints & ligaments, insertions, peripheral nerves, central nerves and landmarks, 1,385 parts in one gzipped chunk per MVMT region (`mvmt-<region>.bin.gz`, 0.13 to 1.52 MB) so a region can be fetched on its own, beside BP3D's own 15 chunks, which are untouched. Every layer part carries `source` (`zanatomy` or `schematic`), `sourceName`, `region`, the regions it spans and the MVMT structures that claim it; the nerves and the spinal cord are schematic and say so. `atlas.regions` lists each region's chunk and the parts that span into it; `atlas.overview` is a decimated whole body (every part, 582k triangles, 8.4 MB) for orientation. Alongside: `mvmt-fma-match.json`, our names matched to BP3D concepts, and `fascial-lines.json`, the twelve myofascial lines as ordered structures resolved to concept ids on this body.
+
+To rebuild after a new export: `node scripts/merge-layers.mjs <anatomy.json> <structure-meshes.json>`, `node scripts/build-overview.mjs`, `node scripts/compress-models.mjs`, then the validators.
 
 ## Run locally
 

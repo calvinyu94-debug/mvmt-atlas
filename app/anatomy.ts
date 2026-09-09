@@ -1,4 +1,4 @@
-export type SystemId = 'skeletal'|'muscular'|'arterial'|'venous'|'nervous'|'digestive'|'respiratory'|'urinary'|'reproductive'|'lymphatic'|'endocrine'|'integumentary'|'connective'|'sensory'|'cardiac';
+export type SystemId = 'skeletal'|'muscular'|'arterial'|'venous'|'nervous'|'digestive'|'respiratory'|'urinary'|'reproductive'|'lymphatic'|'endocrine'|'integumentary'|'connective'|'sensory'|'cardiac'|'fascia'|'ligaments'|'insertions'|'peripheral-nerves'|'central-nerves'|'landmarks';
 export const SYSTEMS: {id:SystemId;name:string;color:string;description:string}[] = [
  {id:'skeletal',name:'Skeleton',color:'#EEE5D3',description:'Bones form the supporting framework of the body, protect organs, and provide attachment points for muscles. Their internal tissue also stores minerals and produces blood cells.'},
  {id:'muscular',name:'Muscles',color:'#B8654F',description:'Skeletal muscles generate movement by pulling on their attachments. Together with tendons, they move joints, stabilize posture, and produce heat.'},
@@ -14,6 +14,13 @@ export const SYSTEMS: {id:SystemId;name:string;color:string;description:string}[
  {id:'endocrine',name:'Endocrine',color:'#c5a09a',description:'Endocrine organs release hormones into the blood to coordinate processes such as metabolism, growth, stress responses, and reproduction.'},
  {id:'reproductive',name:'Reproductive',color:'#bda098',description:'The male reproductive structures represented here contribute to sperm production, maturation, transport, and the production of sex hormones.'},
  {id:'integumentary',name:'Body surface',color:'#ba9b7d',description:'The body surface provides an outer anatomical reference. The integumentary system forms a protective barrier and contributes to sensation and temperature regulation.'},
+ // MVMT layers, fitted onto the BodyParts3D body from Z-Anatomy (mvmt-anatomy tools/bp3d_export.py). Colours are mvmt-program's --v3-* tokens.
+ {id:'fascia',name:'Fascia',color:'#D9CFC2',description:'Fasciae, bursae and retinacula: the connective-tissue sheets and sacs that wrap and separate muscles and let tendons glide. From the Z-Anatomy atlas, fitted onto this body.'},
+ {id:'ligaments',name:'Joints & ligaments',color:'#B6C2CB',description:'Ligaments, joint capsules, articular cartilage and discs. From the Z-Anatomy atlas, fitted onto this body.'},
+ {id:'insertions',name:'Insertions',color:'#8E3B2F',description:'Muscle origin and insertion patches, projected onto the bone surface of this body.'},
+ {id:'peripheral-nerves',name:'Peripheral nerves',color:'#E0A427',description:'Schematic peripheral nerves: indicative paths authored from a written specification, not imaging-derived anatomy.'},
+ {id:'central-nerves',name:'Central nerves',color:'#E0A427',description:'Schematic spinal cord, cauda equina and nerve roots: indicative paths through the vertebral canal, not imaging-derived anatomy.'},
+ {id:'landmarks',name:'Landmarks',color:'#2B5F9E',description:'Palpable bony landmarks, each resolved by its anatomical rule on the bones of this body.'},
  {id:'connective',name:'Connective tissue',color:'#B6C2CB',description:'Cartilage, ligaments, and other connective tissues support, connect, and separate structures. Their roles include stabilizing joints and distributing mechanical loads.'},
 ];
 export interface Part {id:string;name:string;conceptId:string;system:SystemId;chunk:number;positions:number;normals:number;indices:number;vertexCount:number;indexCount:number;bounds:[number[],number[]]}

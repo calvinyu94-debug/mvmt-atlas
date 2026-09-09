@@ -33,3 +33,6 @@ next-env.d.ts
 
 # rebuilt geometry: only the gzipped chunks are committed and served
 public/models/*.bin
+
+# intermediate of scripts/merge-layers.mjs; its content lives in atlas.json
+public/models/mvmt-layers.json

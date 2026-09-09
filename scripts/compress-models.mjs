@@ -7,6 +7,6 @@ for(const name of fs.readdirSync(base).filter(n=>n.endsWith('.json'))){
  const path=new URL(name,base),atlas=JSON.parse(fs.readFileSync(path));
  if(!Array.isArray(atlas.chunks))continue;
  let bytes=0;
- for(const c of atlas.chunks){const raw=new URL(c.url.split('/').pop(),base);if(!fs.existsSync(raw))continue;const compressed=gzipSync(fs.readFileSync(raw),{level:9});c.gzip=c.url+'.gz';c.gzipBytes=compressed.length;fs.writeFileSync(new URL(c.gzip.split('/').pop(),base),compressed);fs.unlinkSync(raw);bytes+=compressed.length;}
+ for(const c of [...atlas.chunks,...(atlas.overview?.chunks??[])]){const raw=new URL(c.url.split('/').pop(),base);if(!fs.existsSync(raw))continue;const compressed=gzipSync(fs.readFileSync(raw),{level:9});c.gzip=c.url+'.gz';c.gzipBytes=compressed.length;fs.writeFileSync(new URL(c.gzip.split('/').pop(),base),compressed);fs.unlinkSync(raw);bytes+=compressed.length;}
  fs.writeFileSync(path,JSON.stringify(atlas));console.log(`${name}: ${(bytes/1e6).toFixed(1)} MB compressed download`);
 }
