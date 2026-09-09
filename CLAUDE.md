@@ -50,6 +50,22 @@ decompresses them itself. The pipeline after a new export from mvmt-anatomy:
 - Context is fetched only after every own chunk has been drawn (`ownComplete`
   in `app/scene.tsx`); a context set that fails to load is a warning, not an
   error.
+- Spanning (what goes in a region's context) is decided against the region's
+  bounds, and the bounds are **the union of its own bones, one box per side for
+  a paired region**: a part spans a region when its centroid lies in that box
+  or at least 15% of its triangle centroids do. Three definitions were
+  measured before settling on this one - the union of every assigned part
+  (12.8 MB of context for elbow-wrist), the landmark anchors plus 50 mm (the
+  cervical anchors on the acromia put both shoulders in its box), a single
+  box for a paired region (both arms' box spans the whole trunk). Thoracic
+  and shoulder contexts are still 5 to 6 MB: that is what surrounds them.
+- `scripts/overrides.mjs` holds the hand-kept tables: BP3D's mislabels
+  (sixteen muscles and the iliotibial tract filed as skeletal) and the
+  BP3D concept names that stand for the MVMT muscle structures whose names
+  match nothing. Both are reviewed as descriptions; `build-index.mjs` stops
+  if a listed name is not in the atlas.
+- An empty context chunk is an error in the console and in
+  `validate-atlas.mjs`, never a silent blank.
 - Region assignment of BP3D parts is by name against mvmt-anatomy's
   `region-assignment.csv` first (so the ribs are thoracic and the hip bones
   lumbar, as in our own viewer) and by landmark distance only for the rest.

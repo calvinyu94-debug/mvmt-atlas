@@ -12,9 +12,13 @@
 //   node scripts/rechunk-bp3d.mjs [mvmt-anatomy/region-assignment.csv]
 import fs from 'node:fs';
 import {gunzipSync} from 'node:zlib';
+import {SYSTEM_OVERRIDES} from './overrides.mjs';
 const dir=new URL('../public/models/',import.meta.url);
 const atlas=JSON.parse(fs.readFileSync(new URL('atlas.json',dir),'utf8'));
-const REGIONAL=new Set(['skeletal','muscular','nervous','connective']);
+// BP3D's own mislabels first, so region and chunk decisions see the right system
+let moved=[];
+for(const p of atlas.parts){if(p.source)continue;const o=SYSTEM_OVERRIDES.find(o=>o.match.test(p.name));if(o&&p.system!==o.system){moved.push(p.name+': '+p.system+' -> '+o.system);p.bp3dSystem=p.bp3dSystem||p.system;p.system=o.system;}}
+const REGIONAL=new Set(['skeletal','muscular','nervous','connective','fascia']);
 const VESSELS=new Set(['arterial','venous']);
 if(!atlas.regions?.every(r=>r.anchors?.length))throw new Error('atlas.regions[].anchors missing: re-run merge-layers.mjs');
 const sigma=atlas.layers?.blend?.sigma??0.12;
@@ -44,10 +48,60 @@ for(const p of atlas.parts){
  const [lo,hi]=p.bounds;const c=[(lo[0]+hi[0])/2,(lo[1]+hi[1])/2,(lo[2]+hi[2])/2];
  let home=null;for(const a of aliases(p.name)){const r=ourRegion.get(norm(a));if(r){home=r;break;}}
  if(home)byName++;else{home=argmax(weightsAt(c));byLandmark++;}
- const spans=new Set();
- for(let k=0;k<8;k++){const corner=[(k&1)?hi[0]:lo[0],(k&2)?hi[1]:lo[1],(k&4)?hi[2]:lo[2]];const w=weightsAt(corner);const best=argmax(w);if(best!==home&&w[best]>0.5)spans.add(best);}
- assigned[p.id]={home,spans:[...spans]};
+ assigned[p.id]={home,spans:[]};
 }
+// spanning: a part reaches into another region when its centroid lies inside that region's box or
+// at least 15% of its triangles do. The box is the region as the fit knows it: the box around its
+// landmark anchors, grown by SPAN_MARGIN. The union of the region's parts was tried first and is
+// not a region - the tibia belongs to the knee and reaches the ankle, the forearm hangs beside the
+// abdomen - and a bounds corner alone was looser still.
+// Three definitions of "the region's bounds" were measured (context bytes, cervical / shoulder /
+// elbow-wrist): the union of every part assigned to the region, 9.2 / 11.6 / 12.8 MB; the box
+// around its landmark anchors + 50 mm, 9.5 / 6.9 / 6.6 MB; the union of its own bones, below.
+// Bones define a region; anchors reach across it (the cervical region's acromion anchors put both
+// shoulders in its box), and a region's soft tissue reaches further still.
+// A paired region (shoulder, elbow-wrist, hip, knee, ankle-foot) is two boxes, one per side: one box
+// around both arms spans the whole trunk between them, and the abdomen is not in the elbow-wrist
+// region. A bone within 2 cm of the midline goes in both.
+const regionBoxes={};
+const grow=(rid,side,[lo,hi])=>{const set=regionBoxes[rid]=regionBoxes[rid]||{};const b=set[side];if(!b){set[side]=[[...lo],[...hi]];return;}for(let i=0;i<3;i++){b[0][i]=Math.min(b[0][i],lo[i]);b[1][i]=Math.max(b[1][i],hi[i]);}};
+for(const p of atlas.parts){if(p.source||p.system!=='skeletal')continue;const rid=assigned[p.id]?.home;if(!rid)continue;const cx=(p.bounds[0][0]+p.bounds[1][0])/2;if(cx>0.02)grow(rid,'l',p.bounds);else if(cx<-0.02)grow(rid,'r',p.bounds);else{grow(rid,'l',p.bounds);grow(rid,'r',p.bounds);}}
+const regionBox={};
+for(const r of atlas.regions){
+ const set=regionBoxes[r.id];
+ if(!set&&r.anchors?.length){const lo=[Infinity,Infinity,Infinity],hi=[-Infinity,-Infinity,-Infinity];for(const a of r.anchors)for(let i=0;i<3;i++){lo[i]=Math.min(lo[i],a[i]-0.05);hi[i]=Math.max(hi[i],a[i]+0.05);}regionBox[r.id]=[[lo,hi]];continue;}
+ if(!set)continue;
+ const boxes=Object.values(set);
+ // an axial region's two half-boxes meet at the midline: merge them into one
+ const axial=boxes.length===2&&Math.min(boxes[0][1][0],boxes[1][1][0])>=Math.max(boxes[0][0][0],boxes[1][0][0])-0.01;
+ regionBox[r.id]=axial?[[boxes[0][0].map((v,i)=>Math.min(v,boxes[1][0][i])),boxes[0][1].map((v,i)=>Math.max(v,boxes[1][1][i]))]]:boxes;
+ r.bounds=[regionBox[r.id][0][0].map((v,i)=>Math.min(...regionBox[r.id].map(b=>b[0][i]))),regionBox[r.id][0][1].map((v,i)=>Math.max(...regionBox[r.id].map(b=>b[1][i])))];
+}
+const inside=(pt,[lo,hi])=>pt[0]>=lo[0]&&pt[0]<=hi[0]&&pt[1]>=lo[1]&&pt[1]<=hi[1]&&pt[2]>=lo[2]&&pt[2]<=hi[2];
+const SPAN_FRACTION=0.15;
+const spansOf=(p,home)=>{
+ const b=source[p.chunk];const pos=new Float32Array(b.buffer,b.byteOffset+p.positions,p.vertexCount*3),idx=new Uint32Array(b.buffer,b.byteOffset+p.indices,p.indexCount);
+ const [lo,hi]=p.bounds;const c=[(lo[0]+hi[0])/2,(lo[1]+hi[1])/2,(lo[2]+hi[2])/2];
+ const out=[];
+ for(const [rid,boxes] of Object.entries(regionBox)){
+  if(rid===home)continue;
+  let hit=false;
+  for(const box of boxes){
+   if(!(lo[0]<=box[1][0]&&hi[0]>=box[0][0]&&lo[1]<=box[1][1]&&hi[1]>=box[0][1]&&lo[2]<=box[1][2]&&hi[2]>=box[0][2]))continue;   // boxes do not even touch
+   if(inside(c,box)){hit=true;break;}
+   let n=0;const tris=idx.length/3;
+   for(let t=0;t<idx.length;t+=3){const a=idx[t]*3,bb=idx[t+1]*3,cc=idx[t+2]*3;const tc=[(pos[a]+pos[bb]+pos[cc])/3,(pos[a+1]+pos[bb+1]+pos[cc+1])/3,(pos[a+2]+pos[bb+2]+pos[cc+2])/3];if(inside(tc,box))n++;}
+   if(n/tris>=SPAN_FRACTION){hit=true;break;}
+  }
+  if(hit)out.push(rid);
+ }
+ return out;
+};
+for(const p of atlas.parts){
+ if(p.source){p.spans=spansOf(p,p.region);continue;}
+ if(assigned[p.id])assigned[p.id].spans=spansOf(p,assigned[p.id].home);
+}
+for(const r of atlas.regions)r.spanningParts=atlas.parts.filter(p=>p.source&&p.spans.includes(r.id)).map(p=>p.id);
 
 // every old BP3D chunk file goes before the new ones are written (the sources are already in
 // memory): a re-run writes the same body-<region> names, and deleting afterwards deleted them
@@ -108,4 +162,6 @@ atlas.triangles=atlas.parts.reduce((n,p)=>n+p.indexCount/3,0);
 delete atlas.overview; // its offsets refer to the old chunk files; build-overview.mjs rebuilds it
 fs.writeFileSync(new URL('atlas.json',dir),JSON.stringify(atlas));
 const summary=atlas.regions.map(r=>({region:r.id,bp3dParts:r.bp3dParts,spanning:r.bp3dSpanningParts.length,bp3dBytes:r.bp3dChunks.reduce((n,i)=>n+chunks[i].bytes,0)}));
-console.log(JSON.stringify({chunks:chunks.length,regional:Object.keys(assigned).length,assignedByName:byName,assignedByLandmark:byLandmark,vessels:chunks.filter(c=>Array.isArray(c.systems)).reduce((n,c)=>n+c.parts,0),organs:chunks.filter(c=>c.systems==='organs').reduce((n,c)=>n+c.parts,0),summary},null,1));
+atlas.layers=atlas.layers||{};atlas.layers.systemOverrides={note:'BP3D parts moved out of the system BP3D files them under (scripts/overrides.mjs); bp3dSystem on the part keeps the original',moved};
+fs.writeFileSync(new URL('atlas.json',dir),JSON.stringify(atlas));
+console.log(JSON.stringify({chunks:chunks.length,regional:Object.keys(assigned).length,assignedByName:byName,assignedByLandmark:byLandmark,systemOverrides:moved,spanning:atlas.regions.map(r=>r.id+':'+r.bp3dSpanningParts.length+'+'+r.spanningParts.length),vessels:chunks.filter(c=>Array.isArray(c.systems)).reduce((n,c)=>n+c.parts,0),organs:chunks.filter(c=>c.systems==='organs').reduce((n,c)=>n+c.parts,0),summary},null,1));
