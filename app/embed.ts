@@ -2,7 +2,7 @@
  * two ways: URL parameters on load, and window.postMessage from the parent
  * frame afterwards. Both carry the same keys:
  *
- *   model    bp3d | zanatomy           which manifest to load
+ *   model    bp3d                      which manifest to load (only bp3d exists; a second model is a future option)
  *   region   <region key>              held for the region filter (applied once regions exist)
  *   systems  skeletal,muscular,...     the systems to show, comma-separated (or an array by message)
  *   select   <FMA concept id | part id | our id>
@@ -16,10 +16,12 @@
  */
 import {SYSTEMS,type SystemId,type View} from './anatomy';
 
-export type ModelId='bp3d'|'zanatomy';
+/** Only the BodyParts3D body is built. The MVMT layers (fascia, ligaments, insertions, nerves, landmarks) are fitted onto it
+ * and ship inside atlas.json; a whole Z-Anatomy body is a future option, and the comparison between the two engines is the
+ * Model switch in mvmt-program. An unknown model value falls back to bp3d. */
+export type ModelId='bp3d';
 export const MODELS:Record<ModelId,{name:string;source:string;manifest:string}>={
  bp3d:{name:'Human Atlas',source:'BodyParts3D',manifest:'/models/atlas.json'},
- zanatomy:{name:'Z-Anatomy',source:'Z-Anatomy',manifest:'/models/zanatomy.json'},
 };
 export interface EmbedRequest{model?:ModelId;region?:string;systems?:SystemId[];select?:string;view?:View;patient?:boolean}
 
@@ -34,7 +36,7 @@ const fromObject=(o:Record<string,unknown>):Source=>({get:k=>o[k]});
 export function parseRequest(source:Source):EmbedRequest{
  const r:EmbedRequest={};
  const text=(k:string)=>{const v=source.get(k);return typeof v==='string'&&v.trim()?v.trim():undefined;};
- const model=text('model');if(model==='bp3d'||model==='zanatomy')r.model=model;
+ const model=text('model');if(model==='bp3d')r.model=model;
  const region=text('region');if(region)r.region=region;
  const systems=source.get('systems');
  if(typeof systems==='string'||Array.isArray(systems)){const list=(Array.isArray(systems)?systems:systems.split(',')).map(s=>String(s).trim()).filter(s=>systemIds.has(s)) as SystemId[];r.systems=list;}

@@ -1,0 +1,9489 @@
+{
+ "note": "Our source names (side stripped) matched to BodyParts3D concepts by normalised token set (content words, colli = cervicis, order-free). null = no BP3D concept of that name.",
+ "summary": {
+  "insertions": {
+   "names": 705,
+   "fma": 0
+  },
+  "fascia": {
+   "names": 84,
+   "fma": 9
+  },
+  "ligaments": {
+   "names": 234,
+   "fma": 7
+  },
+  "landmarks": {
+   "names": 42,
+   "fma": 0
+  }
+ },
+ "matches": [
+  {
+   "sourceName": "(Abdominal part of pectoralis major muscle).ol",
+   "system": "insertions",
+   "structures": [
+    "shoulder-pec-major",
+    "shoulder-pec-abdominal"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "(Abdominal part of pectoralis major muscle).or",
+   "system": "insertions",
+   "structures": [
+    "shoulder-pec-major",
+    "shoulder-pec-abdominal"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "(Iliopectineal bursa)",
+   "system": "fascia",
+   "structures": [
+    "bursa-iliopectineal"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "(Opponens digiti minimi muscle of foot).ol",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "(Opponens digiti minimi muscle of foot).or",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Abductor digiti minimi of foot.el",
+   "system": "insertions",
+   "structures": [
+    "ankle-intrinsics",
+    "ankle-foot-layer-1"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Abductor digiti minimi of foot.er",
+   "system": "insertions",
+   "structures": [
+    "ankle-intrinsics",
+    "ankle-foot-layer-1"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Abductor digiti minimi of hand.el",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-hypothenar"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Abductor digiti minimi of hand.er",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-hypothenar"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Abductor digiti minimi of hand.ol",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-hypothenar"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Abductor digiti minimi of hand.or",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-hypothenar"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Abductor hallucis.el",
+   "system": "insertions",
+   "structures": [
+    "ankle-intrinsics",
+    "ankle-foot-layer-1"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Abductor hallucis.er",
+   "system": "insertions",
+   "structures": [
+    "ankle-intrinsics",
+    "ankle-foot-layer-1"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Abductor hallucis.ol",
+   "system": "insertions",
+   "structures": [
+    "ankle-intrinsics",
+    "ankle-foot-layer-1"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Abductor hallucis.or",
+   "system": "insertions",
+   "structures": [
+    "ankle-intrinsics",
+    "ankle-foot-layer-1"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Abductor pollicis longus",
+   "system": "fascia",
+   "structures": [
+    "elbow-first-compartment"
+   ],
+   "fma": "FMA38515",
+   "fmaName": "abductor pollicis longus"
+  },
+  {
+   "sourceName": "Abductor pollicis longus.el",
+   "system": "insertions",
+   "structures": [
+    "elbow-first-compartment"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Abductor pollicis longus.er",
+   "system": "insertions",
+   "structures": [
+    "elbow-first-compartment"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Abductor pollicis longus.ol",
+   "system": "insertions",
+   "structures": [
+    "elbow-first-compartment"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Abductor pollicis longus.or",
+   "system": "insertions",
+   "structures": [
+    "elbow-first-compartment"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Acetabular labrum",
+   "system": "ligaments",
+   "structures": [
+    "hip-joint"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Acromial part of deltoid muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "shoulder-deltoid",
+    "shoulder-deltoid-middle"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Acromial part of deltoid muscle.or",
+   "system": "insertions",
+   "structures": [
+    "shoulder-deltoid",
+    "shoulder-deltoid-middle"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Acromioclavicular ligament",
+   "system": "ligaments",
+   "structures": [
+    "shoulder-acromioclavicular-lig"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Adductor longus.el",
+   "system": "insertions",
+   "structures": [
+    "hip-adductor-longus",
+    "hip-adductor-longus-only"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Adductor longus.er",
+   "system": "insertions",
+   "structures": [
+    "hip-adductor-longus",
+    "hip-adductor-longus-only"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Adductor longus.ol",
+   "system": "insertions",
+   "structures": [
+    "hip-adductor-longus",
+    "hip-adductor-longus-only"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Adductor longus.or",
+   "system": "insertions",
+   "structures": [
+    "hip-adductor-longus",
+    "hip-adductor-longus-only"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Adductor magnus.el",
+   "system": "insertions",
+   "structures": [
+    "hip-adductor-magnus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Adductor magnus.er",
+   "system": "insertions",
+   "structures": [
+    "hip-adductor-magnus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Adductor magnus.ol",
+   "system": "insertions",
+   "structures": [
+    "hip-adductor-magnus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Adductor magnus.or",
+   "system": "insertions",
+   "structures": [
+    "hip-adductor-magnus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Adductor pollicis.e1l",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-adductor-pollicis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Adductor pollicis.e1r",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-adductor-pollicis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Adductor pollicis.el",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-adductor-pollicis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Adductor pollicis.er",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-adductor-pollicis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Anconeus muscle.el",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-anconeus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Anconeus muscle.er",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-anconeus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Anconeus muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-anconeus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Anconeus muscle.or",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-anconeus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Annular ligament of radius",
+   "system": "ligaments",
+   "structures": [
+    "elbow-wrist-proximal-ru-joint"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Anserine bursa",
+   "system": "fascia",
+   "structures": [
+    "bursa-anserine"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Antebrachial fascia",
+   "system": "fascia",
+   "structures": [
+    "fascia-antebrachial"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Anterior belly of digastric muscle.el",
+   "system": "insertions",
+   "structures": [
+    "head-jaw-digastric",
+    "head-jaw-digastric-anterior"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Anterior belly of digastric muscle.er",
+   "system": "insertions",
+   "structures": [
+    "head-jaw-digastric",
+    "head-jaw-digastric-anterior"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Anterior cruciate ligament",
+   "system": "ligaments",
+   "structures": [
+    "knee-acl",
+    "knee-tibiofemoral"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Anterior intermuscular septum of leg",
+   "system": "fascia",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Anterior layer of thoracolumbar fascia",
+   "system": "fascia",
+   "structures": [
+    "lumbar-tl-fascia"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Anterior ligament of fibular head",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Anterior longitudinal ligament",
+   "system": "ligaments",
+   "structures": [
+    "spine-all"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Anterior meniscotibial ligament (Lateral meniscus)",
+   "system": "ligaments",
+   "structures": [
+    "knee-menisci",
+    "knee-tibiofemoral"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Anterior meniscotibial ligament (Medial meniscus)",
+   "system": "ligaments",
+   "structures": [
+    "knee-menisci",
+    "knee-tibiofemoral"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Anterior sacro-iliac ligament",
+   "system": "ligaments",
+   "structures": [
+    "lumbar-sij"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Anterior sternoclavicular ligament",
+   "system": "ligaments",
+   "structures": [
+    "shoulder-sternoclavicular-lig"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Anterior talocalcaneal ligament",
+   "system": "ligaments",
+   "structures": [
+    "ankle-subtalar",
+    "ankle-tc-anterior"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Anterior talofibular ligament",
+   "system": "ligaments",
+   "structures": [
+    "ankle-talocrural",
+    "ankle-lateral-ligaments",
+    "ankle-atfl"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Anterior tibiofibular ligament",
+   "system": "ligaments",
+   "structures": [
+    "ankle-syndesmosis",
+    "ankle-atifl"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Arcuate popliteal ligament",
+   "system": "ligaments",
+   "structures": [
+    "knee-arcuate-popliteal"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Articular capsule of acromioclavicular joint",
+   "system": "ligaments",
+   "structures": [
+    "shoulder-ac-joint"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Articular capsule of elbow joint",
+   "system": "ligaments",
+   "structures": [
+    "elbow-joint"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Articular capsule of glenohumeral joint",
+   "system": "ligaments",
+   "structures": [
+    "shoulder-gh-joint"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Articular capsule of hip joint",
+   "system": "ligaments",
+   "structures": [
+    "hip-joint"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Articular capsule of interphalangeal joint of great toe",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Articular capsule of knee joint",
+   "system": "ligaments",
+   "structures": [
+    "knee-tibiofemoral"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Articular capsule of radiocarpal joint",
+   "system": "ligaments",
+   "structures": [
+    "elbow-wrist-joint"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Articular capsule of sternoclavicular joint",
+   "system": "ligaments",
+   "structures": [
+    "shoulder-sternoclavicular-joint"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Articular capsule of superior tibiofibular joint",
+   "system": "ligaments",
+   "structures": [
+    "knee-proximal-tibiofibular"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Articular capsule of temporomandibular joint",
+   "system": "ligaments",
+   "structures": [
+    "head-jaw-tmj"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Articular capsules of distal interphalangeal joints",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Articular capsules of distal interphalangeal joints of foot",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Articular capsules of metacarpophalangeal joints",
+   "system": "ligaments",
+   "structures": [
+    "joint-hand-joints"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Articular capsules of metatarsophalangeal joints",
+   "system": "ligaments",
+   "structures": [
+    "ankle-first-mtp",
+    "joint-mtp"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Articular capsules of proximal interphalangeal joints",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Articular capsules of proximal interphalangeal joints of foot",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Articular disc of acromioclavicular joint",
+   "system": "ligaments",
+   "structures": [
+    "shoulder-ac-joint"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Articular disc of distal radio-ulnar joint",
+   "system": "ligaments",
+   "structures": [
+    "elbow-wrist-distal-ru-joint"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Articular disc of sternoclavicular joint",
+   "system": "ligaments",
+   "structures": [
+    "shoulder-sternoclavicular-joint"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Articular disc of temporomandibular joint",
+   "system": "ligaments",
+   "structures": [
+    "head-jaw-tmj",
+    "head-jaw-tmj-disc"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Articularis genus muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "knee-articularis-genus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Articularis genus muscle.or",
+   "system": "insertions",
+   "structures": [
+    "knee-articularis-genus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Ascending part of trapezius muscle.el",
+   "system": "insertions",
+   "structures": [
+    "cervical-upper-trap",
+    "shoulder-trapezius"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Ascending part of trapezius muscle.er",
+   "system": "insertions",
+   "structures": [
+    "cervical-upper-trap",
+    "shoulder-trapezius"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Ascending part of trapezius muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "cervical-upper-trap",
+    "shoulder-trapezius"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Ascending part of trapezius muscle.or",
+   "system": "insertions",
+   "structures": [
+    "cervical-upper-trap",
+    "shoulder-trapezius"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Biceps brachii muscle.el",
+   "system": "insertions",
+   "structures": [
+    "elbow-biceps"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Biceps brachii muscle.er",
+   "system": "insertions",
+   "structures": [
+    "elbow-biceps"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Biceps femoris muscle.el",
+   "system": "insertions",
+   "structures": [
+    "hip-hamstring-origin",
+    "knee-hamstrings"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Biceps femoris muscle.er",
+   "system": "insertions",
+   "structures": [
+    "hip-hamstring-origin",
+    "knee-hamstrings"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Bicipitoradial bursa",
+   "system": "fascia",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Brachial fascia",
+   "system": "fascia",
+   "structures": [
+    "fascia-brachial"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Brachialis muscle.el",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-brachialis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Brachialis muscle.er",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-brachialis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Brachialis muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-brachialis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Brachialis muscle.or",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-brachialis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Brachioradialis muscle.el",
+   "system": "insertions",
+   "structures": [
+    "elbow-brachioradialis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Brachioradialis muscle.er",
+   "system": "insertions",
+   "structures": [
+    "elbow-brachioradialis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Brachioradialis muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "elbow-brachioradialis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Brachioradialis muscle.or",
+   "system": "insertions",
+   "structures": [
+    "elbow-brachioradialis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Bucinator.o1l",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Bucinator.o1r",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Bucinator.ol",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Bucinator.or",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Bursa of piriformis muscle",
+   "system": "fascia",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Calcaneal tendon",
+   "system": "fascia",
+   "structures": [
+    "ankle-achilles"
+   ],
+   "fma": "FMA51061",
+   "fmaName": "calcaneal tendon"
+  },
+  {
+   "sourceName": "Calcaneocuboid ligament",
+   "system": "ligaments",
+   "structures": [
+    "ankle-bifurcate"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Calcaneofibular ligament",
+   "system": "ligaments",
+   "structures": [
+    "ankle-lateral-ligaments",
+    "ankle-cfl"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Calcaneonavicular ligament",
+   "system": "ligaments",
+   "structures": [
+    "ankle-bifurcate"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Capitohamate interosseous ligament",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Clavicular part of deltoid muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "shoulder-deltoid",
+    "shoulder-deltoid-anterior"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Clavicular part of deltoid muscle.or",
+   "system": "insertions",
+   "structures": [
+    "shoulder-deltoid",
+    "shoulder-deltoid-anterior"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Clavipectoral fascia",
+   "system": "fascia",
+   "structures": [
+    "fascia-clavipectoral"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Collateral interphalangeal ligaments of foot",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Collateral interphalangeal ligaments of hand",
+   "system": "ligaments",
+   "structures": [
+    "joint-hand-joints"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Collateral metacarpophalangeal ligaments",
+   "system": "ligaments",
+   "structures": [
+    "joint-hand-joints"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Collateral metatarsophalangeal ligaments",
+   "system": "ligaments",
+   "structures": [
+    "ankle-first-mtp",
+    "joint-mtp"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Common extensor tendon.ol",
+   "system": "insertions",
+   "structures": [
+    "elbow-common-extensor"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Common extensor tendon.or",
+   "system": "insertions",
+   "structures": [
+    "elbow-common-extensor"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Common flexor tendon.ol",
+   "system": "insertions",
+   "structures": [
+    "elbow-common-flexor"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Common flexor tendon.or",
+   "system": "insertions",
+   "structures": [
+    "elbow-common-flexor"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Conoid ligament",
+   "system": "ligaments",
+   "structures": [
+    "shoulder-coracoclavicular"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Coraco-acromial ligament",
+   "system": "ligaments",
+   "structures": [
+    "shoulder-coracoacromial"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Coracobrachial bursa",
+   "system": "fascia",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Coracobrachialis muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "shoulder-coracobrachialis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Coracobrachialis muscle.or",
+   "system": "insertions",
+   "structures": [
+    "shoulder-coracobrachialis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Coracohumeral ligament",
+   "system": "ligaments",
+   "structures": [
+    "shoulder-gh-joint",
+    "shoulder-coracohumeral"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Costoclavicular ligament",
+   "system": "ligaments",
+   "structures": [
+    "shoulder-costoclavicular"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Costotransverse ligament",
+   "system": "ligaments",
+   "structures": [
+    "thoracic-costotransverse"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Cricopharyngeal ligament",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Crural fascia",
+   "system": "fascia",
+   "structures": [
+    "fascia-crural"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Cuneocuboid interosseous ligament",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Cuneometatarsal interosseous ligaments",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Deep head of flexor pollicis brevis.o1l",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-thenar"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Deep head of flexor pollicis brevis.o1r",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-thenar"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Deep head of flexor pollicis brevis.ol",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-thenar"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Deep head of flexor pollicis brevis.or",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-thenar"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Deep infrapatellar bursa",
+   "system": "fascia",
+   "structures": [
+    "bursa-infrapatellar"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Deep part of tibial collateral ligament",
+   "system": "ligaments",
+   "structures": [
+    "knee-mcl",
+    "knee-tibiofemoral"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Deep transverse metacarpal ligament",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Deep transverse metatarsal ligament",
+   "system": "ligaments",
+   "structures": [
+    "ankle-transverse-metatarsal"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Deltoid fascia",
+   "system": "fascia",
+   "structures": [
+    "fascia-deltoid"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Deltoid muscle.el",
+   "system": "insertions",
+   "structures": [
+    "shoulder-deltoid"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Deltoid muscle.er",
+   "system": "insertions",
+   "structures": [
+    "shoulder-deltoid"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Depressor anguli oris.ol",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Depressor anguli oris.or",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Depressor labii inferioris.ol",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Depressor labii inferioris.or",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Depressor septi nasi.ol",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Depressor septi nasi.or",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Descending part of iliofemoral ligament",
+   "system": "ligaments",
+   "structures": [
+    "hip-iliofemoral-ligament"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Descending part of trapezius muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "shoulder-lower-trap",
+    "shoulder-trapezius"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Descending part of trapezius muscle.or",
+   "system": "insertions",
+   "structures": [
+    "shoulder-lower-trap",
+    "shoulder-trapezius"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Diaphragm.o1l",
+   "system": "insertions",
+   "structures": [
+    "thoracic-diaphragm"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Diaphragm.o1r",
+   "system": "insertions",
+   "structures": [
+    "thoracic-diaphragm"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Diaphragm.o2l",
+   "system": "insertions",
+   "structures": [
+    "thoracic-diaphragm"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Diaphragm.o2r",
+   "system": "insertions",
+   "structures": [
+    "thoracic-diaphragm"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Diaphragm.o3l",
+   "system": "insertions",
+   "structures": [
+    "thoracic-diaphragm"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Diaphragm.o3r",
+   "system": "insertions",
+   "structures": [
+    "thoracic-diaphragm"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Diaphragm.o4l",
+   "system": "insertions",
+   "structures": [
+    "thoracic-diaphragm"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Diaphragm.o4r",
+   "system": "insertions",
+   "structures": [
+    "thoracic-diaphragm"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Diaphragm.o5l",
+   "system": "insertions",
+   "structures": [
+    "thoracic-diaphragm"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Diaphragm.o5r",
+   "system": "insertions",
+   "structures": [
+    "thoracic-diaphragm"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Diaphragm.ol",
+   "system": "insertions",
+   "structures": [
+    "thoracic-diaphragm"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Diaphragm.or",
+   "system": "insertions",
+   "structures": [
+    "thoracic-diaphragm"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Diaphragmatic fascia",
+   "system": "fascia",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Dorsal calcaneocuboid ligament",
+   "system": "ligaments",
+   "structures": [
+    "ankle-dorsal-calcaneocuboid"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Dorsal carpometacarpal ligaments",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Dorsal cuboideonavicular ligament",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Dorsal cuneocuboid ligament",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Dorsal cuneonavicular ligaments",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Dorsal fascia of hand",
+   "system": "fascia",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Dorsal intercarpal ligaments",
+   "system": "ligaments",
+   "structures": [
+    "joint-intercarpal"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Dorsal intercuneiform ligaments",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Dorsal interossei muscles of hand.o1l",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-interossei"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Dorsal interossei muscles of hand.o1r",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-interossei"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Dorsal interossei muscles of hand.o2l",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-interossei"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Dorsal interossei muscles of hand.o2r",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-interossei"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Dorsal interossei muscles of hand.o3l",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-interossei"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Dorsal interossei muscles of hand.o3r",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-interossei"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Dorsal interossei muscles of hand.o4l",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-interossei"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Dorsal interossei muscles of hand.o4r",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-interossei"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Dorsal interossei muscles of hand.ol",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-interossei"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Dorsal interossei muscles of hand.or",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-interossei"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Dorsal metacarpal ligaments",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Dorsal metatarsal ligaments",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Dorsal radio-ulnar ligament",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Dorsal radiocarpal ligament",
+   "system": "ligaments",
+   "structures": [
+    "elbow-wrist-joint",
+    "elbow-dorsal-radiocarpal"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Dorsal scaphotriquetral ligament",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Dorsal tarsometatarsal ligaments",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Dorsal ulnocarpal ligament",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Erector spinae.ol",
+   "system": "insertions",
+   "structures": [
+    "spine-erector-spinae"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Erector spinae.or",
+   "system": "insertions",
+   "structures": [
+    "spine-erector-spinae"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor carpi radialis brevis.el",
+   "system": "insertions",
+   "structures": [
+    "elbow-ecrb"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor carpi radialis brevis.er",
+   "system": "insertions",
+   "structures": [
+    "elbow-ecrb"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor carpi radialis longus.el",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-ecrl"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor carpi radialis longus.er",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-ecrl"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor carpi radialis longus.ol",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-ecrl"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor carpi radialis longus.or",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-ecrl"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor carpi ulnaris.el",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-ecu"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor carpi ulnaris.er",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-ecu"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor carpi ulnaris.ol",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-ecu"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor carpi ulnaris.or",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-ecu"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor digitorum brevis.e1l",
+   "system": "insertions",
+   "structures": [
+    "ankle-edb"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor digitorum brevis.e1r",
+   "system": "insertions",
+   "structures": [
+    "ankle-edb"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor digitorum brevis.e2l",
+   "system": "insertions",
+   "structures": [
+    "ankle-edb"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor digitorum brevis.e2r",
+   "system": "insertions",
+   "structures": [
+    "ankle-edb"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor digitorum brevis.el",
+   "system": "insertions",
+   "structures": [
+    "ankle-edb"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor digitorum brevis.er",
+   "system": "insertions",
+   "structures": [
+    "ankle-edb"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor digitorum longus.e1l",
+   "system": "insertions",
+   "structures": [
+    "ankle-edl"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor digitorum longus.e1r",
+   "system": "insertions",
+   "structures": [
+    "ankle-edl"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor digitorum longus.e2l",
+   "system": "insertions",
+   "structures": [
+    "ankle-edl"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor digitorum longus.e2r",
+   "system": "insertions",
+   "structures": [
+    "ankle-edl"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor digitorum longus.e3l",
+   "system": "insertions",
+   "structures": [
+    "ankle-edl"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor digitorum longus.e3r",
+   "system": "insertions",
+   "structures": [
+    "ankle-edl"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor digitorum longus.e4l",
+   "system": "insertions",
+   "structures": [
+    "ankle-edl"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor digitorum longus.e4r",
+   "system": "insertions",
+   "structures": [
+    "ankle-edl"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor digitorum longus.el",
+   "system": "insertions",
+   "structures": [
+    "ankle-edl"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor digitorum longus.er",
+   "system": "insertions",
+   "structures": [
+    "ankle-edl"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor digitorum longus.o1l",
+   "system": "insertions",
+   "structures": [
+    "ankle-edl"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor digitorum longus.o1r",
+   "system": "insertions",
+   "structures": [
+    "ankle-edl"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor digitorum longus.ol",
+   "system": "insertions",
+   "structures": [
+    "ankle-edl"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor digitorum longus.or",
+   "system": "insertions",
+   "structures": [
+    "ankle-edl"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor digitorum.e1l",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-ed"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor digitorum.e1r",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-ed"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor digitorum.e2l",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-ed"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor digitorum.e2r",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-ed"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor digitorum.e3l",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-ed"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor digitorum.e3r",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-ed"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor digitorum.e4l",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-ed"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor digitorum.e4r",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-ed"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor digitorum.e5l",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-ed"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor digitorum.e5r",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-ed"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor digitorum.e6l",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-ed"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor digitorum.e6r",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-ed"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor digitorum.e7l",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-ed"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor digitorum.e7r",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-ed"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor digitorum.el",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-ed"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor digitorum.er",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-ed"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor hallucis brevis.ol",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor hallucis brevis.or",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor hallucis longus.el",
+   "system": "insertions",
+   "structures": [
+    "ankle-ehl"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor hallucis longus.er",
+   "system": "insertions",
+   "structures": [
+    "ankle-ehl"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor hallucis longus.ol",
+   "system": "insertions",
+   "structures": [
+    "ankle-ehl"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor hallucis longus.or",
+   "system": "insertions",
+   "structures": [
+    "ankle-ehl"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor indicis.el",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-ei"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor indicis.er",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-ei"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor indicis.ol",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-ei"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor indicis.or",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-ei"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor pollicis brevis",
+   "system": "fascia",
+   "structures": [
+    "elbow-first-compartment"
+   ],
+   "fma": "FMA38518",
+   "fmaName": "extensor pollicis brevis"
+  },
+  {
+   "sourceName": "Extensor pollicis brevis.el",
+   "system": "insertions",
+   "structures": [
+    "elbow-first-compartment"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor pollicis brevis.er",
+   "system": "insertions",
+   "structures": [
+    "elbow-first-compartment"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor pollicis brevis.ol",
+   "system": "insertions",
+   "structures": [
+    "elbow-first-compartment"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor pollicis brevis.or",
+   "system": "insertions",
+   "structures": [
+    "elbow-first-compartment"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor pollicis longus.el",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-epl"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor pollicis longus.er",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-epl"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor pollicis longus.ol",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-epl"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor pollicis longus.or",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-epl"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor retinaculum of wrist",
+   "system": "fascia",
+   "structures": [
+    "elbow-wrist-extensor-retinaculum"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "External abdominal oblique muscle.o1l",
+   "system": "insertions",
+   "structures": [
+    "lumbar-obliques",
+    "lumbar-external-oblique"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "External abdominal oblique muscle.o1r",
+   "system": "insertions",
+   "structures": [
+    "lumbar-obliques",
+    "lumbar-external-oblique"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "External abdominal oblique muscle.o2l",
+   "system": "insertions",
+   "structures": [
+    "lumbar-obliques",
+    "lumbar-external-oblique"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "External abdominal oblique muscle.o2r",
+   "system": "insertions",
+   "structures": [
+    "lumbar-obliques",
+    "lumbar-external-oblique"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "External abdominal oblique muscle.o3l",
+   "system": "insertions",
+   "structures": [
+    "lumbar-obliques",
+    "lumbar-external-oblique"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "External abdominal oblique muscle.o3r",
+   "system": "insertions",
+   "structures": [
+    "lumbar-obliques",
+    "lumbar-external-oblique"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "External abdominal oblique muscle.o4l",
+   "system": "insertions",
+   "structures": [
+    "lumbar-obliques",
+    "lumbar-external-oblique"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "External abdominal oblique muscle.o4r",
+   "system": "insertions",
+   "structures": [
+    "lumbar-obliques",
+    "lumbar-external-oblique"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "External abdominal oblique muscle.o5l",
+   "system": "insertions",
+   "structures": [
+    "lumbar-obliques",
+    "lumbar-external-oblique"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "External abdominal oblique muscle.o5r",
+   "system": "insertions",
+   "structures": [
+    "lumbar-obliques",
+    "lumbar-external-oblique"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "External abdominal oblique muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "lumbar-obliques",
+    "lumbar-external-oblique"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "External abdominal oblique muscle.or",
+   "system": "insertions",
+   "structures": [
+    "lumbar-obliques",
+    "lumbar-external-oblique"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "External intercostal membrane",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Fascia lata",
+   "system": "fascia",
+   "structures": [
+    "fascia-lata"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Fibular collateral ligament",
+   "system": "ligaments",
+   "structures": [
+    "knee-lcl",
+    "knee-tibiofemoral"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Fibularis brevis muscle.el",
+   "system": "insertions",
+   "structures": [
+    "ankle-fibularis",
+    "ankle-fibularis-brevis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Fibularis brevis muscle.er",
+   "system": "insertions",
+   "structures": [
+    "ankle-fibularis",
+    "ankle-fibularis-brevis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Fibularis brevis muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "ankle-fibularis",
+    "ankle-fibularis-brevis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Fibularis brevis muscle.or",
+   "system": "insertions",
+   "structures": [
+    "ankle-fibularis",
+    "ankle-fibularis-brevis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Fibularis longus muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "ankle-fibularis",
+    "ankle-fibularis-longus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Fibularis longus muscle.or",
+   "system": "insertions",
+   "structures": [
+    "ankle-fibularis",
+    "ankle-fibularis-longus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Fibularis tertius muscle.el",
+   "system": "insertions",
+   "structures": [
+    "ankle-fibularis-tertius"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Fibularis tertius muscle.er",
+   "system": "insertions",
+   "structures": [
+    "ankle-fibularis-tertius"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Fibularis tertius muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "ankle-fibularis-tertius"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Fibularis tertius muscle.or",
+   "system": "insertions",
+   "structures": [
+    "ankle-fibularis-tertius"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Flexor carpi ulnaris.el",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-flexors",
+    "elbow-wrist-fcu"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Flexor carpi ulnaris.er",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-flexors",
+    "elbow-wrist-fcu"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Flexor digiti minimi of foot.el",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Flexor digiti minimi of foot.er",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Flexor digiti minimi of hand.el",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Flexor digiti minimi of hand.er",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Flexor digiti minimi of hand.ol",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Flexor digiti minimi of hand.or",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Flexor digitorum brevis.e1l",
+   "system": "insertions",
+   "structures": [
+    "ankle-intrinsics",
+    "ankle-foot-layer-1"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Flexor digitorum brevis.e1r",
+   "system": "insertions",
+   "structures": [
+    "ankle-intrinsics",
+    "ankle-foot-layer-1"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Flexor digitorum brevis.e2l",
+   "system": "insertions",
+   "structures": [
+    "ankle-intrinsics",
+    "ankle-foot-layer-1"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Flexor digitorum brevis.e2r",
+   "system": "insertions",
+   "structures": [
+    "ankle-intrinsics",
+    "ankle-foot-layer-1"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Flexor digitorum brevis.el",
+   "system": "insertions",
+   "structures": [
+    "ankle-intrinsics",
+    "ankle-foot-layer-1"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Flexor digitorum brevis.er",
+   "system": "insertions",
+   "structures": [
+    "ankle-intrinsics",
+    "ankle-foot-layer-1"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Flexor digitorum brevis.ol",
+   "system": "insertions",
+   "structures": [
+    "ankle-intrinsics",
+    "ankle-foot-layer-1"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Flexor digitorum brevis.or",
+   "system": "insertions",
+   "structures": [
+    "ankle-intrinsics",
+    "ankle-foot-layer-1"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Flexor digitorum longus.e1l",
+   "system": "insertions",
+   "structures": [
+    "ankle-fdl"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Flexor digitorum longus.e1r",
+   "system": "insertions",
+   "structures": [
+    "ankle-fdl"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Flexor digitorum longus.e2l",
+   "system": "insertions",
+   "structures": [
+    "ankle-fdl"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Flexor digitorum longus.e2r",
+   "system": "insertions",
+   "structures": [
+    "ankle-fdl"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Flexor digitorum longus.e3l",
+   "system": "insertions",
+   "structures": [
+    "ankle-fdl"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Flexor digitorum longus.e3r",
+   "system": "insertions",
+   "structures": [
+    "ankle-fdl"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Flexor digitorum longus.el",
+   "system": "insertions",
+   "structures": [
+    "ankle-fdl"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Flexor digitorum longus.er",
+   "system": "insertions",
+   "structures": [
+    "ankle-fdl"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Flexor digitorum longus.ol",
+   "system": "insertions",
+   "structures": [
+    "ankle-fdl"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Flexor digitorum longus.or",
+   "system": "insertions",
+   "structures": [
+    "ankle-fdl"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Flexor digitorum profundus.e1l",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-flexors",
+    "elbow-wrist-fdp"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Flexor digitorum profundus.e1r",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-flexors",
+    "elbow-wrist-fdp"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Flexor digitorum profundus.e2l",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-flexors",
+    "elbow-wrist-fdp"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Flexor digitorum profundus.e2r",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-flexors",
+    "elbow-wrist-fdp"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Flexor digitorum profundus.e3l",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-flexors",
+    "elbow-wrist-fdp"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Flexor digitorum profundus.e3r",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-flexors",
+    "elbow-wrist-fdp"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Flexor digitorum profundus.el",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-flexors",
+    "elbow-wrist-fdp"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Flexor digitorum profundus.er",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-flexors",
+    "elbow-wrist-fdp"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Flexor digitorum superficialis.e1l",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-flexors",
+    "elbow-wrist-fds"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Flexor digitorum superficialis.e1r",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-flexors",
+    "elbow-wrist-fds"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Flexor digitorum superficialis.e2l",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-flexors",
+    "elbow-wrist-fds"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Flexor digitorum superficialis.e2r",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-flexors",
+    "elbow-wrist-fds"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Flexor digitorum superficialis.e3l",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-flexors",
+    "elbow-wrist-fds"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Flexor digitorum superficialis.e3r",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-flexors",
+    "elbow-wrist-fds"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Flexor digitorum superficialis.el",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-flexors",
+    "elbow-wrist-fds"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Flexor digitorum superficialis.er",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-flexors",
+    "elbow-wrist-fds"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Flexor digitorum superficialis.ol",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-flexors",
+    "elbow-wrist-fds"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Flexor digitorum superficialis.or",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-flexors",
+    "elbow-wrist-fds"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Flexor hallucis longus.el",
+   "system": "insertions",
+   "structures": [
+    "ankle-fhl"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Flexor hallucis longus.er",
+   "system": "insertions",
+   "structures": [
+    "ankle-fhl"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Flexor hallucis longus.ol",
+   "system": "insertions",
+   "structures": [
+    "ankle-fhl"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Flexor hallucis longus.or",
+   "system": "insertions",
+   "structures": [
+    "ankle-fhl"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Flexor pollicis longus.el",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-flexors",
+    "elbow-wrist-fpl"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Flexor pollicis longus.er",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-flexors",
+    "elbow-wrist-fpl"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Flexor pollicis longus.o1l",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-flexors",
+    "elbow-wrist-fpl"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Flexor pollicis longus.o1r",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-flexors",
+    "elbow-wrist-fpl"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Flexor pollicis longus.ol",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-flexors",
+    "elbow-wrist-fpl"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Flexor pollicis longus.or",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-flexors",
+    "elbow-wrist-fpl"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Flexor retinaculum of ankle",
+   "system": "fascia",
+   "structures": [
+    "ankle-tarsal-tunnel"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Flexor retinaculum of wrist",
+   "system": "fascia",
+   "structures": [
+    "elbow-carpal-tunnel",
+    "elbow-wrist-flexor-retinaculum"
+   ],
+   "fma": "FMA39988",
+   "fmaName": "flexor retinaculum of wrist"
+  },
+  {
+   "sourceName": "Frenula capsulae",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Frontalis muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "head-jaw-occipitofrontalis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Frontalis muscle.or",
+   "system": "insertions",
+   "structures": [
+    "head-jaw-occipitofrontalis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Geniohyoid muscle.el",
+   "system": "insertions",
+   "structures": [
+    "head-jaw-geniohyoid"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Geniohyoid muscle.er",
+   "system": "insertions",
+   "structures": [
+    "head-jaw-geniohyoid"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Geniohyoid muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "head-jaw-geniohyoid"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Geniohyoid muscle.or",
+   "system": "insertions",
+   "structures": [
+    "head-jaw-geniohyoid"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Glenoid labrum",
+   "system": "ligaments",
+   "structures": [
+    "shoulder-gh-joint",
+    "shoulder-glenoid-labrum"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Gluteus maximus muscle.el",
+   "system": "insertions",
+   "structures": [
+    "hip-glute-max"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Gluteus maximus muscle.er",
+   "system": "insertions",
+   "structures": [
+    "hip-glute-max"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Gluteus maximus muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "hip-glute-max"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Gluteus maximus muscle.or",
+   "system": "insertions",
+   "structures": [
+    "hip-glute-max"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Gluteus medius muscle.el",
+   "system": "insertions",
+   "structures": [
+    "hip-glute-med"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Gluteus medius muscle.er",
+   "system": "insertions",
+   "structures": [
+    "hip-glute-med"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Gluteus medius muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "hip-glute-med"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Gluteus medius muscle.or",
+   "system": "insertions",
+   "structures": [
+    "hip-glute-med"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Gluteus minimus muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "hip-glute-min"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Gluteus minimus muscle.or",
+   "system": "insertions",
+   "structures": [
+    "hip-glute-min"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Gracilis muscle",
+   "system": "fascia",
+   "structures": [
+    "hip-gracilis",
+    "knee-pes-anserinus"
+   ],
+   "fma": "FMA43882",
+   "fmaName": "gracilis"
+  },
+  {
+   "sourceName": "Gracilis muscle.el",
+   "system": "insertions",
+   "structures": [
+    "hip-gracilis",
+    "knee-pes-anserinus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Gracilis muscle.er",
+   "system": "insertions",
+   "structures": [
+    "hip-gracilis",
+    "knee-pes-anserinus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Gracilis muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "hip-gracilis",
+    "knee-pes-anserinus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Gracilis muscle.or",
+   "system": "insertions",
+   "structures": [
+    "hip-gracilis",
+    "knee-pes-anserinus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Iliacus muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "hip-iliacus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Iliacus muscle.or",
+   "system": "insertions",
+   "structures": [
+    "hip-iliacus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Iliocostalis colli muscle.el",
+   "system": "insertions",
+   "structures": [
+    "spine-erector-spinae",
+    "spine-iliocostalis",
+    "spine-iliocostalis-cervicis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Iliocostalis colli muscle.er",
+   "system": "insertions",
+   "structures": [
+    "spine-erector-spinae",
+    "spine-iliocostalis",
+    "spine-iliocostalis-cervicis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Iliolumbar ligament",
+   "system": "ligaments",
+   "structures": [
+    "lumbar-iliolumbar-ligament"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Iliopsoas fascia",
+   "system": "fascia",
+   "structures": [
+    "fascia-iliopsoas"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Iliopsoas muscle.el",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Iliopsoas muscle.er",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Iliotibial tract",
+   "system": "fascia",
+   "structures": [
+    "hip-itb"
+   ],
+   "fma": "FMA51048",
+   "fmaName": "iliotibial tract"
+  },
+  {
+   "sourceName": "Inferior extensor retinaculum of ankle",
+   "system": "fascia",
+   "structures": [
+    "ankle-extensor-retinaculum"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Inferior fibular retinaculum",
+   "system": "fascia",
+   "structures": [
+    "ankle-fibular-retinacula"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Inferior gemellus muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "hip-gemellus-inferior"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Inferior gemellus muscle.or",
+   "system": "insertions",
+   "structures": [
+    "hip-gemellus-inferior"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Inferior glenohumeral ligament",
+   "system": "ligaments",
+   "structures": [
+    "shoulder-gh-joint"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Inferior pubic ligament",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Inferior subtendinous bursa of biceps femoris muscle",
+   "system": "fascia",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Inferior transverse scapular ligament",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Infrapatellar fat pad",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Infraspinatus muscle.el",
+   "system": "insertions",
+   "structures": [
+    "shoulder-infraspinatus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Infraspinatus muscle.er",
+   "system": "insertions",
+   "structures": [
+    "shoulder-infraspinatus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Infraspinatus muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "shoulder-infraspinatus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Infraspinatus muscle.or",
+   "system": "insertions",
+   "structures": [
+    "shoulder-infraspinatus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Inguinal ligament",
+   "system": "fascia",
+   "structures": [
+    "hip-inguinal-ligament"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Interclavicular ligament",
+   "system": "ligaments",
+   "structures": [
+    "shoulder-sternoclavicular-lig"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Intercornual ligament",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Intercuneiform interosseous ligaments",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Intermuscular gluteal bursae",
+   "system": "fascia",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Internal abdominal oblique muscle.o1l",
+   "system": "insertions",
+   "structures": [
+    "lumbar-obliques",
+    "lumbar-internal-oblique"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Internal abdominal oblique muscle.o1r",
+   "system": "insertions",
+   "structures": [
+    "lumbar-obliques",
+    "lumbar-internal-oblique"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Internal abdominal oblique muscle.o2l",
+   "system": "insertions",
+   "structures": [
+    "lumbar-obliques",
+    "lumbar-internal-oblique"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Internal abdominal oblique muscle.o2r",
+   "system": "insertions",
+   "structures": [
+    "lumbar-obliques",
+    "lumbar-internal-oblique"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Internal abdominal oblique muscle.o3l",
+   "system": "insertions",
+   "structures": [
+    "lumbar-obliques",
+    "lumbar-internal-oblique"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Internal abdominal oblique muscle.o3r",
+   "system": "insertions",
+   "structures": [
+    "lumbar-obliques",
+    "lumbar-internal-oblique"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Internal abdominal oblique muscle.o4l",
+   "system": "insertions",
+   "structures": [
+    "lumbar-obliques",
+    "lumbar-internal-oblique"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Internal abdominal oblique muscle.o4r",
+   "system": "insertions",
+   "structures": [
+    "lumbar-obliques",
+    "lumbar-internal-oblique"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Internal abdominal oblique muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "lumbar-obliques",
+    "lumbar-internal-oblique"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Internal abdominal oblique muscle.or",
+   "system": "insertions",
+   "structures": [
+    "lumbar-obliques",
+    "lumbar-internal-oblique"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Internal intercostal membrane",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Interosseous membrane of forearm",
+   "system": "ligaments",
+   "structures": [
+    "elbow-wrist-interosseous-membrane"
+   ],
+   "fma": "FMA23706",
+   "fmaName": "interosseous membrane of forearm"
+  },
+  {
+   "sourceName": "Interosseous membrane of leg",
+   "system": "ligaments",
+   "structures": [
+    "knee-interosseous-membrane-leg"
+   ],
+   "fma": "FMA35187",
+   "fmaName": "interosseous membrane of leg"
+  },
+  {
+   "sourceName": "Interosseous metacarpal ligaments",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Interosseous sacro-iliac ligament",
+   "system": "ligaments",
+   "structures": [
+    "lumbar-sij"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Interpubic disc",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Intersesamoid ligament",
+   "system": "ligaments",
+   "structures": [
+    "ankle-intersesamoid"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Interspinous ligaments",
+   "system": "ligaments",
+   "structures": [
+    "spine-interspinous"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Intervertebral disc C2-C3",
+   "system": "ligaments",
+   "structures": [
+    "cervical-discs"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Intervertebral disc C3-C4",
+   "system": "ligaments",
+   "structures": [
+    "cervical-discs"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Intervertebral disc C4-C5",
+   "system": "ligaments",
+   "structures": [
+    "cervical-discs"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Intervertebral disc C5-C6",
+   "system": "ligaments",
+   "structures": [
+    "cervical-discs"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Intervertebral disc C6-C7",
+   "system": "ligaments",
+   "structures": [
+    "cervical-discs"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Intervertebral disc C7-T1",
+   "system": "ligaments",
+   "structures": [
+    "cervical-discs"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Intervertebral disc L1-L2",
+   "system": "ligaments",
+   "structures": [
+    "lumbar-discs"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Intervertebral disc L2-L3",
+   "system": "ligaments",
+   "structures": [
+    "lumbar-discs"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Intervertebral disc L3-L4",
+   "system": "ligaments",
+   "structures": [
+    "lumbar-discs"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Intervertebral disc L4-L5",
+   "system": "ligaments",
+   "structures": [
+    "lumbar-discs"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Intervertebral disc L5-S1",
+   "system": "ligaments",
+   "structures": [
+    "lumbar-discs"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Intervertebral disc T1-T2",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Intervertebral disc T10-T11",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Intervertebral disc T11-T12",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Intervertebral disc T12-L1",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Intervertebral disc T2-T3",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Intervertebral disc T3-T4",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Intervertebral disc T4-T5",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Intervertebral disc T5-T6",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Intervertebral disc T6-T7",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Intervertebral disc T7-T8",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Intervertebral disc T8-T9",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Intervertebral disc T9-T10",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Intra-articular ligament of head of rib",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Investing abdominal fascia",
+   "system": "fascia",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Ischiofemoral ligament",
+   "system": "ligaments",
+   "structures": [
+    "hip-joint"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Lateral femoral intermuscular septum",
+   "system": "fascia",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Lateral head of flexor hallucis brevis.el",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Lateral head of flexor hallucis brevis.er",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Lateral head of flexor hallucis brevis.o1l",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Lateral head of flexor hallucis brevis.o1r",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Lateral head of flexor hallucis brevis.ol",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Lateral head of flexor hallucis brevis.or",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Lateral head of gastrocnemius.ol",
+   "system": "insertions",
+   "structures": [
+    "ankle-gastrocnemius",
+    "ankle-gastroc-lateral"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Lateral head of gastrocnemius.or",
+   "system": "insertions",
+   "structures": [
+    "ankle-gastrocnemius",
+    "ankle-gastroc-lateral"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Lateral head of triceps brachii.ol",
+   "system": "insertions",
+   "structures": [
+    "elbow-triceps",
+    "elbow-triceps-lateral"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Lateral head of triceps brachii.or",
+   "system": "insertions",
+   "structures": [
+    "elbow-triceps",
+    "elbow-triceps-lateral"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Lateral intermuscular septum of arm",
+   "system": "fascia",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Lateral meniscus",
+   "system": "ligaments",
+   "structures": [
+    "knee-menisci",
+    "knee-tibiofemoral"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Lateral pterygoid muscle.o1l",
+   "system": "insertions",
+   "structures": [
+    "head-jaw-lateral-pterygoid"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Lateral pterygoid muscle.o1r",
+   "system": "insertions",
+   "structures": [
+    "head-jaw-lateral-pterygoid"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Lateral pterygoid muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "head-jaw-lateral-pterygoid"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Lateral pterygoid muscle.or",
+   "system": "insertions",
+   "structures": [
+    "head-jaw-lateral-pterygoid"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Lateral subtendinous bursa of gastrocnemius muscle",
+   "system": "fascia",
+   "structures": [
+    "ankle-gastrocnemius"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Lateral talocalcaneal ligament",
+   "system": "ligaments",
+   "structures": [
+    "ankle-subtalar",
+    "ankle-tc-lateral"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Lateral temporomandibular ligament",
+   "system": "ligaments",
+   "structures": [
+    "head-jaw-lateral-tmj-lig"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Lateral thyrohyoid ligament",
+   "system": "ligaments",
+   "structures": [],
+   "fma": "FMA55139",
+   "fmaName": "lateral thyrohyoid ligament"
+  },
+  {
+   "sourceName": "Latissimus dorsi muscle.el",
+   "system": "insertions",
+   "structures": [
+    "shoulder-lats"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Latissimus dorsi muscle.er",
+   "system": "insertions",
+   "structures": [
+    "shoulder-lats"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Latissimus dorsi muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "shoulder-lats"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Latissimus dorsi muscle.or",
+   "system": "insertions",
+   "structures": [
+    "shoulder-lats"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Levator anguli oris.ol",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Levator anguli oris.or",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Levator ani.ol",
+   "system": "insertions",
+   "structures": [
+    "lumbar-pelvic-floor"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Levator ani.or",
+   "system": "insertions",
+   "structures": [
+    "lumbar-pelvic-floor"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Levator labii superioris.ol",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Levator labii superioris.or",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Levator nasolabialis.ol",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Levator nasolabialis.or",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Levator scapulae.el",
+   "system": "insertions",
+   "structures": [
+    "cervical-levator"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Levator scapulae.er",
+   "system": "insertions",
+   "structures": [
+    "cervical-levator"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Levator scapulae.o1l",
+   "system": "insertions",
+   "structures": [
+    "cervical-levator"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Levator scapulae.o1r",
+   "system": "insertions",
+   "structures": [
+    "cervical-levator"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Levator scapulae.o2l",
+   "system": "insertions",
+   "structures": [
+    "cervical-levator"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Levator scapulae.o2r",
+   "system": "insertions",
+   "structures": [
+    "cervical-levator"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Levator scapulae.o3l",
+   "system": "insertions",
+   "structures": [
+    "cervical-levator"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Levator scapulae.o3r",
+   "system": "insertions",
+   "structures": [
+    "cervical-levator"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Levator scapulae.ol",
+   "system": "insertions",
+   "structures": [
+    "cervical-levator"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Levator scapulae.or",
+   "system": "insertions",
+   "structures": [
+    "cervical-levator"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Levatores longi costarum.e10l",
+   "system": "insertions",
+   "structures": [
+    "spine-levatores-costarum"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Levatores longi costarum.e10r",
+   "system": "insertions",
+   "structures": [
+    "spine-levatores-costarum"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Levatores longi costarum.e1l",
+   "system": "insertions",
+   "structures": [
+    "spine-levatores-costarum"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Levatores longi costarum.e1r",
+   "system": "insertions",
+   "structures": [
+    "spine-levatores-costarum"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Levatores longi costarum.e2l",
+   "system": "insertions",
+   "structures": [
+    "spine-levatores-costarum"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Levatores longi costarum.e2r",
+   "system": "insertions",
+   "structures": [
+    "spine-levatores-costarum"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Levatores longi costarum.e3l",
+   "system": "insertions",
+   "structures": [
+    "spine-levatores-costarum"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Levatores longi costarum.e3r",
+   "system": "insertions",
+   "structures": [
+    "spine-levatores-costarum"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Levatores longi costarum.e4l",
+   "system": "insertions",
+   "structures": [
+    "spine-levatores-costarum"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Levatores longi costarum.e4r",
+   "system": "insertions",
+   "structures": [
+    "spine-levatores-costarum"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Levatores longi costarum.e5l",
+   "system": "insertions",
+   "structures": [
+    "spine-levatores-costarum"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Levatores longi costarum.e5r",
+   "system": "insertions",
+   "structures": [
+    "spine-levatores-costarum"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Levatores longi costarum.e6l",
+   "system": "insertions",
+   "structures": [
+    "spine-levatores-costarum"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Levatores longi costarum.e6r",
+   "system": "insertions",
+   "structures": [
+    "spine-levatores-costarum"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Levatores longi costarum.e7l",
+   "system": "insertions",
+   "structures": [
+    "spine-levatores-costarum"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Levatores longi costarum.e7r",
+   "system": "insertions",
+   "structures": [
+    "spine-levatores-costarum"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Levatores longi costarum.e8l",
+   "system": "insertions",
+   "structures": [
+    "spine-levatores-costarum"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Levatores longi costarum.e8r",
+   "system": "insertions",
+   "structures": [
+    "spine-levatores-costarum"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Levatores longi costarum.e9l",
+   "system": "insertions",
+   "structures": [
+    "spine-levatores-costarum"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Levatores longi costarum.e9r",
+   "system": "insertions",
+   "structures": [
+    "spine-levatores-costarum"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Levatores longi costarum.el",
+   "system": "insertions",
+   "structures": [
+    "spine-levatores-costarum"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Levatores longi costarum.er",
+   "system": "insertions",
+   "structures": [
+    "spine-levatores-costarum"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Ligament of head of femur",
+   "system": "ligaments",
+   "structures": [
+    "hip-ligamentum-teres"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Ligamenta flava",
+   "system": "ligaments",
+   "structures": [
+    "spine-ligamentum-flavum"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Linea alba",
+   "system": "fascia",
+   "structures": [
+    "lumbar-linea-alba"
+   ],
+   "fma": "FMA11336",
+   "fmaName": "linea alba"
+  },
+  {
+   "sourceName": "lm-acromion",
+   "system": "landmarks",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "lm-adductor-tubercle",
+   "system": "landmarks",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "lm-anatomical-snuffbox",
+   "system": "landmarks",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "lm-asis",
+   "system": "landmarks",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "lm-bicipital-groove",
+   "system": "landmarks",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "lm-c1-transverse",
+   "system": "landmarks",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "lm-c2-spinous",
+   "system": "landmarks",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "lm-c7-spinous",
+   "system": "landmarks",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "lm-coracoid",
+   "system": "landmarks",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "lm-costal-margin",
+   "system": "landmarks",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "lm-fibular-head",
+   "system": "landmarks",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "lm-fifth-metatarsal-base",
+   "system": "landmarks",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "lm-gerdys-tubercle",
+   "system": "landmarks",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "lm-greater-trochanter",
+   "system": "landmarks",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "lm-greater-tubercle",
+   "system": "landmarks",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "lm-iliac-crest",
+   "system": "landmarks",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "lm-inferior-angle",
+   "system": "landmarks",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "lm-ischial-tuberosity",
+   "system": "landmarks",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "lm-jugular-notch",
+   "system": "landmarks",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "lm-knee-joint-line",
+   "system": "landmarks",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "lm-lateral-epicondyle",
+   "system": "landmarks",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "lm-lateral-malleolus",
+   "system": "landmarks",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "lm-mandible-angle",
+   "system": "landmarks",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "lm-mastoid-process",
+   "system": "landmarks",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "lm-medial-epicondyle",
+   "system": "landmarks",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "lm-medial-malleolus",
+   "system": "landmarks",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "lm-navicular-tuberosity",
+   "system": "landmarks",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "lm-occipital-protuberance",
+   "system": "landmarks",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "lm-olecranon",
+   "system": "landmarks",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "lm-pisiform",
+   "system": "landmarks",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "lm-psis",
+   "system": "landmarks",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "lm-pubic-tubercle",
+   "system": "landmarks",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "lm-radial-styloid",
+   "system": "landmarks",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "lm-sacral-base",
+   "system": "landmarks",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "lm-scapular-medial-border",
+   "system": "landmarks",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "lm-scapular-spine",
+   "system": "landmarks",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "lm-sternal-angle",
+   "system": "landmarks",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "lm-superior-nuchal-line",
+   "system": "landmarks",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "lm-sustentaculum-tali",
+   "system": "landmarks",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "lm-tibial-tuberosity",
+   "system": "landmarks",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "lm-ulnar-styloid",
+   "system": "landmarks",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "lm-zygomatic-arch",
+   "system": "landmarks",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Long head of biceps brachii.ol",
+   "system": "insertions",
+   "structures": [
+    "shoulder-biceps-long-head",
+    "elbow-biceps"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Long head of biceps brachii.or",
+   "system": "insertions",
+   "structures": [
+    "shoulder-biceps-long-head",
+    "elbow-biceps"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Long head of biceps femoris.ol",
+   "system": "insertions",
+   "structures": [
+    "knee-biceps-femoris-long"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Long head of biceps femoris.or",
+   "system": "insertions",
+   "structures": [
+    "knee-biceps-femoris-long"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Long head of triceps brachii.ol",
+   "system": "insertions",
+   "structures": [
+    "elbow-triceps",
+    "elbow-triceps-long"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Long head of triceps brachii.or",
+   "system": "insertions",
+   "structures": [
+    "elbow-triceps",
+    "elbow-triceps-long"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Long plantar ligament",
+   "system": "ligaments",
+   "structures": [
+    "ankle-long-plantar"
+   ],
+   "fma": "FMA44248",
+   "fmaName": "long plantar ligament"
+  },
+  {
+   "sourceName": "Long plantar ligament.o1l",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Long plantar ligament.o1r",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Long plantar ligament.o2l",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Long plantar ligament.o2r",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Long plantar ligament.o3l",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Long plantar ligament.o3r",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Long plantar ligament.o4l",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Long plantar ligament.o4r",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Long plantar ligament.ol",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Long plantar ligament.or",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Longissimus thoracis muscle.e10l",
+   "system": "insertions",
+   "structures": [
+    "spine-erector-spinae",
+    "spine-longissimus",
+    "spine-longissimus-thoracis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Longissimus thoracis muscle.e10r",
+   "system": "insertions",
+   "structures": [
+    "spine-erector-spinae",
+    "spine-longissimus",
+    "spine-longissimus-thoracis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Longissimus thoracis muscle.e11l",
+   "system": "insertions",
+   "structures": [
+    "spine-erector-spinae",
+    "spine-longissimus",
+    "spine-longissimus-thoracis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Longissimus thoracis muscle.e11r",
+   "system": "insertions",
+   "structures": [
+    "spine-erector-spinae",
+    "spine-longissimus",
+    "spine-longissimus-thoracis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Longissimus thoracis muscle.e12l",
+   "system": "insertions",
+   "structures": [
+    "spine-erector-spinae",
+    "spine-longissimus",
+    "spine-longissimus-thoracis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Longissimus thoracis muscle.e12r",
+   "system": "insertions",
+   "structures": [
+    "spine-erector-spinae",
+    "spine-longissimus",
+    "spine-longissimus-thoracis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Longissimus thoracis muscle.e13l",
+   "system": "insertions",
+   "structures": [
+    "spine-erector-spinae",
+    "spine-longissimus",
+    "spine-longissimus-thoracis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Longissimus thoracis muscle.e13r",
+   "system": "insertions",
+   "structures": [
+    "spine-erector-spinae",
+    "spine-longissimus",
+    "spine-longissimus-thoracis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Longissimus thoracis muscle.e14l",
+   "system": "insertions",
+   "structures": [
+    "spine-erector-spinae",
+    "spine-longissimus",
+    "spine-longissimus-thoracis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Longissimus thoracis muscle.e14r",
+   "system": "insertions",
+   "structures": [
+    "spine-erector-spinae",
+    "spine-longissimus",
+    "spine-longissimus-thoracis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Longissimus thoracis muscle.e15l",
+   "system": "insertions",
+   "structures": [
+    "spine-erector-spinae",
+    "spine-longissimus",
+    "spine-longissimus-thoracis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Longissimus thoracis muscle.e15r",
+   "system": "insertions",
+   "structures": [
+    "spine-erector-spinae",
+    "spine-longissimus",
+    "spine-longissimus-thoracis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Longissimus thoracis muscle.e16l",
+   "system": "insertions",
+   "structures": [
+    "spine-erector-spinae",
+    "spine-longissimus",
+    "spine-longissimus-thoracis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Longissimus thoracis muscle.e16r",
+   "system": "insertions",
+   "structures": [
+    "spine-erector-spinae",
+    "spine-longissimus",
+    "spine-longissimus-thoracis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Longissimus thoracis muscle.e17l",
+   "system": "insertions",
+   "structures": [
+    "spine-erector-spinae",
+    "spine-longissimus",
+    "spine-longissimus-thoracis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Longissimus thoracis muscle.e17r",
+   "system": "insertions",
+   "structures": [
+    "spine-erector-spinae",
+    "spine-longissimus",
+    "spine-longissimus-thoracis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Longissimus thoracis muscle.e18l",
+   "system": "insertions",
+   "structures": [
+    "spine-erector-spinae",
+    "spine-longissimus",
+    "spine-longissimus-thoracis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Longissimus thoracis muscle.e18r",
+   "system": "insertions",
+   "structures": [
+    "spine-erector-spinae",
+    "spine-longissimus",
+    "spine-longissimus-thoracis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Longissimus thoracis muscle.e19l",
+   "system": "insertions",
+   "structures": [
+    "spine-erector-spinae",
+    "spine-longissimus",
+    "spine-longissimus-thoracis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Longissimus thoracis muscle.e19r",
+   "system": "insertions",
+   "structures": [
+    "spine-erector-spinae",
+    "spine-longissimus",
+    "spine-longissimus-thoracis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Longissimus thoracis muscle.e1l",
+   "system": "insertions",
+   "structures": [
+    "spine-erector-spinae",
+    "spine-longissimus",
+    "spine-longissimus-thoracis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Longissimus thoracis muscle.e1r",
+   "system": "insertions",
+   "structures": [
+    "spine-erector-spinae",
+    "spine-longissimus",
+    "spine-longissimus-thoracis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Longissimus thoracis muscle.e20l",
+   "system": "insertions",
+   "structures": [
+    "spine-erector-spinae",
+    "spine-longissimus",
+    "spine-longissimus-thoracis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Longissimus thoracis muscle.e20r",
+   "system": "insertions",
+   "structures": [
+    "spine-erector-spinae",
+    "spine-longissimus",
+    "spine-longissimus-thoracis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Longissimus thoracis muscle.e21l",
+   "system": "insertions",
+   "structures": [
+    "spine-erector-spinae",
+    "spine-longissimus",
+    "spine-longissimus-thoracis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Longissimus thoracis muscle.e21r",
+   "system": "insertions",
+   "structures": [
+    "spine-erector-spinae",
+    "spine-longissimus",
+    "spine-longissimus-thoracis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Longissimus thoracis muscle.e22l",
+   "system": "insertions",
+   "structures": [
+    "spine-erector-spinae",
+    "spine-longissimus",
+    "spine-longissimus-thoracis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Longissimus thoracis muscle.e22r",
+   "system": "insertions",
+   "structures": [
+    "spine-erector-spinae",
+    "spine-longissimus",
+    "spine-longissimus-thoracis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Longissimus thoracis muscle.e23l",
+   "system": "insertions",
+   "structures": [
+    "spine-erector-spinae",
+    "spine-longissimus",
+    "spine-longissimus-thoracis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Longissimus thoracis muscle.e23r",
+   "system": "insertions",
+   "structures": [
+    "spine-erector-spinae",
+    "spine-longissimus",
+    "spine-longissimus-thoracis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Longissimus thoracis muscle.e24l",
+   "system": "insertions",
+   "structures": [
+    "spine-erector-spinae",
+    "spine-longissimus",
+    "spine-longissimus-thoracis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Longissimus thoracis muscle.e24r",
+   "system": "insertions",
+   "structures": [
+    "spine-erector-spinae",
+    "spine-longissimus",
+    "spine-longissimus-thoracis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Longissimus thoracis muscle.e25l",
+   "system": "insertions",
+   "structures": [
+    "spine-erector-spinae",
+    "spine-longissimus",
+    "spine-longissimus-thoracis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Longissimus thoracis muscle.e25r",
+   "system": "insertions",
+   "structures": [
+    "spine-erector-spinae",
+    "spine-longissimus",
+    "spine-longissimus-thoracis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Longissimus thoracis muscle.e26l",
+   "system": "insertions",
+   "structures": [
+    "spine-erector-spinae",
+    "spine-longissimus",
+    "spine-longissimus-thoracis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Longissimus thoracis muscle.e26r",
+   "system": "insertions",
+   "structures": [
+    "spine-erector-spinae",
+    "spine-longissimus",
+    "spine-longissimus-thoracis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Longissimus thoracis muscle.e2l",
+   "system": "insertions",
+   "structures": [
+    "spine-erector-spinae",
+    "spine-longissimus",
+    "spine-longissimus-thoracis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Longissimus thoracis muscle.e2r",
+   "system": "insertions",
+   "structures": [
+    "spine-erector-spinae",
+    "spine-longissimus",
+    "spine-longissimus-thoracis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Longissimus thoracis muscle.e3l",
+   "system": "insertions",
+   "structures": [
+    "spine-erector-spinae",
+    "spine-longissimus",
+    "spine-longissimus-thoracis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Longissimus thoracis muscle.e3r",
+   "system": "insertions",
+   "structures": [
+    "spine-erector-spinae",
+    "spine-longissimus",
+    "spine-longissimus-thoracis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Longissimus thoracis muscle.e4l",
+   "system": "insertions",
+   "structures": [
+    "spine-erector-spinae",
+    "spine-longissimus",
+    "spine-longissimus-thoracis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Longissimus thoracis muscle.e4r",
+   "system": "insertions",
+   "structures": [
+    "spine-erector-spinae",
+    "spine-longissimus",
+    "spine-longissimus-thoracis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Longissimus thoracis muscle.e5l",
+   "system": "insertions",
+   "structures": [
+    "spine-erector-spinae",
+    "spine-longissimus",
+    "spine-longissimus-thoracis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Longissimus thoracis muscle.e5r",
+   "system": "insertions",
+   "structures": [
+    "spine-erector-spinae",
+    "spine-longissimus",
+    "spine-longissimus-thoracis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Longissimus thoracis muscle.e6l",
+   "system": "insertions",
+   "structures": [
+    "spine-erector-spinae",
+    "spine-longissimus",
+    "spine-longissimus-thoracis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Longissimus thoracis muscle.e6r",
+   "system": "insertions",
+   "structures": [
+    "spine-erector-spinae",
+    "spine-longissimus",
+    "spine-longissimus-thoracis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Longissimus thoracis muscle.e7l",
+   "system": "insertions",
+   "structures": [
+    "spine-erector-spinae",
+    "spine-longissimus",
+    "spine-longissimus-thoracis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Longissimus thoracis muscle.e7r",
+   "system": "insertions",
+   "structures": [
+    "spine-erector-spinae",
+    "spine-longissimus",
+    "spine-longissimus-thoracis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Longissimus thoracis muscle.e8l",
+   "system": "insertions",
+   "structures": [
+    "spine-erector-spinae",
+    "spine-longissimus",
+    "spine-longissimus-thoracis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Longissimus thoracis muscle.e8r",
+   "system": "insertions",
+   "structures": [
+    "spine-erector-spinae",
+    "spine-longissimus",
+    "spine-longissimus-thoracis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Longissimus thoracis muscle.e9l",
+   "system": "insertions",
+   "structures": [
+    "spine-erector-spinae",
+    "spine-longissimus",
+    "spine-longissimus-thoracis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Longissimus thoracis muscle.e9r",
+   "system": "insertions",
+   "structures": [
+    "spine-erector-spinae",
+    "spine-longissimus",
+    "spine-longissimus-thoracis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Longissimus thoracis muscle.el",
+   "system": "insertions",
+   "structures": [
+    "spine-erector-spinae",
+    "spine-longissimus",
+    "spine-longissimus-thoracis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Longissimus thoracis muscle.er",
+   "system": "insertions",
+   "structures": [
+    "spine-erector-spinae",
+    "spine-longissimus",
+    "spine-longissimus-thoracis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Longus capitis muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "cervical-deep-flexors"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Longus capitis muscle.or",
+   "system": "insertions",
+   "structures": [
+    "cervical-deep-flexors"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Lunotriquetral interosseous ligament",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Masseter.el",
+   "system": "insertions",
+   "structures": [
+    "head-jaw-masseter"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Masseter.er",
+   "system": "insertions",
+   "structures": [
+    "head-jaw-masseter"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Masseter.o1l",
+   "system": "insertions",
+   "structures": [
+    "head-jaw-masseter"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Masseter.o1r",
+   "system": "insertions",
+   "structures": [
+    "head-jaw-masseter"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Masseter.ol",
+   "system": "insertions",
+   "structures": [
+    "head-jaw-masseter"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Masseter.or",
+   "system": "insertions",
+   "structures": [
+    "head-jaw-masseter"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Masseteric fascia",
+   "system": "fascia",
+   "structures": [
+    "fascia-masseteric"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Medial femoral intermuscular septum",
+   "system": "fascia",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Medial head of flexor hallucis brevis.el",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Medial head of flexor hallucis brevis.er",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Medial head of gastrocnemius.ol",
+   "system": "insertions",
+   "structures": [
+    "ankle-gastrocnemius",
+    "ankle-gastroc-medial"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Medial head of gastrocnemius.or",
+   "system": "insertions",
+   "structures": [
+    "ankle-gastrocnemius",
+    "ankle-gastroc-medial"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Medial head of triceps brachii.ol",
+   "system": "insertions",
+   "structures": [
+    "elbow-triceps",
+    "elbow-triceps-medial"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Medial head of triceps brachii.or",
+   "system": "insertions",
+   "structures": [
+    "elbow-triceps",
+    "elbow-triceps-medial"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Medial intermuscular septum of arm",
+   "system": "fascia",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Medial meniscus",
+   "system": "ligaments",
+   "structures": [
+    "knee-menisci",
+    "knee-tibiofemoral"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Medial pterygoid muscle.el",
+   "system": "insertions",
+   "structures": [
+    "head-jaw-medial-pterygoid"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Medial pterygoid muscle.er",
+   "system": "insertions",
+   "structures": [
+    "head-jaw-medial-pterygoid"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Medial pterygoid muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "head-jaw-medial-pterygoid"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Medial pterygoid muscle.or",
+   "system": "insertions",
+   "structures": [
+    "head-jaw-medial-pterygoid"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Medial subtendinous bursa of gastrocnemius muscle",
+   "system": "fascia",
+   "structures": [
+    "ankle-gastrocnemius"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Medial talocalcaneal ligament",
+   "system": "ligaments",
+   "structures": [
+    "ankle-subtalar",
+    "ankle-tc-medial"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Median cricothyroid ligament",
+   "system": "ligaments",
+   "structures": [],
+   "fma": "FMA55237",
+   "fmaName": "median cricothyroid ligament"
+  },
+  {
+   "sourceName": "Median thyrohyoid ligament",
+   "system": "ligaments",
+   "structures": [],
+   "fma": "FMA55138",
+   "fmaName": "median thyrohyoid ligament"
+  },
+  {
+   "sourceName": "Meniscopatellar ligament",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Mentalis muscle.ol",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Mentalis muscle.or",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Metatarsal interosseous ligaments",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Middle glenohumeral ligament",
+   "system": "ligaments",
+   "structures": [
+    "shoulder-gh-joint"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Middle layer of thoracolumbar fascia",
+   "system": "fascia",
+   "structures": [
+    "lumbar-tl-fascia"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Mylohyoid muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "head-jaw-mylohyoid"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Mylohyoid muscle.or",
+   "system": "insertions",
+   "structures": [
+    "head-jaw-mylohyoid"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Nasalis muscle.ol",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Nasalis muscle.or",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Nuchal ligament",
+   "system": "ligaments",
+   "structures": [
+    "cervical-nuchal-ligament"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Nucleus pulposus C2-C3",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Nucleus pulposus C3-C4",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Nucleus pulposus C4-C5",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Nucleus pulposus C5-C6",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Nucleus pulposus C6-C7",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Nucleus pulposus C7-T1",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Nucleus pulposus L1-L2",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Nucleus pulposus L2-L3",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Nucleus pulposus L3-L4",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Nucleus pulposus L4-L5",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Nucleus pulposus L5-S1",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Nucleus pulposus T1-T2",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Nucleus pulposus T10-T11",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Nucleus pulposus T11-T12",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Nucleus pulposus T12-L1",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Nucleus pulposus T2-T3",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Nucleus pulposus T3-T4",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Nucleus pulposus T4-T5",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Nucleus pulposus T5-T6",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Nucleus pulposus T6-T7",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Nucleus pulposus T7-T8",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Nucleus pulposus T8-T9",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Nucleus pulposus T9-T10",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Oblique cord",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Oblique head of adductor hallucis.el",
+   "system": "insertions",
+   "structures": [
+    "ankle-intrinsics",
+    "ankle-foot-layer-3"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Oblique head of adductor hallucis.er",
+   "system": "insertions",
+   "structures": [
+    "ankle-intrinsics",
+    "ankle-foot-layer-3"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Oblique head of adductor hallucis.o1l",
+   "system": "insertions",
+   "structures": [
+    "ankle-intrinsics",
+    "ankle-foot-layer-3"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Oblique head of adductor hallucis.o1r",
+   "system": "insertions",
+   "structures": [
+    "ankle-intrinsics",
+    "ankle-foot-layer-3"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Oblique head of adductor hallucis.ol",
+   "system": "insertions",
+   "structures": [
+    "ankle-intrinsics",
+    "ankle-foot-layer-3"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Oblique head of adductor hallucis.or",
+   "system": "insertions",
+   "structures": [
+    "ankle-intrinsics",
+    "ankle-foot-layer-3"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Oblique popliteal ligament",
+   "system": "ligaments",
+   "structures": [
+    "knee-oblique-popliteal"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Obliquus inferior capitis muscle.el",
+   "system": "insertions",
+   "structures": [
+    "cervical-suboccipitals",
+    "cervical-obliquus-inferior"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Obliquus inferior capitis muscle.er",
+   "system": "insertions",
+   "structures": [
+    "cervical-suboccipitals",
+    "cervical-obliquus-inferior"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Obliquus inferior capitis muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "cervical-suboccipitals",
+    "cervical-obliquus-inferior"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Obliquus inferior capitis muscle.or",
+   "system": "insertions",
+   "structures": [
+    "cervical-suboccipitals",
+    "cervical-obliquus-inferior"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Obliquus superior capitis muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "cervical-suboccipitals",
+    "cervical-obliquus-superior"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Obliquus superior capitis muscle.or",
+   "system": "insertions",
+   "structures": [
+    "cervical-suboccipitals",
+    "cervical-obliquus-superior"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Obturator externus.ol",
+   "system": "insertions",
+   "structures": [
+    "hip-deep-rotators",
+    "hip-obturator-externus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Obturator externus.or",
+   "system": "insertions",
+   "structures": [
+    "hip-deep-rotators",
+    "hip-obturator-externus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Obturator internus.ol",
+   "system": "insertions",
+   "structures": [
+    "hip-deep-rotators",
+    "hip-obturator-internus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Obturator internus.or",
+   "system": "insertions",
+   "structures": [
+    "hip-deep-rotators",
+    "hip-obturator-internus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Obturator membrane",
+   "system": "ligaments",
+   "structures": [
+    "hip-obturator-membrane"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Occipitalis muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "head-jaw-occipitofrontalis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Occipitalis muscle.or",
+   "system": "insertions",
+   "structures": [
+    "head-jaw-occipitofrontalis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Omohyoid muscle.el",
+   "system": "insertions",
+   "structures": [
+    "head-jaw-omohyoid"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Omohyoid muscle.er",
+   "system": "insertions",
+   "structures": [
+    "head-jaw-omohyoid"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Omohyoid muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "head-jaw-omohyoid"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Omohyoid muscle.or",
+   "system": "insertions",
+   "structures": [
+    "head-jaw-omohyoid"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Opponens digiti minimi muscle of hand.ol",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-hypothenar"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Opponens digiti minimi muscle of hand.or",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-hypothenar"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Orbicularis oris muscle.ol",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Orbicularis oris muscle.or",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Orbital part of orbicularis oculi.ol",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Orbital part of orbicularis oculi.or",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Palmar aponeurosis",
+   "system": "fascia",
+   "structures": [
+    "elbow-wrist-palmar-aponeurosis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Palmar capitohamate ligament",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Palmar carpometacarpal ligaments",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Palmar interphalangeal ligaments",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Palmar lunotriquetral ligament",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Palmar metacarpal ligaments",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Palmar radio-ulnar ligament",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Palmar scaphotriquetral ligament",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Palmar trapezoideocapitate ligament",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Patellar ligament.el",
+   "system": "insertions",
+   "structures": [
+    "knee-patellar-tendon",
+    "knee-patellofemoral"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Patellar ligament.er",
+   "system": "insertions",
+   "structures": [
+    "knee-patellar-tendon",
+    "knee-patellofemoral"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Patellar ligament.ol",
+   "system": "insertions",
+   "structures": [
+    "knee-patellar-tendon",
+    "knee-patellofemoral"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Patellar ligament.or",
+   "system": "insertions",
+   "structures": [
+    "knee-patellar-tendon",
+    "knee-patellofemoral"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Pectineus muscle.el",
+   "system": "insertions",
+   "structures": [
+    "hip-pectineus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Pectineus muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "hip-pectineus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Pectineus muscle.or",
+   "system": "insertions",
+   "structures": [
+    "hip-pectineus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Pectoral fascia",
+   "system": "fascia",
+   "structures": [
+    "fascia-pectoral"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Pectoralis major muscle.el",
+   "system": "insertions",
+   "structures": [
+    "shoulder-pec-major"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Pectoralis major muscle.er",
+   "system": "insertions",
+   "structures": [
+    "shoulder-pec-major"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Pectoralis major muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "shoulder-pec-major"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Pectoralis major muscle.or",
+   "system": "insertions",
+   "structures": [
+    "shoulder-pec-major"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Pectoralis minor muscle.e1l",
+   "system": "insertions",
+   "structures": [
+    "shoulder-pec-minor"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Pectoralis minor muscle.e1r",
+   "system": "insertions",
+   "structures": [
+    "shoulder-pec-minor"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Pectoralis minor muscle.e2l",
+   "system": "insertions",
+   "structures": [
+    "shoulder-pec-minor"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Pectoralis minor muscle.e2r",
+   "system": "insertions",
+   "structures": [
+    "shoulder-pec-minor"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Pectoralis minor muscle.el",
+   "system": "insertions",
+   "structures": [
+    "shoulder-pec-minor"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Pectoralis minor muscle.er",
+   "system": "insertions",
+   "structures": [
+    "shoulder-pec-minor"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Pectoralis minor muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "shoulder-pec-minor"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Pectoralis minor muscle.or",
+   "system": "insertions",
+   "structures": [
+    "shoulder-pec-minor"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Piriformis fascia",
+   "system": "fascia",
+   "structures": [
+    "hip-deep-rotators"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Piriformis muscle.el",
+   "system": "insertions",
+   "structures": [
+    "hip-piriformis",
+    "hip-deep-rotators"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Piriformis muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "hip-piriformis",
+    "hip-deep-rotators"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Piriformis muscle.or",
+   "system": "insertions",
+   "structures": [
+    "hip-piriformis",
+    "hip-deep-rotators"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Pisohamate ligament",
+   "system": "ligaments",
+   "structures": [
+    "elbow-pisohamate"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Pisometacarpal ligament",
+   "system": "ligaments",
+   "structures": [
+    "elbow-pisohamate"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Pisotriquetral ligament",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Plantar aponeurosis",
+   "system": "fascia",
+   "structures": [
+    "ankle-plantar-fascia"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Plantar calcaneocuboid ligament",
+   "system": "ligaments",
+   "structures": [
+    "ankle-short-plantar"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Plantar calcaneonavicular ligament",
+   "system": "ligaments",
+   "structures": [
+    "ankle-spring-ligament"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Plantar cuboideonavicular ligament",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Plantar cuneocuboid ligament",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Plantar cuneonavicular ligaments",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Plantar intercuneiform ligaments",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Plantar interossei muscles.e1l",
+   "system": "insertions",
+   "structures": [
+    "ankle-intrinsics",
+    "ankle-foot-layer-4"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Plantar interossei muscles.e2l",
+   "system": "insertions",
+   "structures": [
+    "ankle-intrinsics",
+    "ankle-foot-layer-4"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Plantar interossei muscles.el",
+   "system": "insertions",
+   "structures": [
+    "ankle-intrinsics",
+    "ankle-foot-layer-4"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Plantar interossei muscles.o1l",
+   "system": "insertions",
+   "structures": [
+    "ankle-intrinsics",
+    "ankle-foot-layer-4"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Plantar interossei muscles.o2l",
+   "system": "insertions",
+   "structures": [
+    "ankle-intrinsics",
+    "ankle-foot-layer-4"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Plantar interossei muscles.ol",
+   "system": "insertions",
+   "structures": [
+    "ankle-intrinsics",
+    "ankle-foot-layer-4"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Plantar interphalangeal ligaments",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Plantar metatarsal ligaments",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Plantar metatarsophalangeal ligaments",
+   "system": "ligaments",
+   "structures": [
+    "ankle-first-mtp",
+    "joint-mtp"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Plantar tarsometatarsal ligaments",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Plantaris muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "knee-plantaris"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Plantaris muscle.or",
+   "system": "insertions",
+   "structures": [
+    "knee-plantaris"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Popliteal fascia",
+   "system": "fascia",
+   "structures": [
+    "fascia-popliteal"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Popliteofibular ligament",
+   "system": "ligaments",
+   "structures": [
+    "knee-popliteofibular"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Popliteus muscle.el",
+   "system": "insertions",
+   "structures": [
+    "knee-popliteus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Popliteus muscle.er",
+   "system": "insertions",
+   "structures": [
+    "knee-popliteus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Popliteus muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "knee-popliteus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Popliteus muscle.or",
+   "system": "insertions",
+   "structures": [
+    "knee-popliteus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Posterior cruciate ligament",
+   "system": "ligaments",
+   "structures": [
+    "knee-pcl",
+    "knee-tibiofemoral"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Posterior intermuscular septum of leg",
+   "system": "fascia",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Posterior layer of thoracolumbar fascia",
+   "system": "fascia",
+   "structures": [
+    "lumbar-tl-fascia"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Posterior ligament of fibular head",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Posterior longitudinal ligament",
+   "system": "ligaments",
+   "structures": [
+    "spine-pll"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Posterior meniscotibial ligament (Lateral meniscus)",
+   "system": "ligaments",
+   "structures": [
+    "knee-menisci",
+    "knee-tibiofemoral"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Posterior meniscotibial ligament (Medial meniscus)",
+   "system": "ligaments",
+   "structures": [
+    "knee-menisci",
+    "knee-tibiofemoral"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Posterior sacro-iliac ligament",
+   "system": "ligaments",
+   "structures": [
+    "lumbar-sij"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Posterior sternoclavicular ligament",
+   "system": "ligaments",
+   "structures": [
+    "shoulder-sternoclavicular-lig"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Posterior talocalcaneal ligament",
+   "system": "ligaments",
+   "structures": [
+    "ankle-subtalar",
+    "ankle-tc-posterior"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Posterior talofibular ligament",
+   "system": "ligaments",
+   "structures": [
+    "ankle-talocrural",
+    "ankle-lateral-ligaments",
+    "ankle-ptfl"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Posterior tibiofibular ligament",
+   "system": "ligaments",
+   "structures": [
+    "ankle-syndesmosis",
+    "ankle-ptifl"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Posterior tibiotalar ligament",
+   "system": "ligaments",
+   "structures": [
+    "ankle-talocrural",
+    "ankle-deltoid-ligament",
+    "ankle-deltoid-post-tibiotalar"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Procerus muscle.el",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Procerus muscle.ol",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Procerus muscle.or",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Pronator quadratus.el",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-pronator-quadratus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Pronator quadratus.ol",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-pronator-quadratus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Pronator teres.el",
+   "system": "insertions",
+   "structures": [
+    "elbow-pronator-teres"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Pronator teres.er",
+   "system": "insertions",
+   "structures": [
+    "elbow-pronator-teres"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Pronator teres.ol",
+   "system": "insertions",
+   "structures": [
+    "elbow-pronator-teres"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Pronator teres.or",
+   "system": "insertions",
+   "structures": [
+    "elbow-pronator-teres"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Pterygospinous ligament",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Pubic symphysis",
+   "system": "ligaments",
+   "structures": [
+    "hip-pubic-symphysis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Pubofemoral ligament",
+   "system": "ligaments",
+   "structures": [
+    "hip-joint",
+    "hip-pubofemoral"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Quadrangular membrane",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Quadrate ligament",
+   "system": "ligaments",
+   "structures": [
+    "elbow-wrist-proximal-ru-joint"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Quadratus femoris muscle.el",
+   "system": "insertions",
+   "structures": [
+    "hip-deep-rotators",
+    "hip-quadratus-femoris"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Quadratus femoris muscle.er",
+   "system": "insertions",
+   "structures": [
+    "hip-deep-rotators",
+    "hip-quadratus-femoris"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Quadratus femoris muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "hip-deep-rotators",
+    "hip-quadratus-femoris"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Quadratus femoris muscle.or",
+   "system": "insertions",
+   "structures": [
+    "hip-deep-rotators",
+    "hip-quadratus-femoris"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Quadriceps femoris muscle.el",
+   "system": "insertions",
+   "structures": [
+    "knee-quad-tendon"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Quadriceps femoris muscle.er",
+   "system": "insertions",
+   "structures": [
+    "knee-quad-tendon"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Radial collateral ligament",
+   "system": "ligaments",
+   "structures": [
+    "elbow-rcl"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Radial collateral ligament of wrist joint",
+   "system": "ligaments",
+   "structures": [
+    "elbow-wrist-joint"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Radiate carpal ligament",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Radiate ligament of head of rib",
+   "system": "ligaments",
+   "structures": [
+    "thoracic-costovertebral",
+    "thoracic-radiate-rib"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Radiocapitate ligament",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Radioscaphocapitate ligament",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Rectus abdominis muscle.el",
+   "system": "insertions",
+   "structures": [
+    "lumbar-rectus-abdominis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Rectus abdominis muscle.er",
+   "system": "insertions",
+   "structures": [
+    "lumbar-rectus-abdominis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Rectus abdominis muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "lumbar-rectus-abdominis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Rectus abdominis muscle.or",
+   "system": "insertions",
+   "structures": [
+    "lumbar-rectus-abdominis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Rectus anterior capitis muscle.el",
+   "system": "insertions",
+   "structures": [
+    "cervical-deep-flexors"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Rectus anterior capitis muscle.er",
+   "system": "insertions",
+   "structures": [
+    "cervical-deep-flexors"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Rectus anterior capitis muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "cervical-deep-flexors"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Rectus anterior capitis muscle.or",
+   "system": "insertions",
+   "structures": [
+    "cervical-deep-flexors"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Rectus femoris muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "hip-rectus-femoris",
+    "knee-quadriceps"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Rectus femoris muscle.or",
+   "system": "insertions",
+   "structures": [
+    "hip-rectus-femoris",
+    "knee-quadriceps"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Rectus lateralis capitis muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "cervical-deep-flexors"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Rectus lateralis capitis muscle.or",
+   "system": "insertions",
+   "structures": [
+    "cervical-deep-flexors"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Rectus posterior major capitis muscle.el",
+   "system": "insertions",
+   "structures": [
+    "cervical-suboccipitals",
+    "cervical-rcp-major"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Rectus posterior major capitis muscle.er",
+   "system": "insertions",
+   "structures": [
+    "cervical-suboccipitals",
+    "cervical-rcp-major"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Rectus posterior major capitis muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "cervical-suboccipitals",
+    "cervical-rcp-major"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Rectus posterior major capitis muscle.or",
+   "system": "insertions",
+   "structures": [
+    "cervical-suboccipitals",
+    "cervical-rcp-major"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Rectus posterior minor capitis muscle.el",
+   "system": "insertions",
+   "structures": [
+    "cervical-suboccipitals",
+    "cervical-rcp-minor"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Rectus posterior minor capitis muscle.er",
+   "system": "insertions",
+   "structures": [
+    "cervical-suboccipitals",
+    "cervical-rcp-minor"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Rectus posterior minor capitis muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "cervical-suboccipitals",
+    "cervical-rcp-minor"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Rectus posterior minor capitis muscle.or",
+   "system": "insertions",
+   "structures": [
+    "cervical-suboccipitals",
+    "cervical-rcp-minor"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Rhomboid major muscle.el",
+   "system": "insertions",
+   "structures": [
+    "shoulder-rhomboids",
+    "shoulder-rhomboid-major"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Rhomboid major muscle.er",
+   "system": "insertions",
+   "structures": [
+    "shoulder-rhomboids",
+    "shoulder-rhomboid-major"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Rhomboid minor muscle.el",
+   "system": "insertions",
+   "structures": [
+    "shoulder-rhomboids",
+    "shoulder-rhomboid-minor"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Rhomboid minor muscle.er",
+   "system": "insertions",
+   "structures": [
+    "shoulder-rhomboids",
+    "shoulder-rhomboid-minor"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Sacrococcygeal symphysis",
+   "system": "ligaments",
+   "structures": [
+    "joint-sacrococcygeal"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Sacrospinous ligament",
+   "system": "ligaments",
+   "structures": [
+    "hip-sacrospinous-ligament"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Sacrotuberous ligament",
+   "system": "ligaments",
+   "structures": [
+    "hip-sacrotuberous-ligament"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Sartorius muscle",
+   "system": "fascia",
+   "structures": [
+    "hip-sartorius",
+    "knee-pes-anserinus"
+   ],
+   "fma": "FMA22353",
+   "fmaName": "sartorius"
+  },
+  {
+   "sourceName": "Sartorius muscle.el",
+   "system": "insertions",
+   "structures": [
+    "hip-sartorius",
+    "knee-pes-anserinus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Sartorius muscle.er",
+   "system": "insertions",
+   "structures": [
+    "hip-sartorius",
+    "knee-pes-anserinus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Sartorius muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "hip-sartorius",
+    "knee-pes-anserinus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Sartorius muscle.or",
+   "system": "insertions",
+   "structures": [
+    "hip-sartorius",
+    "knee-pes-anserinus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Scalenus anterior muscle.e1l",
+   "system": "insertions",
+   "structures": [
+    "cervical-scalenes",
+    "cervical-scalenus-anterior"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Scalenus anterior muscle.e1r",
+   "system": "insertions",
+   "structures": [
+    "cervical-scalenes",
+    "cervical-scalenus-anterior"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Scalenus anterior muscle.e2l",
+   "system": "insertions",
+   "structures": [
+    "cervical-scalenes",
+    "cervical-scalenus-anterior"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Scalenus anterior muscle.e2r",
+   "system": "insertions",
+   "structures": [
+    "cervical-scalenes",
+    "cervical-scalenus-anterior"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Scalenus anterior muscle.el",
+   "system": "insertions",
+   "structures": [
+    "cervical-scalenes",
+    "cervical-scalenus-anterior"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Scalenus anterior muscle.er",
+   "system": "insertions",
+   "structures": [
+    "cervical-scalenes",
+    "cervical-scalenus-anterior"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Scalenus anterior muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "cervical-scalenes",
+    "cervical-scalenus-anterior"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Scalenus anterior muscle.or",
+   "system": "insertions",
+   "structures": [
+    "cervical-scalenes",
+    "cervical-scalenus-anterior"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Scalenus medius muscle.e1l",
+   "system": "insertions",
+   "structures": [
+    "cervical-scalenes",
+    "cervical-scalenus-medius"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Scalenus medius muscle.e1r",
+   "system": "insertions",
+   "structures": [
+    "cervical-scalenes",
+    "cervical-scalenus-medius"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Scalenus medius muscle.el",
+   "system": "insertions",
+   "structures": [
+    "cervical-scalenes",
+    "cervical-scalenus-medius"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Scalenus medius muscle.er",
+   "system": "insertions",
+   "structures": [
+    "cervical-scalenes",
+    "cervical-scalenus-medius"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Scalenus medius muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "cervical-scalenes",
+    "cervical-scalenus-medius"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Scalenus medius muscle.or",
+   "system": "insertions",
+   "structures": [
+    "cervical-scalenes",
+    "cervical-scalenus-medius"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Scalenus posterior muscle.el",
+   "system": "insertions",
+   "structures": [
+    "cervical-scalenes",
+    "cervical-scalenus-posterior"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Scalenus posterior muscle.er",
+   "system": "insertions",
+   "structures": [
+    "cervical-scalenes",
+    "cervical-scalenus-posterior"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Scaphocapitate ligament",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Scapholunate interosseous ligament",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Scaphotrapeziotrapezoidal ligament",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Scapular spinal part of deltoid muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "shoulder-deltoid",
+    "shoulder-deltoid-posterior"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Scapular spinal part of deltoid muscle.or",
+   "system": "insertions",
+   "structures": [
+    "shoulder-deltoid",
+    "shoulder-deltoid-posterior"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Sciatic bursa of gluteus maximus muscle",
+   "system": "fascia",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Sciatic bursa of obturator internus",
+   "system": "fascia",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Semimembranosus bursa",
+   "system": "fascia",
+   "structures": [
+    "hip-hamstring-origin",
+    "knee-hamstrings",
+    "bursa-semimembranosus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Semimembranosus muscle.el",
+   "system": "insertions",
+   "structures": [
+    "hip-hamstring-origin",
+    "knee-hamstrings",
+    "knee-semimembranosus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Semimembranosus muscle.er",
+   "system": "insertions",
+   "structures": [
+    "hip-hamstring-origin",
+    "knee-hamstrings",
+    "knee-semimembranosus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Semimembranosus muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "hip-hamstring-origin",
+    "knee-hamstrings",
+    "knee-semimembranosus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Semimembranosus muscle.or",
+   "system": "insertions",
+   "structures": [
+    "hip-hamstring-origin",
+    "knee-hamstrings",
+    "knee-semimembranosus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Semitendinosus muscle",
+   "system": "fascia",
+   "structures": [
+    "hip-hamstring-origin",
+    "knee-hamstrings",
+    "knee-pes-anserinus",
+    "knee-semitendinosus"
+   ],
+   "fma": "FMA22357",
+   "fmaName": "semitendinosus"
+  },
+  {
+   "sourceName": "Semitendinosus muscle.el",
+   "system": "insertions",
+   "structures": [
+    "hip-hamstring-origin",
+    "knee-hamstrings",
+    "knee-pes-anserinus",
+    "knee-semitendinosus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Semitendinosus muscle.er",
+   "system": "insertions",
+   "structures": [
+    "hip-hamstring-origin",
+    "knee-hamstrings",
+    "knee-pes-anserinus",
+    "knee-semitendinosus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Semitendinosus muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "hip-hamstring-origin",
+    "knee-hamstrings",
+    "knee-pes-anserinus",
+    "knee-semitendinosus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Semitendinosus muscle.or",
+   "system": "insertions",
+   "structures": [
+    "hip-hamstring-origin",
+    "knee-hamstrings",
+    "knee-pes-anserinus",
+    "knee-semitendinosus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Serratus anterior muscle.e1l",
+   "system": "insertions",
+   "structures": [
+    "shoulder-serratus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Serratus anterior muscle.e2l",
+   "system": "insertions",
+   "structures": [
+    "shoulder-serratus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Serratus anterior muscle.e2r",
+   "system": "insertions",
+   "structures": [
+    "shoulder-serratus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Serratus anterior muscle.e3l",
+   "system": "insertions",
+   "structures": [
+    "shoulder-serratus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Serratus anterior muscle.e3r",
+   "system": "insertions",
+   "structures": [
+    "shoulder-serratus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Serratus anterior muscle.e4l",
+   "system": "insertions",
+   "structures": [
+    "shoulder-serratus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Serratus anterior muscle.e4r",
+   "system": "insertions",
+   "structures": [
+    "shoulder-serratus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Serratus anterior muscle.e5l",
+   "system": "insertions",
+   "structures": [
+    "shoulder-serratus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Serratus anterior muscle.e5r",
+   "system": "insertions",
+   "structures": [
+    "shoulder-serratus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Serratus anterior muscle.e6l",
+   "system": "insertions",
+   "structures": [
+    "shoulder-serratus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Serratus anterior muscle.e6r",
+   "system": "insertions",
+   "structures": [
+    "shoulder-serratus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Serratus anterior muscle.e7l",
+   "system": "insertions",
+   "structures": [
+    "shoulder-serratus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Serratus anterior muscle.e7r",
+   "system": "insertions",
+   "structures": [
+    "shoulder-serratus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Serratus anterior muscle.e8l",
+   "system": "insertions",
+   "structures": [
+    "shoulder-serratus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Serratus anterior muscle.el",
+   "system": "insertions",
+   "structures": [
+    "shoulder-serratus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Serratus anterior muscle.er",
+   "system": "insertions",
+   "structures": [
+    "shoulder-serratus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Serratus anterior muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "shoulder-serratus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Serratus anterior muscle.or",
+   "system": "insertions",
+   "structures": [
+    "shoulder-serratus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Serratus posterior inferior muscle.e1l",
+   "system": "insertions",
+   "structures": [
+    "thoracic-serratus-posterior",
+    "thoracic-serratus-post-inferior"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Serratus posterior inferior muscle.e2l",
+   "system": "insertions",
+   "structures": [
+    "thoracic-serratus-posterior",
+    "thoracic-serratus-post-inferior"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Serratus posterior inferior muscle.e3l",
+   "system": "insertions",
+   "structures": [
+    "thoracic-serratus-posterior",
+    "thoracic-serratus-post-inferior"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Serratus posterior inferior muscle.el",
+   "system": "insertions",
+   "structures": [
+    "thoracic-serratus-posterior",
+    "thoracic-serratus-post-inferior"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Serratus posterior superior muscle.e1l",
+   "system": "insertions",
+   "structures": [
+    "thoracic-serratus-posterior",
+    "thoracic-serratus-post-superior"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Serratus posterior superior muscle.e2l",
+   "system": "insertions",
+   "structures": [
+    "thoracic-serratus-posterior",
+    "thoracic-serratus-post-superior"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Serratus posterior superior muscle.e3l",
+   "system": "insertions",
+   "structures": [
+    "thoracic-serratus-posterior",
+    "thoracic-serratus-post-superior"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Serratus posterior superior muscle.el",
+   "system": "insertions",
+   "structures": [
+    "thoracic-serratus-posterior",
+    "thoracic-serratus-post-superior"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Short head of biceps brachii.ol",
+   "system": "insertions",
+   "structures": [
+    "elbow-biceps",
+    "elbow-biceps-short"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Short head of biceps femoris.el",
+   "system": "insertions",
+   "structures": [
+    "knee-biceps-femoris-short"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Soleus muscle.o1l",
+   "system": "insertions",
+   "structures": [
+    "ankle-soleus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Soleus muscle.o1r",
+   "system": "insertions",
+   "structures": [
+    "ankle-soleus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Soleus muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "ankle-soleus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Soleus muscle.or",
+   "system": "insertions",
+   "structures": [
+    "ankle-soleus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Sphenomandibular ligament",
+   "system": "ligaments",
+   "structures": [
+    "head-jaw-sphenomandibular"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Spinalis capitis muscle.el",
+   "system": "insertions",
+   "structures": [
+    "spine-erector-spinae",
+    "spine-spinalis",
+    "spine-spinalis-capitis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Spinalis capitis muscle.er",
+   "system": "insertions",
+   "structures": [
+    "spine-erector-spinae",
+    "spine-spinalis",
+    "spine-spinalis-capitis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Splenius colli muscle.e1l",
+   "system": "insertions",
+   "structures": [
+    "cervical-splenius",
+    "cervical-splenius-cervicis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Splenius colli muscle.e1r",
+   "system": "insertions",
+   "structures": [
+    "cervical-splenius",
+    "cervical-splenius-cervicis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Splenius colli muscle.el",
+   "system": "insertions",
+   "structures": [
+    "cervical-splenius",
+    "cervical-splenius-cervicis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Splenius colli muscle.er",
+   "system": "insertions",
+   "structures": [
+    "cervical-splenius",
+    "cervical-splenius-cervicis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Sternocleidomastoid muscle.el",
+   "system": "insertions",
+   "structures": [
+    "cervical-scm"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Sternocleidomastoid muscle.er",
+   "system": "insertions",
+   "structures": [
+    "cervical-scm"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Sternocleidomastoid muscle.o1l",
+   "system": "insertions",
+   "structures": [
+    "cervical-scm"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Sternocleidomastoid muscle.o1r",
+   "system": "insertions",
+   "structures": [
+    "cervical-scm"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Sternocleidomastoid muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "cervical-scm"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Sternocleidomastoid muscle.or",
+   "system": "insertions",
+   "structures": [
+    "cervical-scm"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Sternocostal head of pectoralis major muscle.e1l",
+   "system": "insertions",
+   "structures": [
+    "shoulder-pec-major",
+    "shoulder-pec-sternocostal"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Sternocostal head of pectoralis major muscle.e1r",
+   "system": "insertions",
+   "structures": [
+    "shoulder-pec-major",
+    "shoulder-pec-sternocostal"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Sternocostal head of pectoralis major muscle.e2l",
+   "system": "insertions",
+   "structures": [
+    "shoulder-pec-major",
+    "shoulder-pec-sternocostal"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Sternocostal head of pectoralis major muscle.e2r",
+   "system": "insertions",
+   "structures": [
+    "shoulder-pec-major",
+    "shoulder-pec-sternocostal"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Sternocostal head of pectoralis major muscle.el",
+   "system": "insertions",
+   "structures": [
+    "shoulder-pec-major",
+    "shoulder-pec-sternocostal"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Sternocostal head of pectoralis major muscle.er",
+   "system": "insertions",
+   "structures": [
+    "shoulder-pec-major",
+    "shoulder-pec-sternocostal"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Sternohyoid muscle.el",
+   "system": "insertions",
+   "structures": [
+    "head-jaw-sternohyoid"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Sternohyoid muscle.er",
+   "system": "insertions",
+   "structures": [
+    "head-jaw-sternohyoid"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Sternohyoid muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "head-jaw-sternohyoid"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Sternohyoid muscle.or",
+   "system": "insertions",
+   "structures": [
+    "head-jaw-sternohyoid"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Stylohyoid ligament",
+   "system": "ligaments",
+   "structures": [
+    "head-jaw-stylohyoid-lig"
+   ],
+   "fma": "FMA72308",
+   "fmaName": "stylohyoid ligament"
+  },
+  {
+   "sourceName": "Stylomandibular ligament",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Subacromial bursa",
+   "system": "fascia",
+   "structures": [
+    "shoulder-subacromial-bursa"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Subclavius muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "shoulder-subclavius"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Subclavius muscle.or",
+   "system": "insertions",
+   "structures": [
+    "shoulder-subclavius"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Subcutaneous acromial bursa",
+   "system": "fascia",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Subcutaneous bursa of lateral malleolus",
+   "system": "fascia",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Subcutaneous bursa of medial malleolus",
+   "system": "fascia",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Subcutaneous bursa of tuberosity of tibia",
+   "system": "fascia",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Subcutaneous calcaneal bursa",
+   "system": "fascia",
+   "structures": [
+    "bursa-calcaneal"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Subcutaneous infrapatellar bursa",
+   "system": "fascia",
+   "structures": [
+    "bursa-infrapatellar"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Subcutaneous prepatellar bursa",
+   "system": "fascia",
+   "structures": [
+    "bursa-prepatellar"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Subcutaneous trochanteric bursa",
+   "system": "fascia",
+   "structures": [
+    "hip-trochanteric-bursa"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Subdeltoid bursa",
+   "system": "fascia",
+   "structures": [
+    "bursa-subdeltoid"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Subfacial prepatellar bursa",
+   "system": "fascia",
+   "structures": [
+    "bursa-prepatellar"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Subscapularis muscle.el",
+   "system": "insertions",
+   "structures": [
+    "shoulder-subscapularis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Subscapularis muscle.er",
+   "system": "insertions",
+   "structures": [
+    "shoulder-subscapularis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Subscapularis muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "shoulder-subscapularis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Subscapularis muscle.or",
+   "system": "insertions",
+   "structures": [
+    "shoulder-subscapularis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Subtendinous bursa of iliacus muscle",
+   "system": "fascia",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Subtendinous bursa of infraspinatus muscle",
+   "system": "fascia",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Subtendinous bursa of obturator internus",
+   "system": "fascia",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Subtendinous bursa of sartorius muscle",
+   "system": "fascia",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Subtendinous bursa of teres major muscle",
+   "system": "fascia",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Subtendinous bursa of tibialis anterior",
+   "system": "fascia",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Subtendinous bursa of trapezius muscle",
+   "system": "fascia",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Subtendinous bursa of triceps brachii muscle",
+   "system": "fascia",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Subtendinous calcaneal bursa",
+   "system": "fascia",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Subtendinous prepatellar bursa",
+   "system": "fascia",
+   "structures": [
+    "bursa-prepatellar"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Superficial investing cervical fascia",
+   "system": "fascia",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Superficial layer of temporal fascia",
+   "system": "fascia",
+   "structures": [
+    "fascia-temporal"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Superficial part of tibial collateral ligament",
+   "system": "ligaments",
+   "structures": [
+    "knee-mcl",
+    "knee-tibiofemoral"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Superior bursa of biceps femoris muscle",
+   "system": "fascia",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Superior extensor retinaculum of ankle",
+   "system": "fascia",
+   "structures": [
+    "ankle-extensor-retinaculum"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Superior fibular retinaculum",
+   "system": "fascia",
+   "structures": [
+    "ankle-fibular-retinacula"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Superior gemellus muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "hip-gemellus-superior"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Superior gemellus muscle.or",
+   "system": "insertions",
+   "structures": [
+    "hip-gemellus-superior"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Superior glenohumeral ligament",
+   "system": "ligaments",
+   "structures": [
+    "shoulder-gh-joint"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Superior pubic ligament",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Superior transverse scapular ligament",
+   "system": "ligaments",
+   "structures": [
+    "shoulder-transverse-scapular"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Supinator.el",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-supinator"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Supinator.er",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-supinator"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Supinator.ol",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-supinator"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Supinator.or",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-supinator"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Suprapatellar bursa",
+   "system": "fascia",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Supraspinatus muscle.el",
+   "system": "insertions",
+   "structures": [
+    "shoulder-supraspinatus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Supraspinatus muscle.er",
+   "system": "insertions",
+   "structures": [
+    "shoulder-supraspinatus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Supraspinatus muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "shoulder-supraspinatus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Supraspinatus muscle.or",
+   "system": "insertions",
+   "structures": [
+    "shoulder-supraspinatus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Supraspinous ligament",
+   "system": "ligaments",
+   "structures": [
+    "spine-supraspinous"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Talocalcaneal interosseous ligament",
+   "system": "ligaments",
+   "structures": [
+    "ankle-sinus-tarsi"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Talonavicular ligament",
+   "system": "ligaments",
+   "structures": [
+    "ankle-dorsal-talonavicular"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Temporalis muscle.el",
+   "system": "insertions",
+   "structures": [
+    "head-jaw-temporalis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Temporalis muscle.er",
+   "system": "insertions",
+   "structures": [
+    "head-jaw-temporalis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Temporalis muscle.o1l",
+   "system": "insertions",
+   "structures": [
+    "head-jaw-temporalis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Temporalis muscle.o1r",
+   "system": "insertions",
+   "structures": [
+    "head-jaw-temporalis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Temporalis muscle.o2l",
+   "system": "insertions",
+   "structures": [
+    "head-jaw-temporalis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Temporalis muscle.o2r",
+   "system": "insertions",
+   "structures": [
+    "head-jaw-temporalis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Temporalis muscle.o3l",
+   "system": "insertions",
+   "structures": [
+    "head-jaw-temporalis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Temporalis muscle.o3r",
+   "system": "insertions",
+   "structures": [
+    "head-jaw-temporalis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Temporalis muscle.o4l",
+   "system": "insertions",
+   "structures": [
+    "head-jaw-temporalis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Temporalis muscle.o4r",
+   "system": "insertions",
+   "structures": [
+    "head-jaw-temporalis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Tensor fasciae latae.ol",
+   "system": "insertions",
+   "structures": [
+    "hip-tfl"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Tensor fasciae latae.or",
+   "system": "insertions",
+   "structures": [
+    "hip-tfl"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Teres major muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "shoulder-teres-major"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Teres major muscle.or",
+   "system": "insertions",
+   "structures": [
+    "shoulder-teres-major"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Teres minor muscle.el",
+   "system": "insertions",
+   "structures": [
+    "shoulder-teres-minor"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Teres minor muscle.er",
+   "system": "insertions",
+   "structures": [
+    "shoulder-teres-minor"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Teres minor muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "shoulder-teres-minor"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Teres minor muscle.or",
+   "system": "insertions",
+   "structures": [
+    "shoulder-teres-minor"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Thyrohyoid muscle.el",
+   "system": "insertions",
+   "structures": [
+    "head-jaw-thyrohyoid"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Thyrohyoid muscle.er",
+   "system": "insertions",
+   "structures": [
+    "head-jaw-thyrohyoid"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Thyrohyoid muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "head-jaw-thyrohyoid"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Thyrohyoid muscle.or",
+   "system": "insertions",
+   "structures": [
+    "head-jaw-thyrohyoid"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Tibialis anterior muscle.e1l",
+   "system": "insertions",
+   "structures": [
+    "ankle-tib-ant"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Tibialis anterior muscle.e1r",
+   "system": "insertions",
+   "structures": [
+    "ankle-tib-ant"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Tibialis anterior muscle.el",
+   "system": "insertions",
+   "structures": [
+    "ankle-tib-ant"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Tibialis anterior muscle.er",
+   "system": "insertions",
+   "structures": [
+    "ankle-tib-ant"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Tibialis anterior muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "ankle-tib-ant"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Tibialis anterior muscle.or",
+   "system": "insertions",
+   "structures": [
+    "ankle-tib-ant"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Tibialis posterior muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "ankle-tib-post"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Tibialis posterior muscle.or",
+   "system": "insertions",
+   "structures": [
+    "ankle-tib-post"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Tibiocalcaneal ligament",
+   "system": "ligaments",
+   "structures": [
+    "ankle-deltoid-ligament",
+    "ankle-deltoid-tibiocalcaneal"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Tibionavicular ligament",
+   "system": "ligaments",
+   "structures": [
+    "ankle-deltoid-ligament",
+    "ankle-deltoid-tibionavicular"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Transversalis fascia",
+   "system": "fascia",
+   "structures": [
+    "fascia-transversalis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Transverse acetabular ligament",
+   "system": "ligaments",
+   "structures": [
+    "hip-joint",
+    "hip-transverse-acetabular"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Transverse head of adductor hallucis.e1l",
+   "system": "insertions",
+   "structures": [
+    "ankle-intrinsics",
+    "ankle-foot-layer-3"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Transverse head of adductor hallucis.e1r",
+   "system": "insertions",
+   "structures": [
+    "ankle-intrinsics",
+    "ankle-foot-layer-3"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Transverse head of adductor hallucis.e2l",
+   "system": "insertions",
+   "structures": [
+    "ankle-intrinsics",
+    "ankle-foot-layer-3"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Transverse head of adductor hallucis.e2r",
+   "system": "insertions",
+   "structures": [
+    "ankle-intrinsics",
+    "ankle-foot-layer-3"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Transverse head of adductor hallucis.e3l",
+   "system": "insertions",
+   "structures": [
+    "ankle-intrinsics",
+    "ankle-foot-layer-3"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Transverse head of adductor hallucis.e3r",
+   "system": "insertions",
+   "structures": [
+    "ankle-intrinsics",
+    "ankle-foot-layer-3"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Transverse head of adductor hallucis.ol",
+   "system": "insertions",
+   "structures": [
+    "ankle-intrinsics",
+    "ankle-foot-layer-3"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Transverse head of adductor hallucis.or",
+   "system": "insertions",
+   "structures": [
+    "ankle-intrinsics",
+    "ankle-foot-layer-3"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Transverse humeral ligament",
+   "system": "ligaments",
+   "structures": [
+    "shoulder-transverse-humeral"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Transverse intermuscular septum of leg",
+   "system": "fascia",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Transverse ligament of knee",
+   "system": "ligaments",
+   "structures": [
+    "knee-transverse-ligament"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Transverse part of iliofemoral ligament",
+   "system": "ligaments",
+   "structures": [
+    "hip-iliofemoral-ligament"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Transverse part of trapezius muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "shoulder-mid-trap",
+    "shoulder-trapezius"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Transverse part of trapezius muscle.or",
+   "system": "insertions",
+   "structures": [
+    "shoulder-mid-trap",
+    "shoulder-trapezius"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Transverse tibiofibular ligament",
+   "system": "ligaments",
+   "structures": [
+    "ankle-syndesmosis",
+    "ankle-transverse-tibiofibular"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Transversus abdominis muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "lumbar-tva"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Transversus abdominis muscle.or",
+   "system": "insertions",
+   "structures": [
+    "lumbar-tva"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Transversus thoracis muscle.o1l",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Transversus thoracis muscle.o1r",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Transversus thoracis muscle.ol",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Transversus thoracis muscle.or",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Trapeziotrapezoidal interosseous ligament",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Trapezoid ligament",
+   "system": "ligaments",
+   "structures": [
+    "shoulder-coracoclavicular"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Trapezoideocapitate interosseous ligament",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Triceps brachii muscle.el",
+   "system": "insertions",
+   "structures": [
+    "elbow-triceps"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Triceps brachii muscle.er",
+   "system": "insertions",
+   "structures": [
+    "elbow-triceps"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Triceps surae muscle.el",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Triceps surae muscle.er",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Triquetrocapitate ligament",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Triquetrohamate ligament",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Triradiate cartilage",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Trochanteric bursa of gluteus maximus muscle",
+   "system": "fascia",
+   "structures": [
+    "hip-trochanteric-bursa"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Trochanteric bursa of gluteus medius muscle",
+   "system": "fascia",
+   "structures": [
+    "hip-trochanteric-bursa"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Trochanteric bursa of gluteus minimus muscle",
+   "system": "fascia",
+   "structures": [
+    "hip-trochanteric-bursa"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Trochanteric insertion.el",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Trochanteric insertion.er",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Ulnar collateral ligament",
+   "system": "ligaments",
+   "structures": [
+    "elbow-ucl"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Ulnar collateral ligament of wrist joint",
+   "system": "ligaments",
+   "structures": [
+    "elbow-wrist-joint"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Ulnar head of flexor carpi ulnaris.ol",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-fcu",
+    "elbow-wrist-fcu-ulnar"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Ulnar head of flexor carpi ulnaris.or",
+   "system": "insertions",
+   "structures": [
+    "elbow-wrist-fcu",
+    "elbow-wrist-fcu-ulnar"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Ulnocapitate ligament",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Ulnolunate ligament",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Ulnopisiform ligament",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Ulnotriquetral ligament",
+   "system": "ligaments",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Vastus intermedius muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "knee-quadriceps",
+    "knee-vastus-intermedius"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Vastus intermedius muscle.or",
+   "system": "insertions",
+   "structures": [
+    "knee-quadriceps",
+    "knee-vastus-intermedius"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Vastus lateralis muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "knee-quadriceps",
+    "knee-vastus-lateralis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Vastus lateralis muscle.or",
+   "system": "insertions",
+   "structures": [
+    "knee-quadriceps",
+    "knee-vastus-lateralis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Vastus medialis muscle.ol",
+   "system": "insertions",
+   "structures": [
+    "knee-quadriceps",
+    "knee-vmo",
+    "knee-vastus-medialis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Vastus medialis muscle.or",
+   "system": "insertions",
+   "structures": [
+    "knee-quadriceps",
+    "knee-vmo",
+    "knee-vastus-medialis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Zygomaticus major muscle.ol",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Zygomaticus major muscle.or",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Zygomaticus minor muscle.ol",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Zygomaticus minor muscle.or",
+   "system": "insertions",
+   "structures": [],
+   "fma": null,
+   "fmaName": null
+  }
+ ]
+}
