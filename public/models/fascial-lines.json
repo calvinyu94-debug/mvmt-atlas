@@ -1,5 +1,5 @@
 {
- "note": "Twelve myofascial lines as ordered lists of MVMT structures; each station resolves at load to the concept ids listed (mvmt = our exported meshes, bp3d = BodyParts3D concepts). Stations with no resolution are listed under unresolved.",
+ "note": "Twelve myofascial lines as ordered lists of MVMT structures; each station resolves at load to the concept ids listed (mvmt = our exported meshes, bp3d = BodyParts3D concepts), status says whether that is the structure itself (full), only its insertion patches (attachments) or nothing (none), and sides counts the resolved meshes by side. Stations with no resolution are listed under unresolved, stations with patches alone under attachmentsOnly.",
  "lines": [
   {
    "id": "SBL",
@@ -13,7 +13,13 @@
        "kind": "mvmt",
        "id": "ankle-plantar-fascia"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 1,
+      "r": 1,
+      "unsided": 0
+     }
     },
     {
      "structure": "ankle-foot-layer-1",
@@ -38,7 +44,13 @@
        "id": "FMA37451",
        "name": "abductor digiti minimi of foot"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 10,
+      "r": 10,
+      "unsided": 0
+     }
     },
     {
      "structure": "ankle-gastrocnemius",
@@ -47,8 +59,24 @@
       {
        "kind": "mvmt",
        "id": "ankle-gastrocnemius"
+      },
+      {
+       "kind": "bp3d",
+       "id": "FMA45956",
+       "name": "medial head of gastrocnemius"
+      },
+      {
+       "kind": "bp3d",
+       "id": "FMA45959",
+       "name": "lateral head of gastrocnemius"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 6,
+      "r": 6,
+      "unsided": 0
+     }
     },
     {
      "structure": "ankle-achilles",
@@ -63,7 +91,13 @@
        "id": "FMA51061",
        "name": "calcaneal tendon"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 2,
+      "r": 2,
+      "unsided": 0
+     }
     },
     {
      "structure": "knee-hamstrings",
@@ -75,6 +109,11 @@
       },
       {
        "kind": "bp3d",
+       "id": "FMA45881",
+       "name": "head of biceps femoris"
+      },
+      {
+       "kind": "bp3d",
        "id": "FMA22357",
        "name": "semitendinosus"
       },
@@ -83,7 +122,13 @@
        "id": "FMA22438",
        "name": "semimembranosus"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 11,
+      "r": 11,
+      "unsided": 0
+     }
     },
     {
      "structure": "hip-sacrotuberous-ligament",
@@ -93,7 +138,13 @@
        "kind": "mvmt",
        "id": "hip-sacrotuberous-ligament"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 1,
+      "r": 1,
+      "unsided": 0
+     }
     },
     {
      "structure": "spine-erector-spinae",
@@ -118,7 +169,13 @@
        "id": "FMA77179",
        "name": "spinalis"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 37,
+      "r": 37,
+      "unsided": 2
+     }
     },
     {
      "structure": "lumbar-tl-fascia",
@@ -128,7 +185,13 @@
        "kind": "mvmt",
        "id": "lumbar-tl-fascia"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 3,
+      "r": 3,
+      "unsided": 0
+     }
     },
     {
      "structure": "cervical-nuchal-ligament",
@@ -138,7 +201,13 @@
        "kind": "mvmt",
        "id": "cervical-nuchal-ligament"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 0,
+      "r": 0,
+      "unsided": 1
+     }
     },
     {
      "structure": "head-jaw-occipitofrontalis",
@@ -148,7 +217,13 @@
        "kind": "mvmt",
        "id": "head-jaw-occipitofrontalis"
       }
-     ]
+     ],
+     "status": "attachments",
+     "sides": {
+      "l": 2,
+      "r": 2,
+      "unsided": 0
+     }
     }
    ]
   },
@@ -169,7 +244,13 @@
        "id": "FMA22532",
        "name": "tibialis anterior"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 4,
+      "r": 4,
+      "unsided": 0
+     }
     },
     {
      "structure": "ankle-edl",
@@ -184,7 +265,13 @@
        "id": "FMA22534",
        "name": "extensor digitorum longus"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 8,
+      "r": 8,
+      "unsided": 0
+     }
     },
     {
      "structure": "ankle-ehl",
@@ -199,7 +286,13 @@
        "id": "FMA22533",
        "name": "extensor hallucis longus"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 3,
+      "r": 3,
+      "unsided": 0
+     }
     },
     {
      "structure": "knee-quadriceps",
@@ -208,8 +301,19 @@
       {
        "kind": "mvmt",
        "id": "knee-quadriceps"
+      },
+      {
+       "kind": "bp3d",
+       "id": "FMA22429",
+       "name": "zone of quadriceps femoris"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 8,
+      "r": 8,
+      "unsided": 0
+     }
     },
     {
      "structure": "hip-rectus-femoris",
@@ -224,7 +328,13 @@
        "id": "FMA22430",
        "name": "rectus femoris"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 2,
+      "r": 2,
+      "unsided": 0
+     }
     },
     {
      "structure": "knee-patellar-tendon",
@@ -234,7 +344,13 @@
        "kind": "mvmt",
        "id": "knee-patellar-tendon"
       }
-     ]
+     ],
+     "status": "attachments",
+     "sides": {
+      "l": 2,
+      "r": 2,
+      "unsided": 0
+     }
     },
     {
      "structure": "lumbar-rectus-abdominis",
@@ -244,7 +360,13 @@
        "kind": "mvmt",
        "id": "lumbar-rectus-abdominis"
       }
-     ]
+     ],
+     "status": "attachments",
+     "sides": {
+      "l": 2,
+      "r": 2,
+      "unsided": 0
+     }
     },
     {
      "structure": "shoulder-pec-major",
@@ -256,10 +378,26 @@
       },
       {
        "kind": "bp3d",
-       "id": "FMA13373",
-       "name": "right pectoralis major"
+       "id": "FMA34687",
+       "name": "clavicular part of pectoralis major"
+      },
+      {
+       "kind": "bp3d",
+       "id": "FMA34696",
+       "name": "sternocostal part of pectoralis major"
+      },
+      {
+       "kind": "bp3d",
+       "id": "FMA34699",
+       "name": "abdominal part of pectoralis major"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 9,
+      "r": 9,
+      "unsided": 0
+     }
     },
     {
      "structure": "cervical-scm",
@@ -274,7 +412,13 @@
        "id": "FMA13407",
        "name": "sternocleidomastoid"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 4,
+      "r": 4,
+      "unsided": 0
+     }
     }
    ]
   },
@@ -295,7 +439,13 @@
        "id": "FMA22539",
        "name": "fibularis longus"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 2,
+      "r": 2,
+      "unsided": 0
+     }
     },
     {
      "structure": "ankle-fibularis-brevis",
@@ -310,7 +460,13 @@
        "id": "FMA22540",
        "name": "fibularis brevis"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 3,
+      "r": 3,
+      "unsided": 0
+     }
     },
     {
      "structure": "hip-itb",
@@ -319,8 +475,19 @@
       {
        "kind": "mvmt",
        "id": "hip-itb"
+      },
+      {
+       "kind": "bp3d",
+       "id": "FMA51048",
+       "name": "iliotibial tract"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 2,
+      "r": 2,
+      "unsided": 0
+     }
     },
     {
      "structure": "hip-tfl",
@@ -334,13 +501,14 @@
        "kind": "bp3d",
        "id": "FMA22423",
        "name": "tensor fasciae latae"
-      },
-      {
-       "kind": "bp3d",
-       "id": "FMA22423",
-       "name": "tensor fasciae latae"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 2,
+      "r": 2,
+      "unsided": 0
+     }
     },
     {
      "structure": "hip-glute-max",
@@ -355,7 +523,13 @@
        "id": "FMA22314",
        "name": "gluteus maximus"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 3,
+      "r": 3,
+      "unsided": 0
+     }
     },
     {
      "structure": "lumbar-external-oblique",
@@ -370,7 +544,13 @@
        "id": "FMA13335",
        "name": "external oblique"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 7,
+      "r": 7,
+      "unsided": 0
+     }
     },
     {
      "structure": "lumbar-internal-oblique",
@@ -380,7 +560,13 @@
        "kind": "mvmt",
        "id": "lumbar-internal-oblique"
       }
-     ]
+     ],
+     "status": "attachments",
+     "sides": {
+      "l": 5,
+      "r": 5,
+      "unsided": 0
+     }
     },
     {
      "structure": "thoracic-intercostals",
@@ -390,23 +576,14 @@
        "kind": "bp3d",
        "id": "FMA13354",
        "name": "intercostal muscle"
-      },
-      {
-       "kind": "bp3d",
-       "id": "FMA9756",
-       "name": "external intercostal muscle"
-      },
-      {
-       "kind": "bp3d",
-       "id": "FMA9757",
-       "name": "internal intercostal muscle"
-      },
-      {
-       "kind": "bp3d",
-       "id": "FMA9758",
-       "name": "innermost intercostal muscle"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 0,
+      "r": 0,
+      "unsided": 6
+     }
     },
     {
      "structure": "cervical-splenius-capitis",
@@ -417,7 +594,13 @@
        "id": "FMA22653",
        "name": "splenius capitis"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 1,
+      "r": 1,
+      "unsided": 0
+     }
     },
     {
      "structure": "cervical-scm",
@@ -432,7 +615,13 @@
        "id": "FMA13407",
        "name": "sternocleidomastoid"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 4,
+      "r": 4,
+      "unsided": 0
+     }
     }
    ]
   },
@@ -449,7 +638,13 @@
        "id": "FMA22653",
        "name": "splenius capitis"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 1,
+      "r": 1,
+      "unsided": 0
+     }
     },
     {
      "structure": "shoulder-rhomboids",
@@ -458,8 +653,24 @@
       {
        "kind": "mvmt",
        "id": "shoulder-rhomboids"
+      },
+      {
+       "kind": "bp3d",
+       "id": "FMA13379",
+       "name": "rhomboid major"
+      },
+      {
+       "kind": "bp3d",
+       "id": "FMA13380",
+       "name": "rhomboid minor"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 4,
+      "r": 4,
+      "unsided": 0
+     }
     },
     {
      "structure": "shoulder-serratus",
@@ -474,7 +685,13 @@
        "id": "FMA13397",
        "name": "serratus anterior"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 9,
+      "r": 11,
+      "unsided": 0
+     }
     },
     {
      "structure": "lumbar-external-oblique",
@@ -489,7 +706,13 @@
        "id": "FMA13335",
        "name": "external oblique"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 7,
+      "r": 7,
+      "unsided": 0
+     }
     },
     {
      "structure": "lumbar-internal-oblique",
@@ -499,7 +722,13 @@
        "kind": "mvmt",
        "id": "lumbar-internal-oblique"
       }
-     ]
+     ],
+     "status": "attachments",
+     "sides": {
+      "l": 5,
+      "r": 5,
+      "unsided": 0
+     }
     },
     {
      "structure": "hip-tfl",
@@ -513,13 +742,14 @@
        "kind": "bp3d",
        "id": "FMA22423",
        "name": "tensor fasciae latae"
-      },
-      {
-       "kind": "bp3d",
-       "id": "FMA22423",
-       "name": "tensor fasciae latae"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 2,
+      "r": 2,
+      "unsided": 0
+     }
     },
     {
      "structure": "hip-itb",
@@ -528,8 +758,19 @@
       {
        "kind": "mvmt",
        "id": "hip-itb"
+      },
+      {
+       "kind": "bp3d",
+       "id": "FMA51048",
+       "name": "iliotibial tract"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 2,
+      "r": 2,
+      "unsided": 0
+     }
     },
     {
      "structure": "ankle-tib-ant",
@@ -544,7 +785,13 @@
        "id": "FMA22532",
        "name": "tibialis anterior"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 4,
+      "r": 4,
+      "unsided": 0
+     }
     },
     {
      "structure": "ankle-fibularis-longus",
@@ -559,7 +806,13 @@
        "id": "FMA22539",
        "name": "fibularis longus"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 2,
+      "r": 2,
+      "unsided": 0
+     }
     },
     {
      "structure": "knee-biceps-femoris-long",
@@ -574,7 +827,13 @@
        "id": "FMA45887",
        "name": "long head of biceps femoris"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 2,
+      "r": 2,
+      "unsided": 0
+     }
     },
     {
      "structure": "hip-sacrotuberous-ligament",
@@ -584,7 +843,13 @@
        "kind": "mvmt",
        "id": "hip-sacrotuberous-ligament"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 1,
+      "r": 1,
+      "unsided": 0
+     }
     },
     {
      "structure": "spine-erector-spinae",
@@ -609,7 +874,13 @@
        "id": "FMA77179",
        "name": "spinalis"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 37,
+      "r": 37,
+      "unsided": 2
+     }
     }
    ]
   },
@@ -630,7 +901,13 @@
        "id": "FMA51099",
        "name": "tibialis posterior"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 2,
+      "r": 2,
+      "unsided": 0
+     }
     },
     {
      "structure": "ankle-fdl",
@@ -645,7 +922,13 @@
        "id": "FMA51071",
        "name": "flexor digitorum longus"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 6,
+      "r": 6,
+      "unsided": 0
+     }
     },
     {
      "structure": "ankle-fhl",
@@ -660,7 +943,13 @@
        "id": "FMA22593",
        "name": "flexor hallucis longus"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 3,
+      "r": 3,
+      "unsided": 0
+     }
     },
     {
      "structure": "knee-popliteus",
@@ -675,7 +964,13 @@
        "id": "FMA22590",
        "name": "popliteus"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 3,
+      "r": 3,
+      "unsided": 0
+     }
     },
     {
      "structure": "hip-adductor-magnus",
@@ -690,7 +985,13 @@
        "id": "FMA22443",
        "name": "adductor magnus"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 3,
+      "r": 3,
+      "unsided": 0
+     }
     },
     {
      "structure": "hip-adductor-brevis",
@@ -701,7 +1002,13 @@
        "id": "FMA22442",
        "name": "adductor brevis"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 1,
+      "r": 1,
+      "unsided": 0
+     }
     },
     {
      "structure": "hip-adductor-longus-only",
@@ -716,7 +1023,13 @@
        "id": "FMA22441",
        "name": "adductor longus"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 3,
+      "r": 3,
+      "unsided": 0
+     }
     },
     {
      "structure": "lumbar-pelvic-floor",
@@ -725,8 +1038,24 @@
       {
        "kind": "mvmt",
        "id": "lumbar-pelvic-floor"
+      },
+      {
+       "kind": "bp3d",
+       "id": "FMA19088",
+       "name": "coccygeus"
+      },
+      {
+       "kind": "bp3d",
+       "id": "FMA19089",
+       "name": "zone of levator ani"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 9,
+      "r": 5,
+      "unsided": 0
+     }
     },
     {
      "structure": "spine-all",
@@ -736,7 +1065,13 @@
        "kind": "mvmt",
        "id": "spine-all"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 0,
+      "r": 0,
+      "unsided": 1
+     }
     },
     {
      "structure": "lumbar-psoas",
@@ -747,7 +1082,13 @@
        "id": "FMA18060",
        "name": "psoas major"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 1,
+      "r": 1,
+      "unsided": 0
+     }
     },
     {
      "structure": "hip-iliacus",
@@ -762,7 +1103,13 @@
        "id": "FMA22310",
        "name": "iliacus"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 2,
+      "r": 2,
+      "unsided": 0
+     }
     },
     {
      "structure": "hip-pectineus",
@@ -777,7 +1124,13 @@
        "id": "FMA22440",
        "name": "pectineus"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 2,
+      "r": 3,
+      "unsided": 0
+     }
     },
     {
      "structure": "thoracic-diaphragm",
@@ -792,7 +1145,13 @@
        "id": "FMA13295",
        "name": "diaphragm"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 6,
+      "r": 6,
+      "unsided": 1
+     }
     },
     {
      "structure": "cervical-scalenes",
@@ -801,8 +1160,29 @@
       {
        "kind": "mvmt",
        "id": "cervical-scalenes"
+      },
+      {
+       "kind": "bp3d",
+       "id": "FMA13385",
+       "name": "scalenus anterior"
+      },
+      {
+       "kind": "bp3d",
+       "id": "FMA13386",
+       "name": "scalenus medius"
+      },
+      {
+       "kind": "bp3d",
+       "id": "FMA13387",
+       "name": "scalenus posterior"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 11,
+      "r": 11,
+      "unsided": 0
+     }
     },
     {
      "structure": "cervical-deep-flexors",
@@ -811,8 +1191,24 @@
       {
        "kind": "mvmt",
        "id": "cervical-deep-flexors"
+      },
+      {
+       "kind": "bp3d",
+       "id": "FMA46308",
+       "name": "longus capitis"
+      },
+      {
+       "kind": "bp3d",
+       "id": "FMA46279",
+       "name": "zone of longus colli"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 8,
+      "r": 5,
+      "unsided": 0
+     }
     },
     {
      "structure": "head-jaw-medial-pterygoid",
@@ -822,7 +1218,13 @@
        "kind": "mvmt",
        "id": "head-jaw-medial-pterygoid"
       }
-     ]
+     ],
+     "status": "attachments",
+     "sides": {
+      "l": 2,
+      "r": 2,
+      "unsided": 0
+     }
     },
     {
      "structure": "head-jaw-temporalis",
@@ -832,7 +1234,13 @@
        "kind": "mvmt",
        "id": "head-jaw-temporalis"
       }
-     ]
+     ],
+     "status": "attachments",
+     "sides": {
+      "l": 5,
+      "r": 5,
+      "unsided": 0
+     }
     }
    ]
   },
@@ -850,10 +1258,26 @@
       },
       {
        "kind": "bp3d",
-       "id": "FMA13373",
-       "name": "right pectoralis major"
+       "id": "FMA34687",
+       "name": "clavicular part of pectoralis major"
+      },
+      {
+       "kind": "bp3d",
+       "id": "FMA34696",
+       "name": "sternocostal part of pectoralis major"
+      },
+      {
+       "kind": "bp3d",
+       "id": "FMA34699",
+       "name": "abdominal part of pectoralis major"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 9,
+      "r": 9,
+      "unsided": 0
+     }
     },
     {
      "structure": "shoulder-lats",
@@ -863,7 +1287,13 @@
        "kind": "mvmt",
        "id": "shoulder-lats"
       }
-     ]
+     ],
+     "status": "attachments",
+     "sides": {
+      "l": 2,
+      "r": 2,
+      "unsided": 0
+     }
     },
     {
      "structure": "elbow-wrist-flexors",
@@ -887,8 +1317,24 @@
        "kind": "bp3d",
        "id": "FMA38469",
        "name": "flexor digitorum superficialis"
+      },
+      {
+       "kind": "bp3d",
+       "id": "FMA38615",
+       "name": "humeral head of flexor carpi ulnaris"
+      },
+      {
+       "kind": "bp3d",
+       "id": "FMA38616",
+       "name": "ulnar head of flexor carpi ulnaris"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 19,
+      "r": 19,
+      "unsided": 0
+     }
     },
     {
      "structure": "elbow-carpal-tunnel",
@@ -898,7 +1344,13 @@
        "kind": "mvmt",
        "id": "elbow-carpal-tunnel"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 1,
+      "r": 1,
+      "unsided": 0
+     }
     }
    ]
   },
@@ -919,7 +1371,13 @@
        "id": "FMA13109",
        "name": "pectoralis minor"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 5,
+      "r": 5,
+      "unsided": 0
+     }
     },
     {
      "structure": "fascia-clavipectoral",
@@ -929,7 +1387,13 @@
        "kind": "mvmt",
        "id": "fascia-clavipectoral"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 1,
+      "r": 1,
+      "unsided": 0
+     }
     },
     {
      "structure": "elbow-biceps",
@@ -943,8 +1407,19 @@
        "kind": "bp3d",
        "id": "FMA37682",
        "name": "short head of biceps brachii"
+      },
+      {
+       "kind": "bp3d",
+       "id": "FMA37683",
+       "name": "long head of biceps brachii"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 4,
+      "r": 5,
+      "unsided": 0
+     }
     },
     {
      "structure": "elbow-rcl",
@@ -954,7 +1429,13 @@
        "kind": "mvmt",
        "id": "elbow-rcl"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 1,
+      "r": 1,
+      "unsided": 0
+     }
     },
     {
      "structure": "elbow-wrist-thenar",
@@ -963,8 +1444,19 @@
       {
        "kind": "mvmt",
        "id": "elbow-wrist-thenar"
+      },
+      {
+       "kind": "bp3d",
+       "id": "FMA64916",
+       "name": "thenar muscle"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 5,
+      "r": 5,
+      "unsided": 0
+     }
     }
    ]
   },
@@ -979,8 +1471,29 @@
       {
        "kind": "mvmt",
        "id": "shoulder-trapezius"
+      },
+      {
+       "kind": "bp3d",
+       "id": "FMA32557",
+       "name": "descending part of trapezius"
+      },
+      {
+       "kind": "bp3d",
+       "id": "FMA32556",
+       "name": "transverse part of trapezius"
+      },
+      {
+       "kind": "bp3d",
+       "id": "FMA32555",
+       "name": "ascending part of trapezius"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 7,
+      "r": 7,
+      "unsided": 0
+     }
     },
     {
      "structure": "shoulder-deltoid",
@@ -989,8 +1502,19 @@
       {
        "kind": "mvmt",
        "id": "shoulder-deltoid"
+      },
+      {
+       "kind": "bp3d",
+       "id": "FMA34676",
+       "name": "zone of deltoid"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 7,
+      "r": 7,
+      "unsided": 0
+     }
     },
     {
      "structure": "elbow-common-extensor",
@@ -1000,7 +1524,13 @@
        "kind": "mvmt",
        "id": "elbow-common-extensor"
       }
-     ]
+     ],
+     "status": "attachments",
+     "sides": {
+      "l": 1,
+      "r": 1,
+      "unsided": 0
+     }
     },
     {
      "structure": "elbow-wrist-ed",
@@ -1015,7 +1545,13 @@
        "id": "FMA38500",
        "name": "extensor digitorum"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 9,
+      "r": 9,
+      "unsided": 0
+     }
     }
    ]
   },
@@ -1030,8 +1566,24 @@
       {
        "kind": "mvmt",
        "id": "shoulder-rhomboids"
+      },
+      {
+       "kind": "bp3d",
+       "id": "FMA13379",
+       "name": "rhomboid major"
+      },
+      {
+       "kind": "bp3d",
+       "id": "FMA13380",
+       "name": "rhomboid minor"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 4,
+      "r": 4,
+      "unsided": 0
+     }
     },
     {
      "structure": "cervical-levator",
@@ -1046,7 +1598,13 @@
        "id": "FMA32519",
        "name": "levator scapulae"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 6,
+      "r": 6,
+      "unsided": 0
+     }
     },
     {
      "structure": "shoulder-supraspinatus",
@@ -1061,7 +1619,13 @@
        "id": "FMA9629",
        "name": "supraspinatus"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 3,
+      "r": 3,
+      "unsided": 0
+     }
     },
     {
      "structure": "shoulder-infraspinatus",
@@ -1076,7 +1640,13 @@
        "id": "FMA32546",
        "name": "infraspinatus"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 3,
+      "r": 3,
+      "unsided": 0
+     }
     },
     {
      "structure": "shoulder-teres-minor",
@@ -1091,7 +1661,13 @@
        "id": "FMA32550",
        "name": "teres minor"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 3,
+      "r": 3,
+      "unsided": 0
+     }
     },
     {
      "structure": "shoulder-subscapularis",
@@ -1106,7 +1682,13 @@
        "id": "FMA13413",
        "name": "subscapularis"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 3,
+      "r": 3,
+      "unsided": 0
+     }
     },
     {
      "structure": "elbow-triceps",
@@ -1120,8 +1702,24 @@
        "kind": "bp3d",
        "id": "FMA37692",
        "name": "long head of triceps brachii"
+      },
+      {
+       "kind": "bp3d",
+       "id": "FMA37693",
+       "name": "medial head of triceps brachii"
+      },
+      {
+       "kind": "bp3d",
+       "id": "FMA37694",
+       "name": "lateral head of triceps brachii"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 7,
+      "r": 7,
+      "unsided": 0
+     }
     },
     {
      "structure": "elbow-ucl",
@@ -1131,7 +1729,13 @@
        "kind": "mvmt",
        "id": "elbow-ucl"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 1,
+      "r": 1,
+      "unsided": 0
+     }
     },
     {
      "structure": "elbow-wrist-hypothenar",
@@ -1140,8 +1744,19 @@
       {
        "kind": "mvmt",
        "id": "elbow-wrist-hypothenar"
+      },
+      {
+       "kind": "bp3d",
+       "id": "FMA64917",
+       "name": "hypothenar muscle"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 6,
+      "r": 6,
+      "unsided": 0
+     }
     }
    ]
   },
@@ -1157,7 +1772,13 @@
        "kind": "mvmt",
        "id": "shoulder-lats"
       }
-     ]
+     ],
+     "status": "attachments",
+     "sides": {
+      "l": 2,
+      "r": 2,
+      "unsided": 0
+     }
     },
     {
      "structure": "lumbar-tl-fascia",
@@ -1167,7 +1788,13 @@
        "kind": "mvmt",
        "id": "lumbar-tl-fascia"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 3,
+      "r": 3,
+      "unsided": 0
+     }
     },
     {
      "structure": "hip-glute-max",
@@ -1182,7 +1809,13 @@
        "id": "FMA22314",
        "name": "gluteus maximus"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 3,
+      "r": 3,
+      "unsided": 0
+     }
     },
     {
      "structure": "knee-vastus-lateralis",
@@ -1197,7 +1830,13 @@
        "id": "FMA22431",
        "name": "vastus lateralis"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 2,
+      "r": 2,
+      "unsided": 0
+     }
     },
     {
      "structure": "knee-patellar-tendon",
@@ -1207,7 +1846,13 @@
        "kind": "mvmt",
        "id": "knee-patellar-tendon"
       }
-     ]
+     ],
+     "status": "attachments",
+     "sides": {
+      "l": 2,
+      "r": 2,
+      "unsided": 0
+     }
     }
    ]
   },
@@ -1225,10 +1870,26 @@
       },
       {
        "kind": "bp3d",
-       "id": "FMA13373",
-       "name": "right pectoralis major"
+       "id": "FMA34687",
+       "name": "clavicular part of pectoralis major"
+      },
+      {
+       "kind": "bp3d",
+       "id": "FMA34696",
+       "name": "sternocostal part of pectoralis major"
+      },
+      {
+       "kind": "bp3d",
+       "id": "FMA34699",
+       "name": "abdominal part of pectoralis major"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 9,
+      "r": 9,
+      "unsided": 0
+     }
     },
     {
      "structure": "lumbar-rectus-abdominis",
@@ -1238,7 +1899,13 @@
        "kind": "mvmt",
        "id": "lumbar-rectus-abdominis"
       }
-     ]
+     ],
+     "status": "attachments",
+     "sides": {
+      "l": 2,
+      "r": 2,
+      "unsided": 0
+     }
     },
     {
      "structure": "hip-adductor-longus-only",
@@ -1253,7 +1920,13 @@
        "id": "FMA22441",
        "name": "adductor longus"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 3,
+      "r": 3,
+      "unsided": 0
+     }
     }
    ]
   },
@@ -1269,7 +1942,13 @@
        "kind": "mvmt",
        "id": "shoulder-lats"
       }
-     ]
+     ],
+     "status": "attachments",
+     "sides": {
+      "l": 2,
+      "r": 2,
+      "unsided": 0
+     }
     },
     {
      "structure": "lumbar-external-oblique",
@@ -1284,7 +1963,13 @@
        "id": "FMA13335",
        "name": "external oblique"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 7,
+      "r": 7,
+      "unsided": 0
+     }
     },
     {
      "structure": "hip-sartorius",
@@ -1299,7 +1984,13 @@
        "id": "FMA22353",
        "name": "sartorius"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 4,
+      "r": 4,
+      "unsided": 0
+     }
     },
     {
      "structure": "hip-adductor-longus-only",
@@ -1314,10 +2005,109 @@
        "id": "FMA22441",
        "name": "adductor longus"
       }
-     ]
+     ],
+     "status": "full",
+     "sides": {
+      "l": 3,
+      "r": 3,
+      "unsided": 0
+     }
     }
    ]
   }
  ],
- "unresolved": []
+ "unresolved": [],
+ "attachmentsOnly": [
+  {
+   "line": "SBL",
+   "structure": "head-jaw-occipitofrontalis",
+   "name": "Occipitofrontalis",
+   "latin": "m. occipitofrontalis",
+   "system": "muscular"
+  },
+  {
+   "line": "SFL",
+   "structure": "knee-patellar-tendon",
+   "name": "Patellar Tendon",
+   "latin": "ligamentum patellae",
+   "system": "fascial"
+  },
+  {
+   "line": "SFL",
+   "structure": "lumbar-rectus-abdominis",
+   "name": "Rectus Abdominis",
+   "latin": "m. rectus abdominis",
+   "system": "muscular"
+  },
+  {
+   "line": "LL",
+   "structure": "lumbar-internal-oblique",
+   "name": "Internal Oblique",
+   "latin": "m. obliquus internus abdominis",
+   "system": "muscular"
+  },
+  {
+   "line": "SPL",
+   "structure": "lumbar-internal-oblique",
+   "name": "Internal Oblique",
+   "latin": "m. obliquus internus abdominis",
+   "system": "muscular"
+  },
+  {
+   "line": "DFL",
+   "structure": "head-jaw-medial-pterygoid",
+   "name": "Medial Pterygoid",
+   "latin": "m. pterygoideus medialis",
+   "system": "muscular"
+  },
+  {
+   "line": "DFL",
+   "structure": "head-jaw-temporalis",
+   "name": "Temporalis",
+   "latin": "m. temporalis",
+   "system": "muscular"
+  },
+  {
+   "line": "SFAL",
+   "structure": "shoulder-lats",
+   "name": "Latissimus Dorsi",
+   "latin": "m. latissimus dorsi",
+   "system": "muscular"
+  },
+  {
+   "line": "SBAL",
+   "structure": "elbow-common-extensor",
+   "name": "Common Extensor Origin",
+   "latin": "origo communis extensorum",
+   "system": "muscular"
+  },
+  {
+   "line": "BFL",
+   "structure": "shoulder-lats",
+   "name": "Latissimus Dorsi",
+   "latin": "m. latissimus dorsi",
+   "system": "muscular"
+  },
+  {
+   "line": "BFL",
+   "structure": "knee-patellar-tendon",
+   "name": "Patellar Tendon",
+   "latin": "ligamentum patellae",
+   "system": "fascial"
+  },
+  {
+   "line": "FFL",
+   "structure": "lumbar-rectus-abdominis",
+   "name": "Rectus Abdominis",
+   "latin": "m. rectus abdominis",
+   "system": "muscular"
+  },
+  {
+   "line": "IFL",
+   "structure": "shoulder-lats",
+   "name": "Latissimus Dorsi",
+   "latin": "m. latissimus dorsi",
+   "system": "muscular"
+  }
+ ]
 }

@@ -42,7 +42,7 @@ decompresses them itself. The pipeline after a new export from mvmt-anatomy:
 - A part is loaded from one layout at a time: full detail (`main:<chunk>`), the
   overview (`overview:<chunk>`) or a region's context (`context:<region>`, a copy
   of the neighbours' spanning parts, drawn with the context material, excluded
-  from picking, explode and the fascial-line surface search). The keys are
+  from picking, explode and a fascial line's stations). The keys are
   built by `chunkKeysFor` / `contextKeysFor` in `app/anatomy.ts`; the first bug
   here was a context key spelled `main:<i>`, which loaded a chunk with no parts
   in it and drew nothing, silently. `window.__atlas` in the console reports
@@ -60,10 +60,44 @@ decompresses them itself. The pipeline after a new export from mvmt-anatomy:
   box for a paired region (both arms' box spans the whole trunk). Thoracic
   and shoulder contexts are still 5 to 6 MB: that is what surrounds them.
 - `scripts/overrides.mjs` holds the hand-kept tables: BP3D's mislabels
-  (sixteen muscles and the iliotibial tract filed as skeletal) and the
-  BP3D concept names that stand for the MVMT muscle structures whose names
-  match nothing. Both are reviewed as descriptions; `build-index.mjs` stops
-  if a listed name is not in the atlas.
+  (sixteen muscles and the iliotibial tract filed as skeletal) and
+  `CONCEPT_MATCHES`, the BP3D concept names that stand for MVMT structures
+  whose names match nothing or match the wrong thing, read for muscle depth
+  and for the fascial-line stations alike. Both are reviewed as descriptions;
+  `build-index.mjs` stops if a listed name is not in the atlas or a key is not
+  a structure of mvmt-program's.
+- **A BP3D name is several concepts, and a match must return all of them.**
+  BP3D holds many muscles as a pair of sided concepts ("right rhomboid
+  major", "left rhomboid major") beside or instead of an unsided one, and the
+  name normaliser drops "right" and "left", so an index that keeps the first
+  concept under a name resolved "pectoralis major" to the right one alone,
+  and "biceps brachii" to its short head alone. `build-index.mjs` now keeps
+  every concept under a name and every smallest containing concept, prunes
+  the ones whose meshes sit inside another's, and records the resolved mesh
+  count per side on each station so a one-sided answer shows in the JSON.
+  The first pass also carried a manual table keyed by station ids that had
+  drifted (`hip-it-band` for `hip-itb`, `thoracic-latissimus` for
+  `shoulder-lats`) and dropped names it could not find without a word; both
+  are hard errors now.
+- **A fascial line is drawn as its stations, never as a path.** Picking a
+  line lights every part its stations resolve to, both sides, in `--v3-line`
+  (opaque, lit, a little emissive) whatever the system toggles say, and drops
+  everything else that is loaded to a ghost: `--v3-ghost` at 12%, flat, no
+  depth write, unpickable, one colour so the blend order cannot matter. When
+  no system is on the ghost is the skeleton and muscles, so there is a body
+  to place the line on. The stations are one merged mesh in the line
+  material, rebuilt when the line or the loaded sets change; the ghost is one
+  material swapped onto every loaded mesh (`setLineActive` in
+  `app/scene.tsx`). The first version drew a tube through one point per
+  station and lit nothing, which read as a wire down one leg: the connective
+  tissue between stations has no geometry here, and a path claims it does.
+  In a region view the region's own stations light and the region is the
+  ghost; the context is hidden. Off while exploded or isolated. Every
+  station is listed in the panel, and one this body cannot light says so on
+  its row ("not on this model", "attachments only · muscle not on this
+  model", "not in this region") - never dropped. Patient view keeps the
+  highlight, the blurb and the caveat and hides the station list.
+  `window.__atlas.line()` reports what a lit line is drawing.
 - An empty context chunk is an error in the console and in
   `validate-atlas.mjs`, never a silent blank.
 - Region assignment of BP3D parts is by name against mvmt-anatomy's

@@ -10,7 +10,7 @@ import {Sheet,SheetContent,SheetTitle,SheetDescription} from '@/components/ui/sh
 import {Combobox,ComboboxInput,ComboboxContent,ComboboxList,ComboboxItem,ComboboxEmpty} from '@/components/ui/combobox';
 import AnatomyScene from './scene';
 import {assetUrl} from './base-url';
-import {MODELS,listenParent,postToParent,readUrlRequest,type EmbedRequest,type ModelId} from './embed';
+import {LINE_IDS,MODELS,listenParent,postToParent,readUrlRequest,type EmbedRequest,type ModelId} from './embed';
 import {DEFAULT_VISIBLE,MORE_SYSTEMS,MVMT_REGIONS,NERVOUS_GROUP,ORGAN_SYSTEMS,PRIMARY_SYSTEMS,SYSTEMS,EXPLANATIONS,TRAILING_SYSTEMS,VESSEL_SYSTEMS,chunkKeysFor,contextKeysFor,explanation,regionBounds,type Atlas,type Concept,type FascialLine,type MuscleDepth,type SceneState,type SystemId,type View} from './anatomy';
 const initial:SceneState={explode:0,visible:DEFAULT_VISIBLE,selected:[],isolate:false,view:'three-quarter',rotate:false,reset:0};
 /** What is visible before any request: the URL's systems if it names them, else the defaults. Arteries, veins and
@@ -24,6 +24,21 @@ const SCHEMATIC='Schematic — indicative path only';
 /** Myers argues the lines from dissection and reasoning; what the viewer can draw is the stations along the route,
  * because the connective tissue between them has no geometry here. Shown with every line, not dismissible. */
 const LINE_CAVEAT='A model, not a dissected structure. What lights up is the stations along the route — the fascia running between them has no geometry here.';
+/** Each line in a sentence, for the panel and for a patient: mvmt-program's copy, so the two viewers say the same thing. */
+const LINE_BLURB:Record<string,string>={
+ SBL:'From the sole of the foot to the brow, over the back of the body. Holds the body upright and prevents it folding forward.',
+ SFL:'From the top of the foot to the side of the skull. Balances the back line and protects the soft front of the body.',
+ LL:'From the outside of the foot up each side to the ear. Balances front against back and left against right, and brakes side-bending.',
+ SPL:'Loops around the body in a double helix. Maintains rotational balance, and its imbalance shows as a twist through the trunk.',
+ DFL:"The body's myofascial core, from the sole of the foot through the inner leg, pelvis and trunk to the jaw. The hardest to reach and the most implicated in persistent postural problems.",
+ SFAL:'From the chest and back to the palm. The line of pulling toward you and gripping.',
+ DFAL:'From the ribs through the biceps to the thumb. Controls the angle of the hand in space.',
+ SBAL:'From the skull and spine over the shoulder to the back of the hand. The line of pushing away.',
+ DBAL:'From the spine through the rotator cuff to the little-finger side of the hand. Stabilises the shoulder during arm work.',
+ FFL:'From one shoulder across the front of the body to the opposite thigh. Loaded in throwing and any cross-body action.',
+ BFL:'From one shoulder across the back to the opposite thigh. The other half of the throwing pattern.',
+ IFL:'Down the same side, from the shoulder to the inner thigh. Loaded in same-side reaching and carrying.',
+};
 const SYSTEM_LABEL:Partial<Record<SystemId,string>>={nervous:'Brain & cranial nerves'};
 export default function Home(){
  const detailTitle=useRef<HTMLHeadingElement>(null);
@@ -46,7 +61,10 @@ export default function Home(){
  // patient view keeps every part the fit could not place with confidence off the screen: the six landmarks over 10 mm, and any
  // carried-over part more than 20% of whose surface sits further than 6 mm from the BP3D body
  const hiddenParts=useMemo(()=>patient&&atlas?atlas.parts.filter(p=>p.fitConfidence==='low').map(p=>p.id):[],[atlas,patient]);
- const line=useMemo(()=>{if(!lineOn||!lineId||!lines||!atlas)return null;const l=lines.find(x=>x.id===lineId);if(!l)return null;return {id:l.id,stations:l.stations.map(st=>[...new Set(st.resolve.flatMap(r=>concepts.get(r.id)?.elements??[]))])};},[lineOn,lineId,lines,atlas,concepts]);
+ // the picked line as the set of parts its stations resolve to, both sides; the scene lights these and ghosts the rest
+ const line=useMemo(()=>{if(!lineOn||!lineId||!lines||!atlas)return null;const l=lines.find(x=>x.id===lineId);if(!l)return null;return {id:l.id,parts:[...new Set(l.stations.flatMap(st=>st.resolve.flatMap(r=>concepts.get(r.id)?.elements??[])))]};},[lineOn,lineId,lines,atlas,concepts]);
+ // the chunks a region view holds at full detail, so a station row can say when its parts are in another region
+ const loadedChunks=useMemo(()=>new Set(chunkKeys.filter(k=>k.startsWith('main:')).map(k=>+k.slice(5))),[chunkKeys]);
  const counts=useMemo(()=>Object.fromEntries(SYSTEMS.map(s=>[s.id,atlas?.parts.filter(p=>p.system===s.id).length??0])),[atlas]);
  const present=(id:SystemId)=>counts[id]>0;
  const selectedParts=state.selected.map(id=>parts.get(id)).filter(p=>!!p),selected=selectedParts[0],system=SYSTEMS.find(s=>s.id===selected?.system);
@@ -63,7 +81,8 @@ export default function Home(){
  const toggle=(id:SystemId)=>setVisible(state.visible.includes(id)?state.visible.filter(x=>x!==id):[...state.visible,id]);
  const toggleGroup=(ids:SystemId[])=>{const on=ids.some(id=>state.visible.includes(id));setVisible(on?state.visible.filter(x=>!ids.includes(x)):[...new Set([...state.visible,...ids])]);};
  const reset=()=>{setState(s=>({...initial,visible:DEFAULT_VISIBLE,reset:s.reset+1}));setChosen(null);setDetails(false);setPanel(null);setDepth(0);setLineOn(false);setLineId(null);setFrame(null);};
- const pickRegion=(id:string)=>{setRegion(id);setDetails(false);setChosen(null);setState(s=>({...s,selected:[],isolate:false,explode:0,reset:s.reset+1,rotate:false}));if(id){setLineOn(false);}};
+ // a picked line survives a region change: in a region view it lights the stations the region holds and ghosts the region
+ const pickRegion=(id:string)=>{setRegion(id);setDetails(false);setChosen(null);setState(s=>({...s,selected:[],isolate:false,explode:0,reset:s.reset+1,rotate:false}));};
  const openPanel=(next:'layers'|'search')=>{setDetails(false);setPanel(p=>p===next?null:next);};
  const apply=(req:EmbedRequest)=>{
   if(req.model&&req.model!==model){pending.current={...(pending.current??{}),...req,model:undefined};setModel(req.model);return;}
@@ -73,6 +92,7 @@ export default function Home(){
   if(req.systems)setState(s=>({...s,visible:req.systems!,selected:[],isolate:false}));
   if(req.view)setState(s=>({...s,view:req.view!,reset:s.reset+1,rotate:false}));
   if(req.select){const id=req.select,part=parts.get(id),concept=atlas.concepts.find(c=>c.id===id)??(part?{id:part.conceptId,name:part.name,elements:[id]}:null);if(concept)choose(concept);else postToParent({type:'unresolved',id});}
+  if(req.line!==undefined){if(!req.line){setLineOn(false);setLineId(null);}else if(LINE_IDS.includes(req.line)){setLineOn(true);setLineId(req.line);}else postToParent({type:'unresolved',line:req.line});}
  };
  const applyRef=useRef(apply);applyRef.current=apply;
  // The detail and about sheets render in a portal outside <main>, so the patient flag also goes on the root element.
@@ -100,8 +120,10 @@ export default function Home(){
     <div className={`system-row group-row ${nervesOn?'enabled':''}`}><Button variant="ghost" className="system-name" onClick={()=>setNervesOpen(o=>!o)} aria-expanded={nervesOpen} title="Central and peripheral nerves, and BodyParts3D's brain and cranial nerves"><span className="system-dot" style={{background:'#E0A427'}}/>Nervous system<span className="system-count">{NERVOUS_GROUP.reduce((n,id)=>n+counts[id],0)}</span>{nervesOpen?<ChevronDown size={14}/>:<ChevronRight size={14}/>}</Button><Switch checked={nervesOn} onCheckedChange={()=>toggleGroup(NERVOUS_GROUP.filter(present))} aria-label="Show the nervous system"/></div>
     {nervesOpen&&NERVOUS_GROUP.filter(present).map(id=>systemRow(id,true))}
     {TRAILING_SYSTEMS.filter(present).map(id=>systemRow(id))}
-    <div className={`system-row ${lineOn?'enabled':''}`}><Button variant="ghost" className="system-name" disabled={!!region} title={region?'Fascial lines run the length of the body: switch to Whole body to trace one':'Trace a myofascial line through the structures along its route'} onClick={()=>{if(!region)setLineOn(o=>!o);}}><span className="system-dot" style={{background:'#7A3E9D'}}/>Fascial lines<span className="system-count">12</span></Button><Switch checked={lineOn} disabled={!!region} onCheckedChange={()=>setLineOn(o=>!o)} aria-label="Show fascial lines"/></div>
-    {lineOn&&!region&&<div className="line-block">{lines?<div className="line-list">{lines.map(l=><button type="button" key={l.id} aria-pressed={lineId===l.id} title={l.name} onClick={()=>setLineId(id=>id===l.id?null:l.id)}>{l.id}</button>)}</div>:<p className="line-note">Loading the lines…</p>}{lineData?<div className="line-info"><strong>{lineData.name}</strong><p className="line-caveat">{LINE_CAVEAT}</p><ol>{lineData.stations.map(st=><li key={st.structure}><button type="button" onClick={()=>{const ids=[...new Set(st.resolve.flatMap(r=>concepts.get(r.id)?.elements??[]))];if(ids.length)choose({id:st.structure,name:st.name,elements:ids});}}>{st.name}</button>{!st.resolve.length&&<span className="line-missing">not in this model</span>}</li>)}</ol>{state.explode>0&&<p className="line-note">Hidden while the anatomy is exploded.</p>}</div>:<p className="line-note">Pick a line to trace it through the body.</p>}</div>}
+    <div className={`system-row ${lineOn?'enabled':''}`}><Button variant="ghost" className="system-name" title="Trace a myofascial line: its stations lit in the line colour, the rest of the body a ghost" onClick={()=>setLineOn(o=>!o)}><span className="system-dot" style={{background:'var(--v3-line)'}}/>Fascial lines<span className="system-count">12</span></Button><Switch checked={lineOn} onCheckedChange={()=>setLineOn(o=>!o)} aria-label="Show fascial lines"/></div>
+    {/* Every station is listed, and one the body cannot light says so on its row - nothing is dropped for tidiness. The
+        station list is the one thing patient view hides here: the highlight and the blurb are what a patient is shown. */}
+    {lineOn&&<div className="line-block">{lines?<div className="line-list">{lines.map(l=><button type="button" key={l.id} aria-pressed={lineId===l.id} title={l.name} onClick={()=>setLineId(id=>id===l.id?null:l.id)}>{l.id}</button>)}</div>:<p className="line-note">Loading the lines…</p>}{lineData?<div className="line-info"><strong>{lineData.name}</strong><p className="line-blurb">{LINE_BLURB[lineData.id]}</p><p className="line-caveat">{LINE_CAVEAT}</p><ol>{lineData.stations.map((st,i)=>{const ids=[...new Set(st.resolve.flatMap(r=>concepts.get(r.id)?.elements??[]))];const here=!region||ids.some(id=>{const p=parts.get(id);return !!p&&loadedChunks.has(p.chunk);});const note=st.status==='none'?'not on this model':st.status==='attachments'?'attachments only · muscle not on this model':!here?'not in this region':'';return <li key={st.structure+i}><button type="button" onClick={()=>{if(ids.length)choose({id:st.structure,name:st.name,elements:ids});}}>{st.name}</button>{note&&<span className="line-missing">{note}</span>}</li>;})}</ol>{state.explode>0&&<p className="line-note">Hidden while the anatomy is exploded.</p>}{state.isolate&&<p className="line-note">Hidden while a structure is isolated.</p>}</div>:<p className="line-note">Pick a line to trace it through the body.</p>}</div>}
     <button type="button" className="fold-toggle" aria-expanded={more} onClick={()=>setMore(o=>!o)}>{more?<ChevronDown size={14}/>:<ChevronRight size={14}/>}More systems<span className="system-count">{MORE_SYSTEMS.filter(present).length}</span></button>
     {more&&MORE_SYSTEMS.filter(present).map(id=>systemRow(id))}
    </div>
