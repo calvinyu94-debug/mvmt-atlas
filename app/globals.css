@@ -23,6 +23,8 @@
     holds no colour literal of its own, so a theme swap reaches the model. */
  --stage:#F5EFE8;--stage-ground:#EAE1D6;--stage-platform:#F8F3ED;--stage-ring:#A08B7A;
  --stage-select:#2E7181;
+ /* a picked fascial line (mvmt-program's --v3-line, deliberately not --accent) and the ghost the rest of the body drops to beneath it */
+ --v3-line:#7A3E9D;--v3-ghost:#5A473A;
  /* the authored layers, as Phase 4B draws them: matte cream nerves, ivory ligaments, translucent off-white fascia, a translucent dura */
  --v3-nerve-surface:#EDE3C9;--v3-ligament-surface:#F2ECDD;--v3-fascia-surface:#F4EFE6;--v3-dura-surface:#E6E0D8;
  /* shadcn tokens, mapped onto the theme. */
@@ -150,7 +152,7 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--accent)}
 @media(max-width:767px){h1{font-size:28px}.layers-panel.mobile-open,.bottom-dock,.detail-sheet{background:var(--panel)}.about-sheet{border-radius:0}}
 
 /* Patient view (?patient=1): identifiers and reference chrome go, the anatomy stays. */
-.patient .structure-meta,.patient .context-note,.patient .source-link,.patient .top-actions kbd,.patient .system-count,.patient .panel-heading .small-number,.patient .studio-footer button,.patient .top-actions .icon-button{display:none}
+.patient .structure-meta,.patient .context-note,.patient .source-link,.patient .top-actions kbd,.patient .system-count,.patient .panel-heading .small-number,.patient .studio-footer button,.patient .top-actions .icon-button,.patient .line-info ol{display:none}
 
 /* Phase 3: regions, grouped systems, muscle depth, fascial lines, the schematic label. */
 .layers-panel{top:180px}
@@ -168,8 +170,9 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--accent)}
 .line-block{padding:4px 0 8px 18px}
 .line-list{display:grid;grid-template-columns:repeat(4,1fr);gap:3px}
 .line-list button{border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--panel);color:var(--ink-2);font-family:var(--font-ui);font-size:10px;font-weight:700;padding:5px 2px;cursor:pointer}
-.line-list button:hover{background:var(--hover)}.line-list button[aria-pressed=true]{background:#7A3E9D;border-color:#7A3E9D;color:#fff}
+.line-list button:hover{background:var(--hover)}.line-list button[aria-pressed=true]{background:var(--v3-line);border-color:var(--v3-line);color:#fff}
 .line-info{margin-top:8px;font-size:12px;color:var(--ink-2)}.line-info strong{display:block;font-family:var(--font-display);font-size:14px;color:var(--ink);margin-bottom:4px}
+.line-blurb{margin:0 0 6px;font-size:11px;line-height:1.5;color:var(--ink-2)}
 .line-caveat{margin:0 0 6px;padding:6px 8px;border-radius:var(--radius-sm);background:var(--accent-wash);color:var(--ink-2);font-size:11px;line-height:1.45}
 .line-info ol{margin:0;padding-left:16px;font-size:11px;line-height:1.5}.line-info ol button{border:0;background:none;padding:0;color:var(--ink-2);font:inherit;cursor:pointer;text-align:left}.line-info ol button:hover{color:var(--accent-dk);text-decoration:underline}
 .line-missing{margin-left:6px;color:var(--warn);font-size:10px}.line-note{margin:6px 0 0;font-size:11px;color:var(--ink-3)}

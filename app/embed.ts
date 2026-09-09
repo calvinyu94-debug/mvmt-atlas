@@ -8,11 +8,14 @@
  *   select   <FMA concept id | part id | our id>
  *   view     anterior | posterior | left | right | superior
  *   patient  1 | 0                     hide identifiers and reference chrome
+ *   line     SBL | SFL | LL | SPL | DFL | SFAL | DFAL | SBAL | DBAL | BFL | FFL | IFL
+ *                                      trace a fascial line: its stations lit, the rest of the body ghosted; empty clears it
  *
  * A message is `{type:'set', ...keys}`. The viewer posts back
  * `{type:'ready', model, parts}` once a manifest has loaded,
- * `{type:'select', id, name}` whenever the selection changes (null when cleared), and
- * `{type:'unresolved', id}` when a requested selection is not in the atlas.
+ * `{type:'select', id, name}` whenever the selection changes (null when cleared),
+ * `{type:'unresolved', id}` when a requested selection is not in the atlas, and
+ * `{type:'unresolved', line}` when a requested line is not one of the twelve.
  */
 import {SYSTEMS,type SystemId,type View} from './anatomy';
 
@@ -23,7 +26,9 @@ export type ModelId='bp3d';
 export const MODELS:Record<ModelId,{name:string;source:string;manifest:string}>={
  bp3d:{name:'Human Atlas',source:'BodyParts3D',manifest:'/models/atlas.json'},
 };
-export interface EmbedRequest{model?:ModelId;region?:string;systems?:SystemId[];select?:string;view?:View;patient?:boolean}
+export interface EmbedRequest{model?:ModelId;region?:string;systems?:SystemId[];select?:string;view?:View;patient?:boolean;line?:string}
+/** Myers' twelve lines, as fascial-lines.json keys them. A `line` request outside this list is posted back as unresolved. */
+export const LINE_IDS=['SBL','SFL','LL','SPL','DFL','SFAL','DFAL','SBAL','DBAL','BFL','FFL','IFL'];
 
 const VIEWS:Record<string,View>={anterior:'front',front:'front',posterior:'back',back:'back',left:'side',side:'side',right:'right',superior:'top',top:'top','three-quarter':'three-quarter'};
 const systemIds=new Set<string>(SYSTEMS.map(s=>s.id));
@@ -44,6 +49,9 @@ export function parseRequest(source:Source):EmbedRequest{
  const view=text('view');if(view&&VIEWS[view.toLowerCase()])r.view=VIEWS[view.toLowerCase()];
  const patient=source.get('patient');
  if(patient!==undefined&&patient!==null)r.patient=patient===true||patient==='1'||patient==='true';
+ // an empty value (or null by message) clears the line; anything else is checked against LINE_IDS when applied
+ const line=source.get('line');
+ if(typeof line==='string')r.line=line.trim().toUpperCase();else if(line===null)r.line='';
  return r;
 }
 

@@ -54,7 +54,17 @@ export default function AnatomyScene({atlas,state,onSelect,onFrame,onProgress,on
    return best;
   };
   const selectColor=tokenVec('--stage-select','#2e7181');
-  const contextColor=token('--v3-context','#dad3cb');
+  const contextColor=token('--v3-context','#dad3cb'),ghostColor=token('--v3-ghost','#5a473a'),lineColor=token('--v3-line','#7a3e9d');
+  // Every material draws from the same per-part state: an explode offset and a visibility flag in partState, the selection in
+  // selectionState.r and the fascial-line station flag in selectionState.g. Shared by the system looks, the ghost and the line.
+  const partStateShader=(shader:Parameters<NonNullable<T.Material['onBeforeCompile']>>[0],tint:boolean)=>{
+   shader.uniforms.partState={value:partTexture};shader.uniforms.selectionState={value:selectionTexture};shader.uniforms.stateWidth={value:width};
+   shader.vertexShader='attribute float partIndex; uniform sampler2D partState; uniform sampler2D selectionState; uniform float stateWidth; varying float partVisible; varying float partSelected; varying float partStation;\n'+shader.vertexShader;
+   shader.vertexShader=shader.vertexShader.replace('#include <begin_vertex>','#include <begin_vertex>\nvec2 stateUv = vec2((partIndex + 0.5) / stateWidth, 0.5); vec4 state = texture2D(partState, stateUv); transformed += state.xyz; partVisible = state.w; vec4 sel = texture2D(selectionState, stateUv); partSelected = sel.r; partStation = sel.g;');
+   shader.fragmentShader='varying float partVisible; varying float partSelected; varying float partStation;\n'+shader.fragmentShader;
+   shader.fragmentShader=shader.fragmentShader.replace('#include <clipping_planes_fragment>','#include <clipping_planes_fragment>\nif (partVisible < 0.5) discard;');
+   if(tint)shader.fragmentShader=shader.fragmentShader.replace('#include <color_fragment>','#include <color_fragment>\ndiffuseColor.rgb = mix(diffuseColor.rgb, '+selectColor+', partSelected * 0.75);');
+  };
   // The authored layers get their own looks (Phase 4B). Nerves and the cord: matte pale cream, no gloss, a faint fibrous grain
   // along their length. Ligaments: ivory, a sheen that runs along the fibre direction (the part's long axis) rather than a
   // round highlight. Fascia: translucent off-white sheets at 0.35, drawn before the insertion patches so those sit on top.
@@ -84,15 +94,21 @@ export default function AnatomyScene({atlas,state,onSelect,onFrame,onProgress,on
      shader.vertexShader='varying vec3 vFibreDir;\nuniform sampler2D fibreState;\n'+shader.vertexShader.replace('#include <begin_vertex>','#include <begin_vertex>\nvFibreDir = normalize((modelMatrix * vec4(texture2D(fibreState, vec2((partIndex + 0.5) / stateWidth, 0.5)).xyz, 0.0)).xyz);');
      shader.fragmentShader='varying vec3 vFibreDir;\n'+shader.fragmentShader.replace('#include <lights_fragment_end>','#include <lights_fragment_end>\n{ vec3 t = normalize(vFibreDir - normal * dot(vFibreDir, normal)); vec3 v = normalize(vViewPosition); vec3 l = normalize(vec3(-0.4, 0.8, 0.6)); vec3 h = normalize(l + v); float th = dot(t, h); float sheen = pow(max(0.0, sqrt(1.0 - th * th)), 24.0); reflectedLight.directSpecular += vec3(0.18) * sheen; }');
     }
-    shader.uniforms.partState={value:partTexture};shader.uniforms.selectionState={value:selectionTexture};shader.uniforms.stateWidth={value:width};
-    shader.vertexShader='attribute float partIndex; uniform sampler2D partState; uniform sampler2D selectionState; uniform float stateWidth; varying float partVisible; varying float partSelected;\n'+shader.vertexShader;
-    shader.vertexShader=shader.vertexShader.replace('#include <begin_vertex>','#include <begin_vertex>\nvec2 stateUv = vec2((partIndex + 0.5) / stateWidth, 0.5); vec4 state = texture2D(partState, stateUv); transformed += state.xyz; partVisible = state.w; partSelected = texture2D(selectionState, stateUv).r;');
-    shader.fragmentShader='varying float partVisible; varying float partSelected;\n'+shader.fragmentShader;
-    shader.fragmentShader=shader.fragmentShader.replace('#include <clipping_planes_fragment>','#include <clipping_planes_fragment>\nif (partVisible < 0.5) discard;');
-    shader.fragmentShader=shader.fragmentShader.replace('#include <color_fragment>','#include <color_fragment>\ndiffuseColor.rgb = mix(diffuseColor.rgb, '+selectColor+', partSelected * 0.75);');
+    partStateShader(shader,true);
    };materials.push(m);return m;
   };
   const mats=new Map<string,T.Material>([...SYSTEMS.map(s=>[s.id,materialFor(s.id)] as [string,T.Material]),['dura',materialFor('dura')]]),contextMats=new Map<string,T.Material>([...SYSTEMS.map(s=>[s.id,materialFor(s.id,true)] as [string,T.Material]),['dura',materialFor('central-nerves',true)]]);
+  // A picked fascial line, drawn the way mvmt-program draws one: its stations opaque in the line colour, lit and glowing so they
+  // keep their shape; every other loaded part a ghost - flat, 12% alpha, no depth write, unpickable - so the body is there to
+  // place the line on and nothing else competes with it. No tube, no path: the connective tissue between stations has no
+  // geometry here, and drawing one would claim it does. Station fragments are discarded from the ghost pass and drawn by the
+  // line mesh alone, which keeps them opaque with their own depth; the ghost is one material swapped onto every loaded mesh
+  // while a line is lit, and the system looks come back after. One ghost colour makes the blending order-independent.
+  const ghostMat=new T.MeshBasicMaterial({color:ghostColor,transparent:true,opacity:.12,depthWrite:false,side:T.DoubleSide});
+  ghostMat.onBeforeCompile=shader=>{partStateShader(shader,false);shader.fragmentShader=shader.fragmentShader.replace('if (partVisible < 0.5) discard;','if (partVisible < 0.5 || partStation > 0.5) discard;');};
+  const lineMat=new T.MeshStandardMaterial({color:lineColor,emissive:lineColor,emissiveIntensity:.3,roughness:.6,metalness:0,side:T.DoubleSide});
+  lineMat.onBeforeCompile=shader=>partStateShader(shader,true);
+  materials.push(ghostMat,lineMat);
   const depthMap=atlas.layers?.muscleDepth?.parts??{};
   // Chunks are fetched on demand. A chunk key is 'main:<i>' (atlas.chunks) or 'overview:<i>'
   // (atlas.overview.chunks, the decimated whole body, same part ids at other offsets). The page
@@ -103,6 +119,8 @@ export default function AnatomyScene({atlas,state,onSelect,onFrame,onProgress,on
   const loadedSets=new Map<string,{meshes:T.Mesh[];geometries:T.BufferGeometry[];parts:number[]}>();
   const inflight=new Map<string,Promise<void>>();
   let wantedKeys:string[]=[],wantedContext:string[]=[],syncing=0,ownComplete=false;
+  // the fascial line: whether one is lit right now, and which parts are its stations (1) - kept beside the shader flag for picking
+  let lineActive=false;const stationFlag=new Uint8Array(atlas.parts.length);
   const partIndex=new Map(atlas.parts.map((p,i)=>[p.id,i]));
   const layoutsIn=(key:string):[number,{chunk:number;positions:number;normals:number;indices:number;vertexCount:number;indexCount:number}][]=>{
    const [kind,ci]=key.split(':');const index=+ci;
@@ -131,7 +149,7 @@ export default function AnatomyScene({atlas,state,onSelect,onFrame,onProgress,on
     const list=groups.get(groupKey)??[];list.push(g);groups.set(groupKey,list);partLoaded[i]=kind==='overview'?2:kind==='context'?3:1;parts.push(i);
    }
    const meshes:T.Mesh[]=[];
-   groups.forEach((gs,system)=>{const geometry=mergeGeometries(gs,false);if(!geometry)throw new Error('Could not assemble anatomy geometry.');own.push(geometry);const mesh=new T.Mesh(geometry,(kind==='context'?contextMats:mats).get(system as never)??mats.get(system==='dura'?'central-nerves' as never:system as never));mesh.frustumCulled=false;mesh.renderOrder=kind==='context'?-1:LOOKS[system]?.order??0;scene.add(mesh);meshes.push(mesh);});
+   groups.forEach((gs,system)=>{const geometry=mergeGeometries(gs,false);if(!geometry)throw new Error('Could not assemble anatomy geometry.');own.push(geometry);const base=(kind==='context'?contextMats:mats).get(system as never)??mats.get(system==='dura'?'central-nerves' as never:system as never)!;const mesh=new T.Mesh(geometry,lineActive&&kind!=='context'?ghostMat:base);mesh.userData.base=base;mesh.frustumCulled=false;mesh.renderOrder=kind==='context'?-1:LOOKS[system]?.order??0;scene.add(mesh);meshes.push(mesh);});
    loadedSets.set(key,{meshes,geometries:own,parts});lastState=null;layoutKey='';lineKey='';dirty=true;
    // timing per chunk set, readable as performance.getEntriesByName('chunk') and in window.__atlas.timings
    const t3=performance.now();timings.push({key,parts:parts.length,fetchMs:Math.round(t1-t0),decodeMs:Math.round(t2-t1),buildMs:Math.round(t3-t2)});performance.measure('chunk',{start:t0,end:t3,detail:key});
@@ -157,30 +175,28 @@ export default function AnatomyScene({atlas,state,onSelect,onFrame,onProgress,on
    report();
    (async()=>{try{let cursor=0;await Promise.all(Array.from({length:3},async()=>{while(cursor<missing.length){const key=missing[cursor++];const job=loadSet(key).finally(()=>inflight.delete(key));inflight.set(key,job);await job;if(generation===syncing)report();}}));if(!disposed&&generation===syncing){ready=true;dirty=true;report();ownComplete=true;syncContext(wantedContext);}}catch(e){if(!disposed)onError(e instanceof Error?e.message:'Could not load the anatomy.');}})();
   };
-  let lastKeys='',lastContextKeys='',lineKey='',lastFrame=-1;
-  // inspection hook for the browser console: which sets are held and how each part is loaded
-  (window as unknown as {__atlas?:unknown}).__atlas={loaded:()=>[...loadedSets.entries()].map(([k,v])=>[k,v.parts.length,v.meshes.length]),kinds:()=>{const c=[0,0,0,0];partLoaded.forEach(v=>c[v]++);return c;},visible:()=>{let n=0;for(let i=0;i<atlas.parts.length;i++)if(data[i*4+3]>.5)n++;return n;},timings:()=>timings.slice()};
-  let lineMesh:T.Mesh|null=null;
-  // A fascial line: for each station, the loaded parts that stand for it; the point is the vertex of those parts
-  // nearest the centre of their joint bounds, so the line rides on the surface it names. Whole body only, and
-  // hidden while the anatomy is exploded, because a line between separated pieces would mean nothing.
-  const buildLine=(line:{id:string;stations:string[][]}|null|undefined)=>{
-   if(lineMesh){scene.remove(lineMesh);lineMesh.geometry.dispose();(lineMesh.material as T.Material).dispose();lineMesh=null;}
-   if(!line)return;
-   const points:T.Vector3[]=[];
-   for(const ids of line.stations){
-    const idx=ids.map(id=>partIndex.get(id)).filter((i):i is number=>i!==undefined&&partLoaded[i]===1||i!==undefined&&partLoaded[i]===2);
-    if(!idx.length)continue;
-    const box=new T.Box3();idx.forEach(i=>box.union(bounds[i]));const centre=box.getCenter(new T.Vector3());
-    let best:T.Vector3|null=null,bd=Infinity;const v=new T.Vector3();
-    for(const i of idx){const pos=pickers[i]?.geometry.getAttribute('position');if(!pos)continue;for(let k=0;k<pos.count;k+=Math.max(1,Math.floor(pos.count/400))){v.fromBufferAttribute(pos,k);const d=v.distanceToSquared(centre);if(d<bd){bd=d;best=v.clone();}}}
-    if(best)points.push(best);
-   }
-   if(points.length<2)return;
-   const curve=new T.CatmullRomCurve3(points,false,'centripetal',.5);
-   lineMesh=new T.Mesh(new T.TubeGeometry(curve,Math.max(16,points.length*12),.006,8,false),new T.MeshBasicMaterial({color:token('--v3-line','#7a3e9d')}));
-   lineMesh.renderOrder=5;scene.add(lineMesh);dirty=true;
+  let lastKeys='',lastContextKeys='',lineKey='',lastFrame=-1,lineMesh:T.Mesh|null=null;
+  // the station set of the picked line: written to selectionState.g for the shaders and kept in stationFlag for picking
+  const setStations=(line:{id:string;parts:string[]}|null|undefined)=>{stationFlag.fill(0);for(const id of line?.parts??[]){const i=partIndex.get(id);if(i!==undefined)stationFlag[i]=1;}for(let i=0;i<atlas.parts.length;i++)selectedData[i*4+1]=stationFlag[i]?255:0;selectionTexture.needsUpdate=true;};
+  // the line mesh: every loaded station part merged into one opaque mesh in the line material. Rebuilt when the line or the
+  // loaded sets change (loadSet and unloadSet clear lineKey). A context copy of a station is not lit: a region view lights
+  // the stations it holds itself, and the whole body holds every part in the overview.
+  const buildLine=()=>{
+   if(lineMesh){scene.remove(lineMesh);lineMesh.geometry.dispose();lineMesh=null;}
+   const gs:T.BufferGeometry[]=[];for(let i=0;i<atlas.parts.length;i++)if(stationFlag[i]&&pickers[i]&&partLoaded[i]===1||stationFlag[i]&&pickers[i]&&partLoaded[i]===2)gs.push(pickers[i]!.geometry);
+   if(!gs.length)return;
+   const geometry=mergeGeometries(gs,false);if(!geometry)return;
+   lineMesh=new T.Mesh(geometry,lineMat);lineMesh.frustumCulled=false;lineMesh.renderOrder=1;lineMesh.visible=lineActive;scene.add(lineMesh);dirty=true;
   };
+  // lights or unlights the line: every loaded mesh swaps between its system look and the ghost, and the line mesh follows
+  const setLineActive=(on:boolean)=>{
+   if(on===lineActive)return;lineActive=on;
+   loadedSets.forEach((rec,key)=>{const context=key.startsWith('context:');rec.meshes.forEach(m=>{m.material=on&&!context?ghostMat:m.userData.base as T.Material;});});
+   if(lineMesh)lineMesh.visible=on;dirty=true;
+  };
+  // inspection hook for the browser console: which sets are held, how each part is loaded, and what a lit line is drawing
+  (window as unknown as {__atlas?:unknown}).__atlas={loaded:()=>[...loadedSets.entries()].map(([k,v])=>[k,v.parts.length,v.meshes.length]),kinds:()=>{const c=[0,0,0,0];partLoaded.forEach(v=>c[v]++);return c;},visible:()=>{let n=0;for(let i=0;i<atlas.parts.length;i++)if(data[i*4+3]>.5)n++;return n;},timings:()=>timings.slice(),
+   line:()=>{let stations=0,lit=0,ghost=0;for(let i=0;i<atlas.parts.length;i++){if(stationFlag[i])stations++;if(data[i*4+3]>.5){if(stationFlag[i])lit++;else ghost++;}}return {active:lineActive,stations,lit,ghost,mesh:lineMesh?lineMesh.geometry.getAttribute('position').count:0};}};
   const fit=(view:string,extent=0)=>{
    const aspect=camera.aspect,mobile=el.clientWidth<768,normalDistance=mobile?Math.max(4.5,1.8*el.clientHeight/Math.max(160,el.clientHeight-350)/(2*Math.tan(T.MathUtils.degToRad(camera.fov/2)))):4;
    const reservedHeight=mobile?350:270;const availableAspect=Math.max(.35,(el.clientWidth-(mobile?40:340))/Math.max(160,el.clientHeight-reservedHeight));const atlasDistance=Math.max(packingHeight,packingWidth/availableAspect)/(2*Math.tan(T.MathUtils.degToRad(camera.fov/2)))*(el.clientHeight/Math.max(160,el.clientHeight-reservedHeight))*1.08;
@@ -200,11 +216,12 @@ export default function AnatomyScene({atlas,state,onSelect,onFrame,onProgress,on
   const up=(e:PointerEvent)=>{
    const validTap=tap.up(e.pointerId,e.clientX,e.clientY);if(!validTap||!ready)return;const rect=renderer.domElement.getBoundingClientRect();pointer.set((e.clientX-rect.left)/rect.width*2-1,-(e.clientY-rect.top)/rect.height*2+1);raycaster.setFromCamera(pointer,camera);
    let nearest=Infinity,found=-1;const hasSolid=atlas.parts.some((p,i)=>p.system!=='integumentary'&&data[i*4+3]>.5);
-   pickers.forEach((mesh,i)=>{if(!mesh||partLoaded[i]===3||data[i*4+3]<.5||(hasSolid&&atlas.parts[i].system==='integumentary'))return;worldBox.copy(bounds[i]).translate(mesh.position);if(!raycaster.ray.intersectBox(worldBox,hitPoint))return;const hits=raycaster.intersectObject(mesh,false);if(hits[0]&&hits[0].distance<nearest){nearest=hits[0].distance;found=i;}});
+   // the ghost of a lit line is not pickable: only its stations answer a tap
+   pickers.forEach((mesh,i)=>{if(!mesh||partLoaded[i]===3||data[i*4+3]<.5||(lineActive&&!stationFlag[i])||(hasSolid&&atlas.parts[i].system==='integumentary'))return;worldBox.copy(bounds[i]).translate(mesh.position);if(!raycaster.ray.intersectBox(worldBox,hitPoint))return;const hits=raycaster.intersectObject(mesh,false);if(hits[0]&&hits[0].distance<nearest){nearest=hits[0].distance;found=i;}});
    if(found<0&&amount>.45)found=findTarget(e.clientX-rect.left,e.clientY-rect.top,e.pointerType==='touch'?24:16);if(found>=0){hover.hidden=true;select.current(atlas.parts[found].id);}
   };
   // double-click frames the part under the pointer (and selects it); the same ray as a tap, context parts excluded
-  const pickAt=(e:MouseEvent)=>{const rect=renderer.domElement.getBoundingClientRect();pointer.set((e.clientX-rect.left)/rect.width*2-1,-(e.clientY-rect.top)/rect.height*2+1);raycaster.setFromCamera(pointer,camera);let nearest=Infinity,found=-1;pickers.forEach((mesh,i)=>{if(!mesh||partLoaded[i]===3||data[i*4+3]<.5)return;worldBox.copy(bounds[i]).translate(mesh.position);if(!raycaster.ray.intersectBox(worldBox,hitPoint))return;const hits=raycaster.intersectObject(mesh,false);if(hits[0]&&hits[0].distance<nearest){nearest=hits[0].distance;found=i;}});return found;};
+  const pickAt=(e:MouseEvent)=>{const rect=renderer.domElement.getBoundingClientRect();pointer.set((e.clientX-rect.left)/rect.width*2-1,-(e.clientY-rect.top)/rect.height*2+1);raycaster.setFromCamera(pointer,camera);let nearest=Infinity,found=-1;pickers.forEach((mesh,i)=>{if(!mesh||partLoaded[i]===3||data[i*4+3]<.5||(lineActive&&!stationFlag[i]))return;worldBox.copy(bounds[i]).translate(mesh.position);if(!raycaster.ray.intersectBox(worldBox,hitPoint))return;const hits=raycaster.intersectObject(mesh,false);if(hits[0]&&hits[0].distance<nearest){nearest=hits[0].distance;found=i;}});return found;};
   const dbl=(e:MouseEvent)=>{if(!ready||amount>.45)return;const found=pickAt(e);if(found>=0)frameCb.current?.(atlas.parts[found].id);};
   renderer.domElement.addEventListener('pointerdown',down);renderer.domElement.addEventListener('pointermove',move);renderer.domElement.addEventListener('pointerup',up);renderer.domElement.addEventListener('pointercancel',cancel);renderer.domElement.addEventListener('dblclick',dbl);
   const clock=new T.Clock();let lastExtent=-1;
@@ -212,13 +229,15 @@ export default function AnatomyScene({atlas,state,onSelect,onFrame,onProgress,on
    if(disposed)return;frame=requestAnimationFrame(animate);const dt=Math.min(clock.getDelta(),.05),s=latest.current;
    const keys=(s.chunkKeys??[]).join(',');if(keys!==lastKeys){lastKeys=keys;sync(s.chunkKeys??[]);}
    const ckeys=(s.contextKeys??[]).join(',');if(ckeys!==lastContextKeys){lastContextKeys=ckeys;syncContext(s.contextKeys??[]);}
-   const nextLineKey=s.line?s.line.id+':'+s.line.stations.flat().join(','):'';if(nextLineKey!==lineKey){lineKey=nextLineKey;buildLine(s.line);}
-   if(lineMesh)lineMesh.visible=amount<.05&&!s.isolate;
-   const changed=lastState?.visible!==s.visible||lastState?.selected!==s.selected||lastState?.isolate!==s.isolate||lastState?.hiddenParts!==s.hiddenParts||lastState?.depth!==s.depth;
+   // the picked line: its station set and mesh follow the line and the loaded sets; it is lit only assembled and not
+   // isolated, since stations pulled apart, or one part on its own, are not a line
+   const nextLineKey=s.line?s.line.id+':'+s.line.parts.length:'';if(nextLineKey!==lineKey){lineKey=nextLineKey;setStations(s.line);buildLine();}
+   const wasLit=lineActive;setLineActive(!!s.line&&amount<.05&&!s.isolate);
+   const changed=lastState?.visible!==s.visible||lastState?.selected!==s.selected||lastState?.isolate!==s.isolate||lastState?.hiddenParts!==s.hiddenParts||lastState?.depth!==s.depth||lastState?.line!==s.line||wasLit!==lineActive;
    const moving=Math.abs(amount-s.explode)>.0001;
    if(moving){amount=T.MathUtils.damp(amount,s.explode,8,dt);dirty=true;}
    if(changed||moving||lastExtent<0){
-    const visible=new Set(s.visible),selection=new Set(s.selected),hidden=new Set(s.hiddenParts??[]);
+    const visible=new Set(s.visible),selection=new Set(s.selected),hidden=new Set(s.hiddenParts??[]),anyOn=s.visible.length>0;
     // muscle depth: a muscle with no depth entry is shown under every setting rather than lost
     const shown=(p:typeof atlas.parts[number],i:number)=>{if(!partLoaded[i]||hidden.has(p.id))return false;if(s.depth&&p.system==='muscular'){const d=depthMap[p.id];if(d&&d!==s.depth&&!selection.has(p.id))return false;}return s.isolate?selection.has(p.id):visible.has(p.system)||selection.has(p.id);};
     const visibleParts=atlas.parts.filter((p,i)=>partLoaded[i]!==3&&shown(p,i));
@@ -229,7 +248,11 @@ export default function AnatomyScene({atlas,state,onSelect,onFrame,onProgress,on
      const c=centers[i],destination=offsets[i];let dx=0,dy=0,dz=0;
      if(amount<=.45){const t=amount/.45;const group=SYSTEMS.findIndex(sys=>sys.id===p.system);const angle=group/SYSTEMS.length*Math.PI*2;dx=Math.sin(angle)*t*.48;dy=(c.y-.85)*t*.28;dz=Math.cos(angle)*t*.48;}
      else {const t=(amount-.45)/.55,group=SYSTEMS.findIndex(sys=>sys.id===p.system),angle=group/SYSTEMS.length*Math.PI*2;dx=T.MathUtils.lerp(Math.sin(angle)*.48,destination.x-c.x,t);dy=T.MathUtils.lerp((c.y-.85)*.28,destination.y-c.y,t);dz=T.MathUtils.lerp(Math.cos(angle)*.48,-c.z,t);}
-     const selected=selection.has(p.id);const on=partLoaded[i]===3?(!s.isolate&&visible.has(p.system)&&amount<.05):shown(p,i);data.set([dx,dy,dz,on?1:0],i*4);selectedData[i*4]=selected?255:0;
+     const selected=selection.has(p.id);
+     // a lit line: its stations shown whatever the toggles say, the rest the ghost - what the toggles show, or the skeleton
+     // and muscles when nothing is on, so there is a body to place the line on - and context copies hidden
+     const on=lineActive?(!partLoaded[i]||partLoaded[i]===3||hidden.has(p.id)?false:stationFlag[i]===1||(anyOn?shown(p,i):p.system==='skeletal'||p.system==='muscular')):partLoaded[i]===3?(!s.isolate&&visible.has(p.system)&&amount<.05):shown(p,i);
+     data.set([dx,dy,dz,on?1:0],i*4);selectedData[i*4]=selected?255:0;
      markerPositions.set(data[i*4+3]>.5?[c.x+dx,c.y+dy,c.z+dz]:[10000,10000,10000],i*3);const mesh=pickers[i];if(mesh){mesh.position.set(dx,dy,dz);mesh.updateMatrix();mesh.updateMatrixWorld(true);}
     });partTexture.needsUpdate=true;selectionTexture.needsUpdate=true;markerGeometry.attributes.position.needsUpdate=true;lastState=s;lastExtent=amount;dirty=true;
    }
@@ -249,7 +272,7 @@ export default function AnatomyScene({atlas,state,onSelect,onFrame,onProgress,on
 
   };animate();
   const contextLost=(e:Event)=>{e.preventDefault();onError('The 3D session was paused by your device. Reload to continue.');};renderer.domElement.addEventListener('webglcontextlost',contextLost);
-  return()=>{disposed=true;abort.abort();cancelAnimationFrame(frame);observer.disconnect();controls.dispose();renderer.domElement.removeEventListener('dblclick',dbl);buildLine(null);[...loadedSets.keys()].forEach(unloadSet);geometries.forEach(g=>g.dispose());materials.forEach(m=>m.dispose());scene.traverse(o=>{if(o instanceof T.Mesh&&!geometries.includes(o.geometry)){o.geometry.dispose();const ms=Array.isArray(o.material)?o.material:[o.material];ms.forEach(m=>m.dispose());}});env.dispose();partTexture.dispose();selectionTexture.dispose();markerGeometry.dispose();markerMaterial.dispose();hover.remove();renderer.dispose();renderer.domElement.remove();};
+  return()=>{disposed=true;abort.abort();cancelAnimationFrame(frame);observer.disconnect();controls.dispose();renderer.domElement.removeEventListener('dblclick',dbl);if(lineMesh){scene.remove(lineMesh);lineMesh.geometry.dispose();lineMesh=null;}[...loadedSets.keys()].forEach(unloadSet);geometries.forEach(g=>g.dispose());materials.forEach(m=>m.dispose());scene.traverse(o=>{if(o instanceof T.Mesh&&!geometries.includes(o.geometry)){o.geometry.dispose();const ms=Array.isArray(o.material)?o.material:[o.material];ms.forEach(m=>m.dispose());}});env.dispose();partTexture.dispose();selectionTexture.dispose();markerGeometry.dispose();markerMaterial.dispose();hover.remove();renderer.dispose();renderer.domElement.remove();};
  },[atlas]);
  return <div className="scene" ref={host}/>;
 }

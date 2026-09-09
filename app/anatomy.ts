@@ -34,9 +34,9 @@ export type View = 'three-quarter'|'front'|'back'|'side'|'right'|'top';
 /** chunkKeys: the chunk sets the scene should hold ('main:<i>' or 'overview:<i>', see chunkKeysFor); contextKeys: the
  * region's context sets, fetched only once every chunkKey is in and drawn dimmed and unselectable ('context:<region>');
  * hiddenParts: part ids kept off whatever their system says (patient view hides low-confidence landmarks); depth:
- * 0 all muscles, 1 superficial, 2 deep; frame: a part to frame the camera on, bumped by n; line: a fascial line as
- * ordered stations, each a list of the part ids that stand for it. */
-export interface SceneState {inspectorOpen?:boolean;explode:number;visible:SystemId[];selected:string[];isolate:boolean;view:View;rotate:boolean;reset:number;chunkKeys?:string[];contextKeys?:string[];hiddenParts?:string[];depth?:MuscleDepth;frame?:{id:string;n:number}|null;line?:{id:string;stations:string[][]}|null;focus?:[number[],number[]]|null}
+ * 0 all muscles, 1 superficial, 2 deep; frame: a part to frame the camera on, bumped by n; line: a fascial line as the
+ * set of part ids its stations resolve to - the scene lights those and ghosts every other loaded part. */
+export interface SceneState {inspectorOpen?:boolean;explode:number;visible:SystemId[];selected:string[];isolate:boolean;view:View;rotate:boolean;reset:number;chunkKeys?:string[];contextKeys?:string[];hiddenParts?:string[];depth?:MuscleDepth;frame?:{id:string;n:number}|null;line?:{id:string;parts:string[]}|null;focus?:[number[],number[]]|null}
 /** The box a region view frames: the region's own parts, BP3D's and ours. */
 export function regionBounds(atlas:Atlas,region:string):[number[],number[]]|null{
  let lo:number[]|null=null,hi:number[]|null=null;
@@ -69,7 +69,10 @@ export const TRAILING_SYSTEMS:SystemId[]=['insertions','landmarks'];
 export const MORE_SYSTEMS:SystemId[]=['arterial','venous','cardiac','sensory','respiratory','digestive','urinary','lymphatic','endocrine','reproductive','integumentary','connective'];
 export const MVMT_REGIONS:{id:string;name:string}[]=[{id:'head-jaw',name:'Head & jaw'},{id:'cervical',name:'Cervical'},{id:'shoulder',name:'Shoulder'},{id:'elbow-wrist',name:'Elbow & wrist'},{id:'thoracic',name:'Thoracic'},{id:'lumbar',name:'Lumbar'},{id:'hip',name:'Hip'},{id:'knee',name:'Knee'},{id:'ankle-foot',name:'Ankle & foot'}];
 export type MuscleDepth=0|1|2;
-export interface FascialLine {id:string;name:string;stations:{structure:string;name:string;resolve:{kind:'mvmt'|'bp3d';id:string;name?:string}[]}[]}
+/** A line from fascial-lines.json: stations in anatomical order, each resolved to concept ids on this body. `status` is what
+ * those concepts hold - the structure itself (`full`), only its insertion patches (`attachments`), nothing (`none`) - and
+ * `sides` counts the resolved meshes by side, so a bilateral station can be checked to light both. */
+export interface FascialLine {id:string;name:string;stations:{structure:string;name:string;resolve:{kind:'mvmt'|'bp3d';id:string;name?:string}[];status:'full'|'attachments'|'none';sides:{l:number;r:number;unsided:number}}[]}
 /** The context chunk keys a region view draws dimmed once its own chunks are in: the neighbours' parts that reach into it. */
 export function contextKeysFor(atlas:Atlas,region:string|null):string[]{
  const r=region&&atlas.chunkSets?.regions[region];
