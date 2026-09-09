@@ -63,24 +63,52 @@ export default function AnatomyScene({atlas,state,onSelect,onProgress,onError}:P
    };materials.push(m);return m;
   };
   const mats=new Map(SYSTEMS.map(s=>[s.id,materialFor(s.id)]));
-  let loaded=0;
-  const loadChunk=async(ci:number)=>{
-   // Only the gzipped chunks ship (GitHub Pages serves them as raw bytes), so decoding is not optional.
-   const chunk=atlas.chunks[ci];if(!chunk.gzip)throw new Error('This anatomy catalogue has no compressed geometry.');if(typeof DecompressionStream==='undefined')throw new Error('This browser cannot decompress the anatomy files. Please use a current browser.');const response=await fetch(assetUrl(chunk.gzip),{signal:abort.signal});const buffer=await decodeModelResponse(response,chunk.bytes,true);if(disposed)return;
-   const groups=new Map<string,T.BufferGeometry[]>();
-   atlas.parts.forEach((p,i)=>{
-    if(p.chunk!==ci)return;
-    const g=new T.BufferGeometry();g.setAttribute('position',new T.BufferAttribute(new Float32Array(buffer,p.positions,p.vertexCount*3),3));
-    // GPU normalized signed-short normals keep the complete atlas compact in memory.
-    g.setAttribute('normal',new T.BufferAttribute(new Int16Array(buffer,p.normals,p.vertexCount*3),3,true));g.setIndex(new T.BufferAttribute(new Uint32Array(buffer,p.indices,p.indexCount),1));
-    g.boundingBox=bounds[i].clone();g.computeBoundingSphere();const pick=new T.Mesh(g);pick.matrixAutoUpdate=false;pickers[i]=pick;geometries.push(g);
-    g.setAttribute('partIndex',new T.BufferAttribute(new Float32Array(p.vertexCount).fill(i),1));
-    const list=groups.get(p.system)??[];list.push(g);groups.set(p.system,list);
-   });
-   groups.forEach((gs,system)=>{const geometry=mergeGeometries(gs,false);if(!geometry)throw new Error('Could not assemble anatomy geometry.');geometries.push(geometry);const mesh=new T.Mesh(geometry,mats.get(system as never));mesh.frustumCulled=false;scene.add(mesh);});
-   lastState=null;loaded++;onProgress(Math.round(loaded/atlas.chunks.length*100));dirty=true;
+  // Chunks are fetched on demand. A chunk key is 'main:<i>' (atlas.chunks) or 'overview:<i>'
+  // (atlas.overview.chunks, the decimated whole body, same part ids at other offsets). The page
+  // says which keys it wants (a region's own chunks, the overview, a system's chunks); sets no
+  // longer wanted are disposed, so a part is drawn from at most one layout at a time and a
+  // region view never holds the whole body in memory.
+  const partLoaded=new Uint8Array(atlas.parts.length);           // 0 absent, 1 full detail, 2 overview
+  const loadedSets=new Map<string,{meshes:T.Mesh[];geometries:T.BufferGeometry[];parts:number[]}>();
+  const inflight=new Map<string,Promise<void>>();
+  let wantedKeys:string[]=[],syncing=0;
+  const layoutsIn=(key:string):[number,{chunk:number;positions:number;normals:number;indices:number;vertexCount:number;indexCount:number}][]=>{
+   const [kind,ci]=key.split(':');const index=+ci;
+   if(kind==='overview'){const ov=atlas.overview;if(!ov)return[];return atlas.parts.map((p,i)=>[i,ov.parts[p.id]] as const).filter(([,l])=>l&&l.chunk===index).map(([i,l])=>[i,l]);}
+   return atlas.parts.map((p,i)=>[i,p] as const).filter(([,p])=>p.chunk===index).map(([i,p])=>[i,p]);
   };
-  (async()=>{try{let cursor=0;await Promise.all(Array.from({length:3},async()=>{while(cursor<atlas.chunks.length){const i=cursor++;await loadChunk(i);}}));if(!disposed){ready=true;dirty=true;}}catch(e){if(!disposed)onError(e instanceof Error?e.message:'Could not load the anatomy.');}})();
+  const loadSet=async(key:string)=>{
+   const [kind,ci]=key.split(':');const chunk=kind==='overview'?atlas.overview!.chunks[+ci]:atlas.chunks[+ci];
+   // Only the gzipped chunks ship (GitHub Pages serves them as raw bytes), so decoding is not optional.
+   if(!chunk.gzip)throw new Error('This anatomy catalogue has no compressed geometry.');if(typeof DecompressionStream==='undefined')throw new Error('This browser cannot decompress the anatomy files. Please use a current browser.');
+   const response=await fetch(assetUrl(chunk.gzip),{signal:abort.signal});const buffer=await decodeModelResponse(response,chunk.bytes,true);if(disposed||!wantedKeys.includes(key))return;
+   const groups=new Map<string,T.BufferGeometry[]>(),own:T.BufferGeometry[]=[],parts:number[]=[];
+   for(const [i,l] of layoutsIn(key)){
+    if(partLoaded[i])continue;const p=atlas.parts[i];
+    const g=new T.BufferGeometry();g.setAttribute('position',new T.BufferAttribute(new Float32Array(buffer,l.positions,l.vertexCount*3),3));
+    // GPU normalized signed-short normals keep the complete atlas compact in memory.
+    g.setAttribute('normal',new T.BufferAttribute(new Int16Array(buffer,l.normals,l.vertexCount*3),3,true));g.setIndex(new T.BufferAttribute(new Uint32Array(buffer,l.indices,l.indexCount),1));
+    g.boundingBox=bounds[i].clone();g.computeBoundingSphere();const pick=new T.Mesh(g);pick.matrixAutoUpdate=false;pickers[i]=pick;own.push(g);
+    g.setAttribute('partIndex',new T.BufferAttribute(new Float32Array(l.vertexCount).fill(i),1));
+    const list=groups.get(p.system)??[];list.push(g);groups.set(p.system,list);partLoaded[i]=kind==='overview'?2:1;parts.push(i);
+   }
+   const meshes:T.Mesh[]=[];
+   groups.forEach((gs,system)=>{const geometry=mergeGeometries(gs,false);if(!geometry)throw new Error('Could not assemble anatomy geometry.');own.push(geometry);const mesh=new T.Mesh(geometry,mats.get(system as never));mesh.frustumCulled=false;scene.add(mesh);meshes.push(mesh);});
+   loadedSets.set(key,{meshes,geometries:own,parts});lastState=null;layoutKey='';dirty=true;
+  };
+  const unloadSet=(key:string)=>{
+   const rec=loadedSets.get(key);if(!rec)return;loadedSets.delete(key);
+   rec.meshes.forEach(m=>scene.remove(m));rec.geometries.forEach(g=>g.dispose());rec.parts.forEach(i=>{pickers[i]=undefined;partLoaded[i]=0;});lastState=null;layoutKey='';dirty=true;
+  };
+  const sync=(keys:string[])=>{
+   wantedKeys=keys;const generation=++syncing;
+   for(const key of [...loadedSets.keys()])if(!keys.includes(key))unloadSet(key);
+   const missing=keys.filter(k=>!loadedSets.has(k)&&!inflight.has(k));
+   const report=()=>{const done=keys.filter(k=>loadedSets.has(k)).length;onProgress(keys.length?Math.round(done/keys.length*100):100);};
+   report();
+   (async()=>{try{let cursor=0;await Promise.all(Array.from({length:3},async()=>{while(cursor<missing.length){const key=missing[cursor++];const job=loadSet(key).finally(()=>inflight.delete(key));inflight.set(key,job);await job;if(generation===syncing)report();}}));if(!disposed){ready=true;dirty=true;if(generation===syncing)report();}}catch(e){if(!disposed)onError(e instanceof Error?e.message:'Could not load the anatomy.');}})();
+  };
+  let lastKeys='';
   const fit=(view:string,extent=0)=>{
    const aspect=camera.aspect,mobile=el.clientWidth<768,normalDistance=mobile?Math.max(4.5,1.8*el.clientHeight/Math.max(160,el.clientHeight-350)/(2*Math.tan(T.MathUtils.degToRad(camera.fov/2)))):4;
    const reservedHeight=mobile?350:270;const availableAspect=Math.max(.35,(el.clientWidth-(mobile?40:340))/Math.max(160,el.clientHeight-reservedHeight));const atlasDistance=Math.max(packingHeight,packingWidth/availableAspect)/(2*Math.tan(T.MathUtils.degToRad(camera.fov/2)))*(el.clientHeight/Math.max(160,el.clientHeight-reservedHeight))*1.08;
@@ -103,12 +131,13 @@ export default function AnatomyScene({atlas,state,onSelect,onProgress,onError}:P
   const clock=new T.Clock();let lastExtent=-1;
   const animate=()=>{
    if(disposed)return;frame=requestAnimationFrame(animate);const dt=Math.min(clock.getDelta(),.05),s=latest.current;
+   const keys=(s.chunkKeys??[]).join(',');if(keys!==lastKeys){lastKeys=keys;sync(s.chunkKeys??[]);}
    const changed=lastState?.visible!==s.visible||lastState?.selected!==s.selected||lastState?.isolate!==s.isolate;
    const moving=Math.abs(amount-s.explode)>.0001;
    if(moving){amount=T.MathUtils.damp(amount,s.explode,8,dt);dirty=true;}
    if(changed||moving||lastExtent<0){
     const visible=new Set(s.visible),selection=new Set(s.selected);
-    const visibleParts=atlas.parts.filter(p=>s.isolate?selection.has(p.id):visible.has(p.system)||selection.has(p.id));
+    const visibleParts=atlas.parts.filter((p,i)=>partLoaded[i]&&(s.isolate?selection.has(p.id):visible.has(p.system)||selection.has(p.id)));
     const nextLayoutKey=visibleParts.map(p=>p.id).join(',')+':'+camera.aspect.toFixed(3);
     if(nextLayoutKey!==layoutKey){const layout=createExplosionLayout(visibleParts,camera.aspect);packingWidth=layout.width;packingHeight=layout.height;atlas.parts.forEach((p,i)=>{const cell=layout.cells.get(p.id);offsets[i]=cell?new T.Vector3(cell.x,cell.y+.85,0):centers[i].clone();});layoutKey=nextLayoutKey;if(amount>.05&&!s.isolate)fit(s.view,Math.max(0,(amount-.3)/.7));}
 
@@ -116,7 +145,7 @@ export default function AnatomyScene({atlas,state,onSelect,onProgress,onError}:P
      const c=centers[i],destination=offsets[i];let dx=0,dy=0,dz=0;
      if(amount<=.45){const t=amount/.45;const group=SYSTEMS.findIndex(sys=>sys.id===p.system);const angle=group/SYSTEMS.length*Math.PI*2;dx=Math.sin(angle)*t*.48;dy=(c.y-.85)*t*.28;dz=Math.cos(angle)*t*.48;}
      else {const t=(amount-.45)/.55,group=SYSTEMS.findIndex(sys=>sys.id===p.system),angle=group/SYSTEMS.length*Math.PI*2;dx=T.MathUtils.lerp(Math.sin(angle)*.48,destination.x-c.x,t);dy=T.MathUtils.lerp((c.y-.85)*.28,destination.y-c.y,t);dz=T.MathUtils.lerp(Math.cos(angle)*.48,-c.z,t);}
-     const selected=selection.has(p.id);data.set([dx,dy,dz,(s.isolate?selected:visible.has(p.system)||selected)?1:0],i*4);selectedData[i*4]=selected?255:0;
+     const selected=selection.has(p.id);data.set([dx,dy,dz,partLoaded[i]&&(s.isolate?selected:visible.has(p.system)||selected)?1:0],i*4);selectedData[i*4]=selected?255:0;
      markerPositions.set(data[i*4+3]>.5?[c.x+dx,c.y+dy,c.z+dz]:[10000,10000,10000],i*3);const mesh=pickers[i];if(mesh){mesh.position.set(dx,dy,dz);mesh.updateMatrix();mesh.updateMatrixWorld(true);}
     });partTexture.needsUpdate=true;selectionTexture.needsUpdate=true;markerGeometry.attributes.position.needsUpdate=true;lastState=s;lastExtent=amount;dirty=true;
    }
@@ -134,7 +163,7 @@ export default function AnatomyScene({atlas,state,onSelect,onProgress,onError}:P
 
   };animate();
   const contextLost=(e:Event)=>{e.preventDefault();onError('The 3D session was paused by your device. Reload to continue.');};renderer.domElement.addEventListener('webglcontextlost',contextLost);
-  return()=>{disposed=true;abort.abort();cancelAnimationFrame(frame);observer.disconnect();controls.dispose();geometries.forEach(g=>g.dispose());materials.forEach(m=>m.dispose());scene.traverse(o=>{if(o instanceof T.Mesh&&!geometries.includes(o.geometry)){o.geometry.dispose();const ms=Array.isArray(o.material)?o.material:[o.material];ms.forEach(m=>m.dispose());}});env.dispose();partTexture.dispose();selectionTexture.dispose();markerGeometry.dispose();markerMaterial.dispose();hover.remove();renderer.dispose();renderer.domElement.remove();};
+  return()=>{disposed=true;abort.abort();cancelAnimationFrame(frame);observer.disconnect();controls.dispose();[...loadedSets.keys()].forEach(unloadSet);geometries.forEach(g=>g.dispose());materials.forEach(m=>m.dispose());scene.traverse(o=>{if(o instanceof T.Mesh&&!geometries.includes(o.geometry)){o.geometry.dispose();const ms=Array.isArray(o.material)?o.material:[o.material];ms.forEach(m=>m.dispose());}});env.dispose();partTexture.dispose();selectionTexture.dispose();markerGeometry.dispose();markerMaterial.dispose();hover.remove();renderer.dispose();renderer.domElement.remove();};
  },[atlas]);
  return <div className="scene" ref={host}/>;
 }

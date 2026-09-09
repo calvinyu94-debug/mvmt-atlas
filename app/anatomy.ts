@@ -25,9 +25,29 @@ export const SYSTEMS: {id:SystemId;name:string;color:string;description:string}[
 ];
 export interface Part {id:string;name:string;conceptId:string;system:SystemId;chunk:number;positions:number;normals:number;indices:number;vertexCount:number;indexCount:number;bounds:[number[],number[]]}
 export interface Concept {id:string;name:string;elements:string[]}
-export interface Atlas {version:string;sex?:'male';source?:string;scope?:string;parts:Part[];concepts:Concept[];chunks:{url:string;bytes:number;gzip?:string;gzipBytes?:number}[];triangles:number}
+export interface Chunk {url:string;bytes:number;gzip?:string;gzipBytes?:number;region?:string;bp3dRegion?:string;systems?:string[]|string;triangles?:number;parts?:number}
+export interface Layout {chunk:number;positions:number;normals:number;indices:number;vertexCount:number;indexCount:number}
+export interface RegionInfo {id:string;name:string;chunk:number;parts:number;triangles:number;bytes:number;bounds:[number[],number[]]|null;spanningParts:string[];bp3dChunks?:number[];bp3dParts?:number;bp3dSpanningParts?:string[];anchors?:number[][]}
+export interface ChunkSets {regions:Record<string,{bp3d:number[];mvmt:number[];neighbours:number[]}>;vessels:number[];organs:number[]}
+export interface Atlas {version:string;sex?:'male';source?:string;scope?:string;parts:Part[];concepts:Concept[];chunks:Chunk[];triangles:number;regions?:RegionInfo[];chunkSets?:ChunkSets;overview?:{chunks:Chunk[];parts:Record<string,Layout>;triangles:number;bytes:number}}
 export type View = 'three-quarter'|'front'|'back'|'side'|'right'|'top';
-export interface SceneState {inspectorOpen?:boolean;explode:number;visible:SystemId[];selected:string[];isolate:boolean;view:View;rotate:boolean;reset:number}
+/** chunkKeys: which chunk sets the scene should hold, 'main:<i>' or 'overview:<i>'; see chunkKeysFor. */
+export interface SceneState {inspectorOpen?:boolean;explode:number;visible:SystemId[];selected:string[];isolate:boolean;view:View;rotate:boolean;reset:number;chunkKeys?:string[]}
+export const VESSEL_SYSTEMS:SystemId[]=['arterial','venous'];
+export const ORGAN_SYSTEMS:SystemId[]=['cardiac','sensory','respiratory','digestive','urinary','lymphatic','endocrine','reproductive','integumentary'];
+/** The chunk sets a view needs. A region takes its own BP3D and MVMT chunks (arteries, veins and
+ * organs only when one of their systems is on); the whole body takes the decimated overview. An
+ * atlas without chunk sets takes every chunk, as before. */
+export function chunkKeysFor(atlas:Atlas,region:string|null,visible:SystemId[]):string[]{
+ const sets=atlas.chunkSets;
+ if(!sets||!atlas.overview)return atlas.chunks.map((_,i)=>`main:${i}`);
+ const r=region&&sets.regions[region];
+ if(!r)return atlas.overview.chunks.map((_,i)=>`overview:${i}`);
+ const keys=[...r.bp3d,...r.mvmt];
+ if(visible.some(s=>VESSEL_SYSTEMS.includes(s)))keys.push(...sets.vessels);
+ if(visible.some(s=>ORGAN_SYSTEMS.includes(s)))keys.push(...sets.organs);
+ return [...new Set(keys)].map(i=>`main:${i}`);
+}
 export const DEFAULT_VISIBLE:SystemId[] = ['cardiac','sensory','skeletal','muscular','arterial','venous','nervous','respiratory','digestive','urinary','lymphatic','endocrine','reproductive','connective'];
 export const EXPLANATIONS:Record<string,string> = {
  'heart':'A muscular pump in the chest. Its right side sends blood to the lungs; its left side sends blood through the systemic circulation.',

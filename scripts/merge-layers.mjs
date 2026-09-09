@@ -2,12 +2,13 @@
 // mvmt-<region>.bin) into atlas.json beside BodyParts3D's own parts, which are left untouched.
 // Idempotent: a previous merge is stripped first. Also writes the FMA match table and the fascial
 // lines with each station resolved to BP3D and MVMT concepts.
-//   node scripts/merge-layers.mjs <anatomy.json from mvmt-program> <structure-meshes.json>
+//   node scripts/merge-layers.mjs <anatomy.json from mvmt-program> <structure-meshes.json> <bp3d-fit.json>
 import fs from 'node:fs';
 const dir=new URL('../public/models/',import.meta.url);
 const read=name=>JSON.parse(fs.readFileSync(new URL(name,dir),'utf8'));
-const [anatomyPath,joinPath]=process.argv.slice(2);
-if(!anatomyPath||!joinPath)throw new Error('usage: merge-layers.mjs <anatomy.json> <structure-meshes.json>');
+const [anatomyPath,joinPath,fitPath]=process.argv.slice(2);
+if(!anatomyPath||!joinPath||!fitPath)throw new Error('usage: merge-layers.mjs <anatomy.json> <structure-meshes.json> <bp3d-fit.json>');
+const fit=JSON.parse(fs.readFileSync(fitPath,'utf8'));
 const atlas=read('atlas.json'),layers=read('mvmt-layers.json');
 const anatomy=JSON.parse(fs.readFileSync(anatomyPath,'utf8')),join=JSON.parse(fs.readFileSync(joinPath,'utf8'));
 
@@ -28,8 +29,11 @@ for(const c of layers.concepts){
  if(existing){existing.bp3dElements=existing.elements.slice();existing.elements=[...existing.elements,...c.elements];extended++;}
  else{atlas.concepts.push(c);byId.set(c.id,c);added++;}
 }
-atlas.regions=layers.regions.map(r=>({...r,chunk:r.chunk+offset}));
-atlas.layers={generatedFrom:layers.generatedFrom,fit:layers.fit,systems:layers.systems,report:layers.report};
+// each region carries its landmark anchors in this (Y-up, +Z anterior) frame, so rechunk-bp3d.mjs can
+// assign BP3D parts by the same blend weights the layers were fitted with
+const toBp3d=p=>[p[0],p[2],-p[1]];
+atlas.regions=layers.regions.map(r=>({...r,chunk:r.chunk+offset,anchors:(fit.regions[r.id]?.anchors??[]).map(toBp3d)}));
+atlas.layers={generatedFrom:layers.generatedFrom,fit:layers.fit,systems:layers.systems,blend:fit.blend,report:layers.report};
 atlas.triangles=atlas.parts.reduce((n,p)=>n+p.indexCount/3,0);
 fs.writeFileSync(new URL('atlas.json',dir),JSON.stringify(atlas));
 
