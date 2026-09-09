@@ -49,9 +49,14 @@ for(const s of anatomy){
 }
 const muscles=atlas.parts.filter(p=>p.system==='muscular');
 const classified=muscles.filter(p=>depth[p.id]).length;
+// a structure BP3D has no concept for may still have its belly: the muscles mvmt-anatomy carries across from
+// Z-Anatomy arrive as our own muscular parts under the structure's concept, and take its depth that way
+const partSystem=new Map(atlas.parts.map(p=>[p.id,p.system]));
+const carriedStructures=unmatched.filter(n=>{const s=anatomy.find(x=>x.name===n);const own=s&&byId.get(s.id);return !!own&&own.elements.some(e=>partSystem.get(e)==='muscular');});
 atlas.layers=atlas.layers||{};
-atlas.layers.muscleDepth={note:'1 superficial, 2 deep, from MVMT ANATOMY layer through name-matched BP3D concepts; a muscle without an entry is shown under every depth setting',parts:depth,
- summary:{muscularParts:muscles.length,classified,superficial:muscles.filter(p=>depth[p.id]===1).length,deep:muscles.filter(p=>depth[p.id]===2).length,structuresMatched:matchedStructures,structuresUnmatched:unmatched.length},unmatchedStructures:unmatched};
+atlas.layers.muscleDepth={note:'1 superficial, 2 deep, from MVMT ANATOMY layer through name-matched BP3D concepts and our own carried muscles; a muscle without an entry is shown under every depth setting',parts:depth,
+ summary:{muscularParts:muscles.length,bp3dMuscularParts:muscles.filter(p=>!p.source).length,carriedMuscularParts:muscles.filter(p=>p.source).length,classified,superficial:muscles.filter(p=>depth[p.id]===1).length,deep:muscles.filter(p=>depth[p.id]===2).length,structuresMatched:matchedStructures,structuresUnmatched:unmatched.length,structuresCarried:carriedStructures.length},
+ unmatchedStructures:unmatched,carriedStructures};
 fs.writeFileSync(new URL('atlas.json',dir),JSON.stringify(atlas));
 
 // ---- fascial lines: named-structure storage, each station resolved to concept ids on this atlas.

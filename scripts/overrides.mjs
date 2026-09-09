@@ -70,10 +70,19 @@ export const CONCEPT_MATCHES={
  // fascial-line stations that are not muscles
  'Achilles Tendon':['calcaneal tendon'],
  'Iliotibial Band':['iliotibial tract'],
- // not modelled in BodyParts3D as selected by Human Atlas: nothing to match until the full release is audited (Phase 4A)
+ // groups whose members BP3D has under other names (the section 3 search of BP3D's part names: "rotator" for the rotatores)
+ 'Rotatores':['rotator muscle'],
+ 'Transversospinalis Group':['semispinalis','rotator muscle'],          // plus the multifidus carried from Z-Anatomy
+ 'Hamstring Origin':['semitendinosus','semimembranosus','long head of biceps femoris'],
+ 'Obliques':['external oblique'],                                        // plus the internal oblique carried from Z-Anatomy
+ // not modelled in BodyParts3D as selected by Human Atlas (the section 3 search found no part of the name). The muscle
+ // itself is carried across from Z-Anatomy by mvmt-anatomy's CARRIED_MUSCLES and reaches its structure as our own
+ // exported mesh, so depth and the fascial lines get it that way; nothing here to match.
  'Masseter':[],'Masseter, Superficial Part':[],'Masseter, Deep Part':[],'Temporalis':[],'Medial Pterygoid':[],'Lateral Pterygoid':[],
  'Lateral Pterygoid, Superior Head':[],'Lateral Pterygoid, Inferior Head':[],'Occipitofrontalis':[],'Latissimus Dorsi':[],
- 'Common Extensor Origin':[],'Common Flexor Origin':[],'Thoracic Multifidus':[],'Lumbar Multifidus':[],'Cervical Multifidus':[],'Multifidus':[],
- 'Quadratus Lumborum':[],'Transversus Abdominis':[],'Obliques':[],'Internal Oblique':[],'Rectus Abdominis':[],'Psoas Minor':[],
- 'Spinalis Capitis':[],'Transversospinalis Group':[],'Rotatores':[],'Hamstring Origin':[],'Extensor Digitorum Brevis':[],'Articularis Genus':[],
+ 'Thoracic Multifidus':[],'Lumbar Multifidus':[],'Cervical Multifidus':[],'Multifidus':[],
+ 'Quadratus Lumborum':[],'Transversus Abdominis':[],'Internal Oblique':[],'Rectus Abdominis':[],
+ 'Spinalis Capitis':[],'Extensor Digitorum Brevis':[],
+ // not modelled in BodyParts3D and nothing to carry: Z-Anatomy has no belly for these either (attachment sites, or absent)
+ 'Common Extensor Origin':[],'Common Flexor Origin':[],'Psoas Minor':[],'Articularis Genus':[],
 };
