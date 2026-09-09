@@ -75,6 +75,29 @@ decompresses them itself. The pipeline after a new export from mvmt-anatomy:
   fascial lines carry their own caveat the same way. Neither is to be softened
   for tidiness: that is the failure they exist against.
 
+## Fidelity of the authored layers (Phase 4)
+
+- **BodyParts3D 4.0 has nothing to add.** The IS-A archive Human Atlas used is
+  the whole release (2,234 elements); the PART-OF archive is a 1,258-element
+  subset of it. Its nerves are cranial and orbital only, its "spinal cord" is
+  a 160-triangle central canal, its ligaments are laryngeal, ocular and
+  plantar, it has no bursae. Every MVMT layer stays authored; there is no
+  imaging-derived replacement to fetch. Do not spend time on the archives
+  again without a new release.
+- The authored looks live in `LOOKS` in `app/scene.tsx` and their colours in
+  the `--v3-*-surface` tokens: nerves matte cream with a fibrous grain in the
+  normal, ligaments ivory with a sheen along the part's long axis (the fibre
+  direction, per part, from a texture), fascia translucent at 0.35 drawn
+  before the insertion patches, the dura a translucent sheath. The nerves are
+  tubes rebuilt from their centrelines in mvmt-anatomy's export, tapered and
+  continuous with their plexus; the cord follows published cross-sections
+  with both enlargements, roots at every level, thirty cauda strands.
+- `fitConfidence: low` on a carried-over part means more than 20% of its
+  sampled vertices lie further than 6 mm from any BP3D bone or muscle
+  surface; patient view hides every such part. For the cord and roots this
+  measures clearance from the canal wall, not the fit, and flags them
+  wholesale - a decision for CYU, recorded in the Phase 4 PR.
+
 ## The embed API
 
 `app/embed.ts` is the contract with mvmt-program. When testing it in the

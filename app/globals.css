@@ -23,6 +23,8 @@
     holds no colour literal of its own, so a theme swap reaches the model. */
  --stage:#F5EFE8;--stage-ground:#EAE1D6;--stage-platform:#F8F3ED;--stage-ring:#A08B7A;
  --stage-select:#2E7181;
+ /* the authored layers, as Phase 4B draws them: matte cream nerves, ivory ligaments, translucent off-white fascia, a translucent dura */
+ --v3-nerve-surface:#EDE3C9;--v3-ligament-surface:#F2ECDD;--v3-fascia-surface:#F4EFE6;--v3-dura-surface:#E6E0D8;
  /* shadcn tokens, mapped onto the theme. */
  font-family:var(--font-body);color:var(--ink);background:var(--bg);
  --background:var(--bg);--foreground:var(--ink);--card:var(--panel);--card-foreground:var(--ink);--popover:var(--panel);--popover-foreground:var(--ink);--primary:var(--ink);--primary-foreground:#FFFFFF;--secondary:var(--chrome-btn);--secondary-foreground:var(--chrome-fg);--muted:var(--panel-2);--muted-foreground:var(--ink-3);--accent-foreground:var(--ink);--destructive:var(--danger);--border:var(--line);--input:var(--line);--ring:var(--accent);--radius:.75rem;color-scheme:light}

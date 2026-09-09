@@ -35,6 +35,9 @@ export default function AnatomyScene({atlas,state,onSelect,onFrame,onProgress,on
   const innerRing=new T.Mesh(new T.RingGeometry(.55,.551,128),new T.MeshBasicMaterial({color:token('--stage-ring','#a08b7a'),transparent:true,opacity:.16,side:T.DoubleSide}));innerRing.rotation.x=-Math.PI/2;innerRing.position.y=.001;scene.add(innerRing);
   const width=T.MathUtils.ceilPowerOfTwo(atlas.parts.length),data=new Float32Array(width*4),partTexture=new T.DataTexture(data,width,1,T.RGBAFormat,T.FloatType);partTexture.needsUpdate=true;
   const selectedData=new Uint8Array(width*4),selectionTexture=new T.DataTexture(selectedData,width,1);selectionTexture.needsUpdate=true;
+  // per-part fibre direction for the ligament sheen: the long axis of the part's bounds, in the atlas frame
+  const fibreData=new Float32Array(width*4);atlas.parts.forEach((p,i)=>{const s=[p.bounds[1][0]-p.bounds[0][0],p.bounds[1][1]-p.bounds[0][1],p.bounds[1][2]-p.bounds[0][2]];const k=s.indexOf(Math.max(...s));fibreData[i*4+k]=1;fibreData[i*4+3]=1;});
+  const fibreTexture=new T.DataTexture(fibreData,width,1,T.RGBAFormat,T.FloatType);fibreTexture.needsUpdate=true;
   const materials:T.Material[]=[],geometries:T.BufferGeometry[]=[],pickers:(T.Mesh|undefined)[]=[],centers=atlas.parts.map(p=>new T.Vector3().fromArray(p.bounds[0]).add(new T.Vector3().fromArray(p.bounds[1])).multiplyScalar(.5));
   const offsets:T.Vector3[]=[],bounds=atlas.parts.map(p=>new T.Box3(new T.Vector3().fromArray(p.bounds[0]),new T.Vector3().fromArray(p.bounds[1])));
   let packingWidth=1,packingHeight=1;
@@ -52,10 +55,35 @@ export default function AnatomyScene({atlas,state,onSelect,onFrame,onProgress,on
   };
   const selectColor=tokenVec('--stage-select','#2e7181');
   const contextColor=token('--v3-context','#dad3cb');
+  // The authored layers get their own looks (Phase 4B). Nerves and the cord: matte pale cream, no gloss, a faint fibrous grain
+  // along their length. Ligaments: ivory, a sheen that runs along the fibre direction (the part's long axis) rather than a
+  // round highlight. Fascia: translucent off-white sheets at 0.35, drawn before the insertion patches so those sit on top.
+  // The dura is a translucent sheath. Colours are tokens in globals.css.
+  const LOOKS:Record<string,{color:string;roughness:number;metalness?:number;opacity?:number;order?:number;grain?:boolean;sheen?:boolean}>={
+   'peripheral-nerves':{color:token('--v3-nerve-surface','#ede3c9'),roughness:.96,grain:true},
+   'central-nerves':{color:token('--v3-nerve-surface','#ede3c9'),roughness:.96,grain:true},
+   'ligaments':{color:token('--v3-ligament-surface','#f2ecdd'),roughness:.62,sheen:true},
+   'fascia':{color:token('--v3-fascia-surface','#f4efe6'),roughness:.7,opacity:.35,order:-2},
+   'dura':{color:token('--v3-dura-surface','#e6e0d8'),roughness:.6,opacity:.28,order:-2},
+   'insertions':{color:SYSTEMS.find(s=>s.id==='insertions')?.color??'#8e3b2f',roughness:.5,order:2},
+  };
   const materialFor=(system:string,context=false)=>{
    // context: a neighbouring region's part drawn dim and unselectable, depthWrite off so it never occludes the region itself
-   const m=new T.MeshStandardMaterial({color:context?contextColor:SYSTEMS.find(s=>s.id===system)?.color??'#aebbb8',metalness:.08,roughness:context?.9:.53,side:T.DoubleSide,transparent:context||system==='integumentary',opacity:context?.22:system==='integumentary'?.1:1,depthWrite:!context&&system!=='integumentary'});
+   const look=context?null:LOOKS[system];
+   const translucent=!!look?.opacity;
+   const m=new T.MeshStandardMaterial({color:context?contextColor:look?.color??SYSTEMS.find(s=>s.id===system)?.color??'#aebbb8',metalness:look?.metalness??.08,roughness:context?.9:look?.roughness??.53,side:T.DoubleSide,transparent:context||translucent||system==='integumentary',opacity:context?.22:look?.opacity??(system==='integumentary'?.1:1),depthWrite:!context&&!translucent&&system!=='integumentary'});
    m.onBeforeCompile=shader=>{
+    if(look?.grain){
+     // a fine fibrous grain: the normal is tilted by a longitudinal hash of the position, so the tube reads as bundled fibres
+     shader.vertexShader='varying vec3 vFibrePos;\n'+shader.vertexShader.replace('#include <begin_vertex>','#include <begin_vertex>\nvFibrePos = transformed;');
+     shader.fragmentShader='varying vec3 vFibrePos;\nfloat fibreHash(vec3 p){return fract(sin(dot(p, vec3(127.1, 311.7, 74.7))) * 43758.5453);}\n'+shader.fragmentShader.replace('#include <normal_fragment_maps>','#include <normal_fragment_maps>\n{ vec3 q = vFibrePos * 900.0; float g = fibreHash(floor(vec3(q.x, q.y * 0.08, q.z))) - 0.5; normal = normalize(normal + 0.12 * g * vec3(1.0, 0.0, 1.0)); }');
+    }
+    if(look?.sheen){
+     // anisotropic sheen along the fibre direction: the part's long axis, read per part from the fibre texture
+     shader.uniforms.fibreState={value:fibreTexture};
+     shader.vertexShader='varying vec3 vFibreDir;\nuniform sampler2D fibreState;\n'+shader.vertexShader.replace('#include <begin_vertex>','#include <begin_vertex>\nvFibreDir = normalize((modelMatrix * vec4(texture2D(fibreState, vec2((partIndex + 0.5) / stateWidth, 0.5)).xyz, 0.0)).xyz);');
+     shader.fragmentShader='varying vec3 vFibreDir;\n'+shader.fragmentShader.replace('#include <lights_fragment_end>','#include <lights_fragment_end>\n{ vec3 t = normalize(vFibreDir - normal * dot(vFibreDir, normal)); vec3 v = normalize(vViewPosition); vec3 l = normalize(vec3(-0.4, 0.8, 0.6)); vec3 h = normalize(l + v); float th = dot(t, h); float sheen = pow(max(0.0, sqrt(1.0 - th * th)), 24.0); reflectedLight.directSpecular += vec3(0.18) * sheen; }');
+    }
     shader.uniforms.partState={value:partTexture};shader.uniforms.selectionState={value:selectionTexture};shader.uniforms.stateWidth={value:width};
     shader.vertexShader='attribute float partIndex; uniform sampler2D partState; uniform sampler2D selectionState; uniform float stateWidth; varying float partVisible; varying float partSelected;\n'+shader.vertexShader;
     shader.vertexShader=shader.vertexShader.replace('#include <begin_vertex>','#include <begin_vertex>\nvec2 stateUv = vec2((partIndex + 0.5) / stateWidth, 0.5); vec4 state = texture2D(partState, stateUv); transformed += state.xyz; partVisible = state.w; partSelected = texture2D(selectionState, stateUv).r;');
@@ -64,7 +92,7 @@ export default function AnatomyScene({atlas,state,onSelect,onFrame,onProgress,on
     shader.fragmentShader=shader.fragmentShader.replace('#include <color_fragment>','#include <color_fragment>\ndiffuseColor.rgb = mix(diffuseColor.rgb, '+selectColor+', partSelected * 0.75);');
    };materials.push(m);return m;
   };
-  const mats=new Map(SYSTEMS.map(s=>[s.id,materialFor(s.id)])),contextMats=new Map(SYSTEMS.map(s=>[s.id,materialFor(s.id,true)]));
+  const mats=new Map<string,T.Material>([...SYSTEMS.map(s=>[s.id,materialFor(s.id)] as [string,T.Material]),['dura',materialFor('dura')]]),contextMats=new Map<string,T.Material>([...SYSTEMS.map(s=>[s.id,materialFor(s.id,true)] as [string,T.Material]),['dura',materialFor('central-nerves',true)]]);
   const depthMap=atlas.layers?.muscleDepth?.parts??{};
   // Chunks are fetched on demand. A chunk key is 'main:<i>' (atlas.chunks) or 'overview:<i>'
   // (atlas.overview.chunks, the decimated whole body, same part ids at other offsets). The page
@@ -98,10 +126,12 @@ export default function AnatomyScene({atlas,state,onSelect,onFrame,onProgress,on
     g.setAttribute('normal',new T.BufferAttribute(new Int16Array(buffer,l.normals,l.vertexCount*3),3,true));g.setIndex(new T.BufferAttribute(new Uint32Array(buffer,l.indices,l.indexCount),1));
     g.boundingBox=bounds[i].clone();g.computeBoundingSphere();const pick=new T.Mesh(g);pick.matrixAutoUpdate=false;pickers[i]=pick;own.push(g);
     g.setAttribute('partIndex',new T.BufferAttribute(new Float32Array(l.vertexCount).fill(i),1));
-    const list=groups.get(p.system)??[];list.push(g);groups.set(p.system,list);partLoaded[i]=kind==='overview'?2:kind==='context'?3:1;parts.push(i);
+    // the dura is drawn with its own translucent look, grouped apart from the rest of the central nerves
+    const groupKey=(p as {material?:string}).material==='Dura'?'dura':p.system;
+    const list=groups.get(groupKey)??[];list.push(g);groups.set(groupKey,list);partLoaded[i]=kind==='overview'?2:kind==='context'?3:1;parts.push(i);
    }
    const meshes:T.Mesh[]=[];
-   groups.forEach((gs,system)=>{const geometry=mergeGeometries(gs,false);if(!geometry)throw new Error('Could not assemble anatomy geometry.');own.push(geometry);const mesh=new T.Mesh(geometry,(kind==='context'?contextMats:mats).get(system as never));mesh.frustumCulled=false;if(kind==='context')mesh.renderOrder=-1;scene.add(mesh);meshes.push(mesh);});
+   groups.forEach((gs,system)=>{const geometry=mergeGeometries(gs,false);if(!geometry)throw new Error('Could not assemble anatomy geometry.');own.push(geometry);const mesh=new T.Mesh(geometry,(kind==='context'?contextMats:mats).get(system as never)??mats.get(system==='dura'?'central-nerves' as never:system as never));mesh.frustumCulled=false;mesh.renderOrder=kind==='context'?-1:LOOKS[system]?.order??0;scene.add(mesh);meshes.push(mesh);});
    loadedSets.set(key,{meshes,geometries:own,parts});lastState=null;layoutKey='';lineKey='';dirty=true;
    // timing per chunk set, readable as performance.getEntriesByName('chunk') and in window.__atlas.timings
    const t3=performance.now();timings.push({key,parts:parts.length,fetchMs:Math.round(t1-t0),decodeMs:Math.round(t2-t1),buildMs:Math.round(t3-t2)});performance.measure('chunk',{start:t0,end:t3,detail:key});
