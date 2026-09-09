@@ -11,17 +11,22 @@ import {Combobox,ComboboxInput,ComboboxContent,ComboboxList,ComboboxItem,Combobo
 import AnatomyScene from './scene';
 import {assetUrl} from './base-url';
 import {MODELS,listenParent,postToParent,readUrlRequest,type EmbedRequest,type ModelId} from './embed';
-import {DEFAULT_VISIBLE,SYSTEMS,EXPLANATIONS,explanation,type Atlas,type Concept,type SceneState,type SystemId,type View} from './anatomy';
+import {DEFAULT_VISIBLE,ORGAN_SYSTEMS,SYSTEMS,EXPLANATIONS,VESSEL_SYSTEMS,chunkKeysFor,explanation,type Atlas,type Concept,type SceneState,type SystemId,type View} from './anatomy';
 const initial:SceneState={explode:0,visible:DEFAULT_VISIBLE,selected:[],isolate:false,view:'three-quarter',rotate:false,reset:0};
+/** What is visible before any request: the URL's systems if it names them, else the defaults, minus arteries, veins
+ * and organs in a region view so a region fetches only its own chunks until one of those systems is switched on. */
+function initialVisible():SystemId[]{const req=readUrlRequest();if(req.systems)return req.systems;return req.region?DEFAULT_VISIBLE.filter(s=>!VESSEL_SYSTEMS.includes(s)&&!ORGAN_SYSTEMS.includes(s)):DEFAULT_VISIBLE;}
 export default function Home(){
  const detailTitle=useRef<HTMLHeadingElement>(null);
- const [atlas,setAtlas]=useState<Atlas|null>(null),[state,setState]=useState(initial),[progress,setProgress]=useState(0),[error,setError]=useState(''),[panel,setPanel]=useState<'layers'|'search'|null>(null),[details,setDetails]=useState(false),[about,setAbout]=useState(false),[query,setQuery]=useState(''),[chosen,setChosen]=useState<Concept|null>(null);
+ const [atlas,setAtlas]=useState<Atlas|null>(null),[state,setState]=useState(()=>({...initial,visible:initialVisible()})),[progress,setProgress]=useState(0),[error,setError]=useState(''),[panel,setPanel]=useState<'layers'|'search'|null>(null),[details,setDetails]=useState(false),[about,setAbout]=useState(false),[query,setQuery]=useState(''),[chosen,setChosen]=useState<Concept|null>(null);
  const [model,setModel]=useState<ModelId>(()=>readUrlRequest().model??'bp3d'),[patient,setPatient]=useState(()=>readUrlRequest().patient??false),[region,setRegion]=useState(()=>readUrlRequest().region??'');
  // The URL request is applied once the manifest is in; a message that arrives before then waits here too.
  const pending=useRef<EmbedRequest|null>(readUrlRequest());
- useEffect(()=>{const abort=new AbortController();setProgress(0);setError('');setAtlas(null);setChosen(null);setDetails(false);setState({...initial,visible:DEFAULT_VISIBLE});fetch(assetUrl(MODELS[model].manifest),{signal:abort.signal}).then(r=>{if(!r.ok)throw new Error('The anatomy catalogue could not be loaded.');return r.json();}).then(data=>setAtlas(data as Atlas)).catch(e=>{if(e.name!=='AbortError')setError(e.message);});return()=>abort.abort();},[model]);
+ useEffect(()=>{const abort=new AbortController();setProgress(0);setError('');setAtlas(null);setChosen(null);setDetails(false);setState({...initial,visible:initialVisible()});fetch(assetUrl(MODELS[model].manifest),{signal:abort.signal}).then(r=>{if(!r.ok)throw new Error('The anatomy catalogue could not be loaded.');return r.json();}).then(data=>setAtlas(data as Atlas)).catch(e=>{if(e.name!=='AbortError')setError(e.message);});return()=>abort.abort();},[model]);
  useEffect(()=>{const key=(e:KeyboardEvent)=>{if(e.key==='/'&&!(e.target instanceof HTMLInputElement)&&!(e.target instanceof HTMLTextAreaElement)){e.preventDefault();setPanel('search');setDetails(false);}};window.addEventListener('keydown',key);return()=>window.removeEventListener('keydown',key);},[]);
  const parts=useMemo(()=>new Map(atlas?.parts.map(p=>[p.id,p])),[atlas]);
+ // which chunk sets the scene holds: a region fetches its own BP3D and MVMT chunks, the whole body the decimated overview
+ const chunkKeys=useMemo(()=>atlas?chunkKeysFor(atlas,region||null,state.visible):[],[atlas,region,state.visible]);
  const counts=useMemo(()=>Object.fromEntries(SYSTEMS.map(s=>[s.id,atlas?.parts.filter(p=>p.system===s.id).length??0])),[atlas]);
  const activeSystems=SYSTEMS.filter(s=>counts[s.id]>0);
  const selectedParts=state.selected.map(id=>parts.get(id)).filter(p=>!!p),selected=selectedParts[0],system=SYSTEMS.find(s=>s.id===selected?.system);
@@ -49,7 +54,7 @@ export default function Home(){
  useEffect(()=>{if(!atlas)return;postToParent({type:'ready',model,parts:atlas.parts.length});const req=pending.current;pending.current=null;if(req)applyRef.current(req);},[atlas]);
  useEffect(()=>listenParent(req=>applyRef.current(req)),[]);
  return <main className={`studio${patient?' patient':''}`} data-region={region||undefined}>
-  {atlas&&<AnatomyScene atlas={atlas} state={{...state,inspectorOpen:details&&selectedParts.length>0}} onSelect={choosePart} onProgress={n=>{setProgress(n);if(n===100)setError('');}} onError={setError}/>}
+  {atlas&&<AnatomyScene atlas={atlas} state={{...state,chunkKeys,inspectorOpen:details&&selectedParts.length>0}} onSelect={choosePart} onProgress={n=>{setProgress(n);if(n===100)setError('');}} onError={setError}/>}
   <div className="vignette"/>
   <header className="identity"><div className="eyebrow"><span className="status-dot"/> INTERACTIVE ANATOMY</div><h1>MVMT Atlas<Badge variant="outline" className="edition">3D</Badge></h1><div className="identity-meta">{atlas?atlas.parts.length.toLocaleString():'2,234'} modeled pieces <span>·</span> {MODELS[model].source}{patient&&<><span>·</span>Patient view</>}</div></header>
   <nav className="top-actions" aria-label="Explorer panels"><Button variant="ghost" className={panel==='search'?'active':''} onClick={()=>openPanel('search')} aria-label="Search anatomy"><Search size={18}/><span>Find a structure</span><kbd>/</kbd></Button><Button variant="ghost" className="icon-button" aria-label="About this atlas" onClick={()=>{setDetails(false);setPanel(null);setAbout(true);}}><Info size={18}/></Button></nav>
