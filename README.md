@@ -6,12 +6,13 @@ The anatomy viewer inside [MVMT Program](https://github.com/calvinyu94-debug/mvm
 
 ## Explore
 
-- Orbit, zoom, and select structures directly on the body.
-- Toggle individual systems or use skeleton and organ presets.
-- Move from assembled anatomy to a spaced inventory of every visible piece.
-- Search anatomical names and source identifiers.
-- Isolate a selected structure and read its details.
-- Use compact controls and detail panels on mobile.
+- Orbit, zoom, and select structures directly on the body; double-tap to frame one.
+- Pick a region (MVMT's nine, or the whole body): a region fetches only its own chunks, frames itself, and draws the neighbours' parts that reach into it dimmed and unselectable once its own are in.
+- Toggle systems: skeleton, muscles, joints & ligaments, fascia, the nervous system (our schematic central and peripheral nerves and BodyParts3D's brain and cranial nerves, with sub-toggles), insertions, landmarks; arteries, veins and organs wait in a "More systems" fold and load only when switched on.
+- Muscle depth: all, superficial or deep, from MVMT's classification (a muscle without one is shown under every setting).
+- Trace a fascial line through the structures along its route, on the whole body; hidden while the anatomy is exploded, and never without its caveat.
+- Six preset views and reset; patient view hides identifiers, counts and the low-confidence landmarks.
+- Move from assembled anatomy to a spaced inventory of every visible piece; search anatomical names, MVMT ids and source identifiers; isolate a selected structure and read its details.
 
 ## Embed API
 
@@ -20,7 +21,7 @@ MVMT Program hosts the viewer in an iframe. The viewer reads these keys as URL p
 | Key | Values | Effect |
 |---|---|---|
 | `model` | `bp3d` | Which manifest to load. Only the BodyParts3D body exists; the MVMT layers are fitted onto it. A second body is a future option, and the comparison between engines is the Model switch in mvmt-program. |
-| `region` | a region key | Held on the root element as `data-region` for the region filter, which does not exist yet. |
+| `region` | `head-jaw`, `cervical`, `shoulder`, `elbow-wrist`, `thoracic`, `lumbar`, `hip`, `knee`, `ankle-foot` | Opens that region: its own chunks are fetched and framed, its neighbours' spanning parts drawn dimmed afterwards. Absent or unknown means the whole body (the decimated overview). |
 | `systems` | comma-separated system ids (`skeletal,muscular,...`), or an array by message | The systems to show. |
 | `select` | an FMA concept id, a BP3D part id, or an MVMT id (`knee-acl`, `lm-asis`, `ZA-iliotibial-tract`) | Selects and opens the detail panel. |
 | `view` | `anterior`, `posterior`, `left`, `right`, `superior` | Camera preset. |
@@ -36,7 +37,7 @@ https://calvinyu94-debug.github.io/mvmt-atlas/?systems=skeletal,muscular&view=po
 
 `atlas.json` also carries the MVMT layers fitted onto the BodyParts3D body by [mvmt-anatomy](https://github.com/calvinyu94-debug/mvmt-anatomy) (`tools/bp3d_fit.py`, `tools/bp3d_export.py`): fascia, joints & ligaments, insertions, peripheral nerves, central nerves and landmarks, 1,385 parts in one gzipped chunk per MVMT region (`mvmt-<region>.bin.gz`, 0.13 to 1.52 MB) so a region can be fetched on its own, beside BP3D's own 15 chunks, which are untouched. Every layer part carries `source` (`zanatomy` or `schematic`), `sourceName`, `region`, the regions it spans and the MVMT structures that claim it; the nerves and the spinal cord are schematic and say so. `atlas.regions` lists each region's chunk and the parts that span into it; `atlas.overview` is a decimated whole body (every part, 582k triangles, 8.4 MB) for orientation. Alongside: `mvmt-fma-match.json`, our names matched to BP3D concepts, and `fascial-lines.json`, the twelve myofascial lines as ordered structures resolved to concept ids on this body.
 
-To rebuild after a new export: `node scripts/merge-layers.mjs <anatomy.json> <structure-meshes.json>`, `node scripts/build-overview.mjs`, `node scripts/compress-models.mjs`, then the validators.
+To rebuild after a new export: `node scripts/merge-layers.mjs <anatomy.json> <structure-meshes.json> <bp3d-fit.json>`, `node scripts/rechunk-bp3d.mjs <region-assignment.csv>` (BP3D's own parts by region, with a context chunk per region and the vessel and organ sets), `node scripts/build-overview.mjs`, `node scripts/compress-models.mjs`, `node scripts/build-index.mjs <anatomy.json> <structure-meshes.json>` (muscle depth and the fascial lines), then the validators. `atlas.chunkSets` says which chunks a view fetches; `atlas.contexts` holds each region's dimmed surround.
 
 ## Run locally
 

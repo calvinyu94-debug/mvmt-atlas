@@ -53,6 +53,7 @@ for(const p of atlas.parts){
 // memory): a re-run writes the same body-<region> names, and deleting afterwards deleted them
 const oldMvmt=atlas.chunks.filter(c=>c.region&&c.url.includes('/mvmt-'));
 for(const c of atlas.chunks){if(!(c.region&&c.url.includes('/mvmt-'))){for(const f of [c.url,c.gzip].filter(Boolean)){const p=new URL(f.split('/').pop(),dir);if(fs.existsSync(p))fs.unlinkSync(p);}}}
+delete atlas.contexts;   // rebuilt below from the fresh assignment
 // pack
 let chunks=[];const chunkOf=new Map();
 const writer=()=>{const segs=[];let bytes=0;const append=a=>{const pad=(4-bytes%4)%4;if(pad){segs.push(Buffer.alloc(pad));bytes+=pad;}const off=bytes;const b=Buffer.from(a.buffer,a.byteOffset,a.byteLength);segs.push(b);bytes+=b.length;return off;};return {append,bytes:()=>bytes,buffer:()=>Buffer.concat(segs)};};
@@ -70,6 +71,26 @@ const packInto=(name,parts,meta)=>{ // one or more chunks named name-<n>.bin, sp
 for(const r of atlas.regions){const parts=atlas.parts.filter(p=>!p.source&&assigned[p.id]?.home===r.id);packInto(`body-${r.id}`,parts,{bp3dRegion:r.id});}
 packInto('body-vessels',atlas.parts.filter(p=>!p.source&&VESSELS.has(p.system)),{systems:['arterial','venous']});
 packInto('body-organs',atlas.parts.filter(p=>!p.source&&!REGIONAL.has(p.system)&&!VESSELS.has(p.system)),{systems:'organs'});
+// context chunks: for each region, a copy of the parts that reach into it from its neighbours
+// (BP3D spanning parts and MVMT spanning parts), so a region view can draw its surroundings
+// dimmed without fetching a whole neighbour. Copies, so atlas.contexts carries their own layouts.
+const contexts={};
+const mvmtSpanning=Object.fromEntries(atlas.regions.map(r=>[r.id,new Set(r.spanningParts||[])]));
+const layoutOf=new Map();
+for(const r of atlas.regions){
+ const bp3dSpan=new Set(atlas.parts.filter(p=>!p.source&&assigned[p.id]?.spans.includes(r.id)).map(p=>p.id));
+ const parts=atlas.parts.filter(p=>bp3dSpan.has(p.id)||(p.source&&mvmtSpanning[r.id].has(p.id)));
+ if(!parts.length)continue;
+ let w=writer(),tris=0;const layouts={};
+ for(const p of parts){
+  const b=source[p.chunk];const pos=new Float32Array(b.buffer,b.byteOffset+p.positions,p.vertexCount*3),nor=new Int16Array(b.buffer,b.byteOffset+p.normals,p.vertexCount*3),idx=new Uint32Array(b.buffer,b.byteOffset+p.indices,p.indexCount);
+  layouts[p.id]={chunk:chunks.length,positions:w.append(pos),normals:w.append(nor),indices:w.append(idx),vertexCount:p.vertexCount,indexCount:p.indexCount};tris+=p.indexCount/3;
+ }
+ const url=`/models/body-${r.id}-context.bin`;fs.writeFileSync(new URL(url.split('/').pop(),dir),w.buffer());
+ chunks.push({url,bytes:w.bytes(),context:r.id,triangles:tris,parts:parts.length});
+ contexts[r.id]={chunk:chunks.length-1,parts:layouts,count:parts.length,bp3d:bp3dSpan.size,mvmt:parts.length-bp3dSpan.size};
+}
+atlas.contexts=contexts;
 // keep the MVMT chunks, re-indexed after the new BP3D chunks
 const base=chunks.length;
 for(const c of oldMvmt)chunks.push(c);
@@ -79,7 +100,7 @@ for(const p of atlas.parts)if(assigned[p.id]){p.region=assigned[p.id].home;p.spa
 atlas.chunks=chunks;
 atlas.chunkSets={
  note:'Chunk indices to fetch. A region needs its BP3D chunk(s) and its MVMT chunk; whole body needs the overview instead; arteries, veins and organs load only when toggled on.',
- regions:Object.fromEntries(atlas.regions.map(r=>[r.id,{bp3d:r.bp3dChunks,mvmt:[r.chunk],neighbours:[]}])),
+ regions:Object.fromEntries(atlas.regions.map(r=>[r.id,{bp3d:r.bp3dChunks,mvmt:[r.chunk],context:contexts[r.id]?[contexts[r.id].chunk]:[]}])),
  vessels:chunks.map((c,i)=>c.systems&&Array.isArray(c.systems)?i:-1).filter(i=>i>=0),
  organs:chunks.map((c,i)=>c.systems==='organs'?i:-1).filter(i=>i>=0),
 };
