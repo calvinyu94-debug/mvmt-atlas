@@ -152,11 +152,19 @@ decompresses them itself. The pipeline after a new export from mvmt-anatomy:
   fell to the sloppy simplifier and the external oblique, decimated to 12%
   with a 3% error bound, wobbled through the gaps. `build-overview.mjs`
   copies carried parts and the BodyParts3D sheets named in the export's
-  stacks whole (`atlas.overview.copiedWhole`). `validate-atlas.mjs` fails if
-  two carried parts in one region are inside each other on more than 2% of
-  their triangles (parts of one muscle the export lists as siblings are
-  exempt); it samples 800 centroids per part, so a pair at the threshold can
-  read a fraction over what the export measured at 1,200.
+  stacks whole (`atlas.overview.copiedWhole`): the region chunk's bytes
+  verbatim, not run through `compactMesh` (which reorders vertices), and
+  `validate-atlas.mjs` asserts positions, normals and indices identical
+  between the region chunk and the overview for every part in that set, so
+  a copy that silently falls back to the simplifier fails the build.
+  `validate-atlas.mjs` also fails if two carried parts in one region are
+  inside each other on more than 2% of their triangles (parts of one muscle
+  the export lists as siblings are exempt); it samples 800 centroids per
+  part, so a pair at the threshold can read a fraction over what the export
+  measured at 1,200. Chunk fetches carry `?v=<bytes>-<gzipBytes>` from the
+  manifest: GitHub Pages caches for ten minutes and ignores the query, so a
+  chunk cached from an earlier build is never read at a newer manifest's
+  offsets (which draws as shards of the wrong parts).
 - **Thirteen muscles are ours, not BodyParts3D's.** The Muscles system holds
   36 parts with `source: zanatomy` (`carried: true`, `carriedFor` naming the
   MVMT structure): masseter, temporalis, the pterygoids, occipitofrontalis,

@@ -27,11 +27,17 @@ for(const p of atlas.parts){
  const target=Math.max(24*3,Math.floor(p.indexCount*ratio/3)*3);
  // Quadric simplification first; where the error bound stops it early (thin vessels, flat patches) the
  // topology-free sloppy simplifier finishes the job, since the overview is for orientation only.
- let [simplified,err]=ratio>=1?[indices,0]:MeshoptSimplifier.simplify(indices,pos,3,Math.min(indices.length,target),error);
- if(ratio<1&&simplified.length>target*1.5&&indices.length>target*1.5){const [sl,se]=MeshoptSimplifier.simplifySloppy(indices,pos,3,null,Math.min(indices.length,target),error);if(sl.length>=3&&sl.length<simplified.length){simplified=sl;err=se;sloppy++;}}
- maxError=Math.max(maxError,err);const [remap,count]=MeshoptSimplifier.compactMesh(simplified);
- const positions=new Float32Array(count*3),normals=new Int16Array(count*3);
- for(let old=0;old<remap.length;old++){const n=remap[old];if(n===0xffffffff)continue;positions.set(pos.subarray(old*3,old*3+3),n*3);normals.set(normal.subarray(old*3,old*3+3),n*3);}
+ // a copied part is the region's bytes verbatim (validate-atlas.mjs asserts it): no simplify, no compactMesh reorder
+ let simplified,err,count,positions,normals;
+ if(ratio>=1){simplified=indices;err=0;count=p.vertexCount;positions=pos;normals=normal;}
+ else{
+  [simplified,err]=MeshoptSimplifier.simplify(indices,pos,3,Math.min(indices.length,target),error);
+  if(simplified.length>target*1.5&&indices.length>target*1.5){const [sl,se]=MeshoptSimplifier.simplifySloppy(indices,pos,3,null,Math.min(indices.length,target),error);if(sl.length>=3&&sl.length<simplified.length){simplified=sl;err=se;sloppy++;}}
+  let remap;[remap,count]=MeshoptSimplifier.compactMesh(simplified);
+  positions=new Float32Array(count*3);normals=new Int16Array(count*3);
+  for(let old=0;old<remap.length;old++){const n=remap[old];if(n===0xffffffff)continue;positions.set(pos.subarray(old*3,old*3+3),n*3);normals.set(normal.subarray(old*3,old*3+3),n*3);}
+ }
+ maxError=Math.max(maxError,err);
  if(bytes>4_000_000)flush();
  parts[p.id]={chunk:chunks.length,positions:append(positions),normals:append(normals),indices:append(simplified),vertexCount:count,indexCount:simplified.length};
  triangles+=simplified.length/3;sourceTriangles+=p.indexCount/3;
