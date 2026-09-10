@@ -34,7 +34,12 @@ export interface Chunk {url:string;bytes:number;gzip?:string;gzipBytes?:number;r
 export interface Layout {chunk:number;positions:number;normals:number;indices:number;vertexCount:number;indexCount:number}
 export interface RegionInfo {id:string;name:string;chunk:number;parts:number;triangles:number;bytes:number;bounds:[number[],number[]]|null;spanningParts:string[];bp3dChunks?:number[];bp3dParts?:number;bp3dSpanningParts?:string[];anchors?:number[][]}
 export interface ChunkSets {regions:Record<string,{bp3d:number[];mvmt:number[];context?:number[]}>;vessels:number[];organs:number[]}
-export interface Atlas {version:string;sex?:'male';source?:string;scope?:string;parts:Part[];concepts:Concept[];chunks:Chunk[];triangles:number;regions?:RegionInfo[];chunkSets?:ChunkSets;overview?:{chunks:Chunk[];parts:Record<string,Layout>;triangles:number;bytes:number};contexts?:Record<string,{chunk:number;parts:Record<string,Layout>;count:number}>;layers?:{muscleDepth?:{parts:Record<string,number>};[k:string]:unknown}}
+export interface Atlas {version:string;sex?:'male';source?:string;scope?:string;parts:Part[];concepts:Concept[];chunks:Chunk[];triangles:number;regions?:RegionInfo[];chunkSets?:ChunkSets;overview?:{chunks:Chunk[];parts:Record<string,Layout>;triangles:number;bytes:number};contexts?:Record<string,{chunk:number;parts:Record<string,Layout>;count:number}>;layers?:{muscleDepth?:{parts:Record<string,number>};mvmt?:MvmtBridge;[k:string]:unknown}}
+/** The id bridge from build-index.mjs: every part id to the MVMT structure ids that claim it, in resolution order (the most
+ * specific group first, then the rest by specificity), and every structure id to the part ids it claims. */
+export interface MvmtBridge {parts:Record<string,string[]>;structures:Record<string,string[]>;names:Record<string,string>}
+/** mvmt-program's SYSTEMS, as its Anatomy view labels them. A structure's system is an MVMT system, not a BP3D one. */
+export const MVMT_SYSTEMS:Record<string,string>={muscular:'Muscular',skeletal:'Skeletal',articular:'Articular',nervous:'Nervous',fascial:'Fascial',landmark:'Landmark'};
 export type View = 'three-quarter'|'front'|'back'|'side'|'right'|'top';
 /** chunkKeys: the chunk sets the scene should hold ('main:<i>' or 'overview:<i>', see chunkKeysFor); contextKeys: the
  * region's context sets, fetched only once every chunkKey is in and drawn dimmed and unselectable ('context:<region>');

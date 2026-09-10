@@ -35,9 +35,11 @@ export const NEIGHBOURS={
 };
 
 // MVMT structures whose names do not match a BodyParts3D concept by token set, or match the wrong
-// one, with the BP3D concept names that stand for them. build-index.mjs reads this twice: for the
-// muscle depth (so a structure's superficial / deep reaches BP3D's muscles) and for the fascial
-// lines (so a station lights BP3D's meshes for it, both sides). A name here is matched exactly
+// one, with the BP3D concept names that stand for them. build-index.mjs reads this three times: for
+// the muscle depth (so a structure's superficial / deep reaches BP3D's muscles), for the fascial
+// lines (so a station lights BP3D's meshes for it, both sides), and for the id bridge (so a click
+// on a BP3D part resolves to the MVMT structure it belongs to and that structure's drills can be
+// offered from the atlas). A name here is matched exactly
 // after normalisation, an entry replaces the automatic match rather than adding to it, and the
 // build stops if a name is not a concept of this atlas or a key is not a structure of
 // mvmt-program's. A structure listed with an empty array is one BodyParts3D (as selected by Human
@@ -47,7 +49,8 @@ export const CONCEPT_MATCHES={
  'Digastric, Anterior Belly':['digastric'],
  'Digastric, Posterior Belly':['digastric'],
  'Scalenes':['scalenus anterior','scalenus medius','scalenus posterior'],
- 'Deep Neck Flexors':['longus capitis','zone of longus colli'],       // BP3D models longus colli on the left only
+ // BP3D models longus colli on the left only; the two small prevertebral recti are the rest of the group
+ 'Deep Neck Flexors':['longus capitis','zone of longus colli','rectus capitis anterior','rectus capitis lateralis'],
  'Suboccipitals':['rectus capitis posterior major','rectus capitis posterior minor','obliquus capitis superior','obliquus capitis inferior'],
  'Upper Trapezius':['descending part of trapezius'],
  'Middle Trapezius':['transverse part of trapezius'],
@@ -68,16 +71,16 @@ export const CONCEPT_MATCHES={
  'Flexor Digitorum Superficialis, Radial Head':['flexor digitorum superficialis'],
  'Extensor Carpi Ulnaris, Humeral Head':['extensor carpi ulnaris'],
  'Extensor Carpi Ulnaris, Ulnar Head':['extensor carpi ulnaris'],
- 'Thenar Group':['thenar muscle'],
+ 'Thenar Group':['thenar muscle','superficial head of flexor pollicis brevis'],   // the superficial head is a BP3D part outside "thenar muscle"
  'Hypothenar Group':['hypothenar muscle'],
  // "intercostal muscle" is the parent of the external, internal and innermost layers; it holds all six meshes
  'Intercostals':['intercostal muscle'],
  'Erector Spinae':['iliocostalis','longissimus','spinalis'],
  'Spinalis Cervicis':['spinalis thoracis'],
- 'Interspinales':['set of interspinales lumborum','set of interspinales cervicis'],
- 'Intertransversarii':['set of anterior cervical intertransversarii','set of posterior cervical intertransversarii'],
+ 'Interspinales':['set of interspinales lumborum','set of interspinales cervicis','interspinalis thoracis'],
+ 'Intertransversarii':['set of anterior cervical intertransversarii','set of posterior cervical intertransversarii','lumbar intertransversarius'],
  'Deep External Rotators':['piriformis','obturator internus','obturator externus','quadratus femoris'],
- 'Pelvic Floor':['coccygeus','zone of levator ani'],
+ 'Pelvic Floor':['coccygeus','zone of levator ani','tendinous arch of levator ani'],
  'Adductor Longus & Brevis':['adductor longus','adductor brevis'],
  'Quadriceps':['zone of quadriceps femoris'],
  'Vastus Medialis Oblique':['vastus medialis'],
@@ -85,10 +88,10 @@ export const CONCEPT_MATCHES={
  'Gastrocnemius':['medial head of gastrocnemius','lateral head of gastrocnemius'],
  'Fibularis Longus & Brevis':['fibularis longus','fibularis brevis'],
  'Sole, First Layer':['abductor hallucis','flexor digitorum brevis','abductor digiti minimi of foot'],
- 'Sole, Second Layer':['lumbrical of foot'],
- 'Sole, Third Layer':['flexor digiti minimi brevis of foot'],
+ 'Sole, Second Layer':['lumbrical of foot','flexor accessorius'],                 // quadratus plantae, under BP3D's other name for it
+ 'Sole, Third Layer':['flexor digiti minimi brevis of foot','head of flexor hallucis brevis','head of adductor hallucis','opponens digiti minimi of foot'],
  'Sole, Fourth Layer':['interosseous of foot'],
- 'Intrinsic Foot Muscles':['abductor hallucis','flexor digitorum brevis','abductor digiti minimi of foot','lumbrical of foot','flexor digiti minimi brevis of foot','interosseous of foot'],
+ 'Intrinsic Foot Muscles':['abductor hallucis','flexor digitorum brevis','abductor digiti minimi of foot','lumbrical of foot','flexor accessorius','flexor digiti minimi brevis of foot','head of flexor hallucis brevis','head of adductor hallucis','opponens digiti minimi of foot','interosseous of foot'],
  // BP3D models both rhomboids, as sided concepts ("right rhomboid major"); the plural matched nothing
  'Rhomboids':['rhomboid major','rhomboid minor'],
  // fascial-line stations that are not muscles
@@ -106,7 +109,27 @@ export const CONCEPT_MATCHES={
  'Lateral Pterygoid, Superior Head':[],'Lateral Pterygoid, Inferior Head':[],'Occipitofrontalis':[],'Latissimus Dorsi':[],
  'Thoracic Multifidus':[],'Lumbar Multifidus':[],'Cervical Multifidus':[],'Multifidus':[],
  'Quadratus Lumborum':[],'Transversus Abdominis':[],'Internal Oblique':[],'Rectus Abdominis':[],
- 'Spinalis Capitis':[],'Extensor Digitorum Brevis':[],
+ 'Spinalis Capitis':[],
+ // BP3D has no extensor digitorum brevis, but it names the medial slip of the same muscle mass on its own; the belly is
+ // still carried from Z-Anatomy, so this is the one carried muscle that also matches a BP3D part
+ 'Extensor Digitorum Brevis':['extensor hallucis brevis'],
  // not modelled in BodyParts3D and nothing to carry: Z-Anatomy has no belly for these either (attachment sites, or absent)
  'Common Extensor Origin':[],'Common Flexor Origin':[],'Psoas Minor':[],'Articularis Genus':[],
+ // ---- the id bridge. MVMT files most bones as groups where BP3D names each bone, so the groups are spelled out; the
+ // bones named one to one (femur, scapula, hip bone, patella ...) match on their own. BP3D has no coccyx.
+ 'Cranium':['neurocranium','sphenoid bone','maxilla','zygomatic bone','nasal bone','palatine bone','vomer'],   // "skull" would bring the teeth and gingivae with it
+ 'Cervical Vertebrae':['set of cervical vertebrae'],
+ 'Thoracic Vertebrae':['set of thoracic vertebrae'],
+ 'Cervical Discs':['intervertebral disk of cervical vertebra'],
+ 'Lumbar Discs':['intervertebral disk of lumbar vertebra'],
+ 'Ribs':['rib'],
+ 'Costal Cartilages':['costal cartilage'],
+ 'Sacrum and Coccyx':['sacrum'],
+ 'Carpal Bones':['carpal bone'],
+ 'Metacarpals and Phalanges':['metacarpal bone','phalanx of finger'],
+ 'Tarsal Bones':['tarsal bone'],
+ 'Metatarsals and Phalanges':['metatarsal bone','phalanx of toe','sesamoid bone of foot'],
+ 'Interosseous Membrane':['interosseous membrane of forearm'],   // the token match took the forearm's and the leg's alike; the leg's is its own structure
+ 'Adductor Magnus':['adductor magnus','adductor minimus'],   // adductor minimus is the upper part of magnus, a BP3D part of its own
+ 'Digastric':['digastric','intermediate tendon'],           // the tendon between the bellies is a BP3D part of its own
 };

@@ -215,6 +215,39 @@ Browser pane, open the pane on the URL first: a pane opened fresh collapses
 the URL to its origin, and an empty `location.search` looks like a race in
 the app when it is not.
 
+- **The structure panel is the parent's panel in this frame, and the
+  drills are the parent's, never ours.** `select` carries `mvmtId`, the
+  parent answers `structure` with the blurbs and the drills as its live
+  library resolves them (a practitioner can add exercises there, so a
+  bundled list would go stale in exactly the case that matters), and
+  `add-exercise` goes through the parent's own `anatAddToPhase()`. The
+  button shows *Added* from the parent's `added` answer, not from the click.
+  Standalone (or after `REPLY_GRACE_MS` with no answer) the blurbs come from
+  `models/mvmt-structures.json`, written by `build-index.mjs`, and the drills
+  section is not rendered.
+- **The id bridge resolves a part to the most specific *group*, not the most
+  specific structure.** `atlas.layers.mvmt.parts[id]` lists every claiming
+  structure, first the most specific one with no `inherits`, then the rest
+  by specificity. That is mvmt-program's default (Show named parts off): the
+  deep part of masseter answers Masseter, with Masseter, Deep Part a link
+  under *Breaks down into*. A concept of several parts takes the structure
+  most of its parts answer first. The bridge and the blurbs are regenerated
+  by `build-index.mjs` from mvmt-program's `ANATOMY`, lifted out of its
+  `index.html` by `scripts/extract-anatomy.mjs`; never hand-edit either.
+- **The bridge's hand table is `CONCEPT_MATCHES`, and it now covers bones.**
+  MVMT files ribs, carpals, tarsals, phalanges, cranial bones and vertebrae
+  as groups where BP3D names each bone, so those are spelled out there. An
+  entry replaces the automatic match, so a structure whose automatic match
+  is right but incomplete (Adductor Magnus, Digastric) lists the automatic
+  name as well. The automatic match is by token containment and once took
+  the leg's interosseous membrane for the forearm's; audit
+  `verification/bridge/coverage.md` (the "structures resolving to BP3D
+  parts" table) after any change to the table or to `ANATOMY`.
+- BP3D holds no lumbar vertebrae group and no thoracic discs that MVMT has a
+  structure for, and no coccyx at all; teeth, gingivae and the laryngeal,
+  ocular, lingual and palatal parts have no MVMT counterpart. Those are the
+  in-scope parts the coverage table lists as without a structure.
+
 ## Theme
 
 Colour lives in the Clay Soft token block at the top of `app/globals.css`,

@@ -984,12 +984,17 @@
        "kind": "bp3d",
        "id": "FMA22443",
        "name": "adductor magnus"
+      },
+      {
+       "kind": "bp3d",
+       "id": "FMA43885",
+       "name": "adductor minimus"
       }
      ],
      "status": "full",
      "sides": {
-      "l": 3,
-      "r": 3,
+      "l": 4,
+      "r": 4,
       "unsided": 0
      }
     },
@@ -1048,13 +1053,18 @@
        "kind": "bp3d",
        "id": "FMA19089",
        "name": "zone of levator ani"
+      },
+      {
+       "kind": "bp3d",
+       "id": "FMA46442",
+       "name": "tendinous arch of levator ani"
       }
      ],
      "status": "full",
      "sides": {
       "l": 9,
       "r": 5,
-      "unsided": 0
+      "unsided": 4
      }
     },
     {
@@ -1201,12 +1211,22 @@
        "kind": "bp3d",
        "id": "FMA46279",
        "name": "zone of longus colli"
+      },
+      {
+       "kind": "bp3d",
+       "id": "FMA46312",
+       "name": "rectus capitis anterior"
+      },
+      {
+       "kind": "bp3d",
+       "id": "FMA46316",
+       "name": "rectus capitis lateralis"
       }
      ],
      "status": "full",
      "sides": {
-      "l": 8,
-      "r": 5,
+      "l": 10,
+      "r": 7,
       "unsided": 0
      }
     },
@@ -1449,12 +1469,17 @@
        "kind": "bp3d",
        "id": "FMA64916",
        "name": "thenar muscle"
+      },
+      {
+       "kind": "bp3d",
+       "id": "FMA46104",
+       "name": "superficial head of flexor pollicis brevis"
       }
      ],
      "status": "full",
      "sides": {
-      "l": 5,
-      "r": 5,
+      "l": 6,
+      "r": 6,
       "unsided": 0
      }
     }

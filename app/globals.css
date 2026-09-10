@@ -185,3 +185,23 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--accent)}
 @media(max-width:767px){.layers-panel{top:auto}.line-list{grid-template-columns:repeat(6,1fr)}}
 .layers-panel{top:150px;bottom:150px;max-height:none;width:262px}.region-chips{padding:6px 0 8px}.chip{padding:3px 8px;font-size:9px}.layers-panel .layer-presets{margin:8px 0 6px}
 @media(min-width:1400px){.layers-panel{top:160px;bottom:160px}}
+
+/* ---- The MVMT structure panel: the sections the Z-Anatomy selection panel shows in mvmt-program (What it does, Why it
+   matters clinically, Drills that load this), on the same tokens and at the same weights. The clinical block is the
+   practitioner-only one, marked by the rule and the muted ground exactly as there. Nothing here is a warning colour. */
+.mvmt-block{display:flex;flex-direction:column}
+.mvmt-lbl{font-family:var(--font-ui);text-transform:uppercase;letter-spacing:.08em;font-weight:600;font-size:10.5px;color:var(--ink-3)}
+.mvmt-name{font-family:var(--font-ui);font-size:16px;font-weight:600;margin:0;letter-spacing:-.01em;color:var(--ink)}
+.mvmt-latin{font-style:italic;color:var(--ink-3);font-size:12.5px;margin:2px 0 8px}
+.mvmt-tags{display:flex;gap:6px;flex-wrap:wrap}
+.mvmt-tag{font-family:var(--font-ui);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;padding:2px 6px;border-radius:var(--radius-sm);background:var(--line-2);color:var(--ink-2);white-space:nowrap}
+.mvmt-parent{font-size:12.5px;color:var(--ink-2);margin-top:10px}
+button.mvmt-link{border:0;background:transparent;padding:0;font:inherit;color:var(--ink);font-weight:600;text-decoration:underline;text-underline-offset:2px;cursor:pointer}
+button.mvmt-link:hover{color:var(--accent-dk)}
+.mvmt-sec{margin-top:14px}.mvmt-sec .mvmt-lbl{display:block;margin-bottom:5px}.mvmt-sec p{margin:0;font-size:13px;line-height:1.5;color:var(--ink-2)}
+.mvmt-clin{background:var(--panel-2);border-left:3px solid var(--ink-3);padding:10px 12px;border-radius:var(--radius)}
+.mvmt-model{margin:12px 0 0;padding:10px 0 0;border-top:1px solid var(--line-2);font-size:12px;line-height:1.45;color:var(--ink-3)}.mvmt-model b{font-family:var(--font-ui);text-transform:uppercase;letter-spacing:.08em;font-size:10.5px;font-weight:700}
+.mvmt-note{margin:0 0 4px;font-size:12px;color:var(--ink-3);font-style:italic}
+.mvmt-kids{display:flex;gap:6px;flex-wrap:wrap}.mvmt-kids button{border:1px solid var(--line);background:var(--panel-2);color:var(--ink);padding:4px 9px;border-radius:var(--radius-sm);font:inherit;font-size:12.5px;text-align:left;cursor:pointer}.mvmt-kids button:hover{background:var(--hover);border-color:var(--ink-3)}
+.mvmt-drill{display:flex;gap:10px;align-items:baseline;padding:9px 0;border-bottom:1px solid var(--line-2)}.mvmt-drill:last-child{border-bottom:0}.mvmt-drill .dn{flex:1;min-width:0;font-size:13px;color:var(--ink)}.mvmt-drill .dm{display:block;font-size:11.5px;color:var(--ink-3);margin-top:2px}
+button.mvmt-add{border:1px solid var(--line);background:var(--panel);border-radius:var(--radius);padding:5px 9px;color:var(--ink-2);font-family:var(--font-ui);font-size:10px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;cursor:pointer;white-space:nowrap}button.mvmt-add:hover:not(:disabled){background:var(--hover);color:var(--ink)}button.mvmt-add:disabled{opacity:.35;cursor:not-allowed}

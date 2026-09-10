@@ -10,8 +10,18 @@ import {Sheet,SheetContent,SheetTitle,SheetDescription} from '@/components/ui/sh
 import {Combobox,ComboboxInput,ComboboxContent,ComboboxList,ComboboxItem,ComboboxEmpty} from '@/components/ui/combobox';
 import AnatomyScene from './scene';
 import {assetUrl} from './base-url';
-import {LINE_IDS,MODELS,listenParent,postToParent,readUrlRequest,type EmbedRequest,type ModelId} from './embed';
-import {DEFAULT_VISIBLE,MORE_SYSTEMS,MVMT_REGIONS,NERVOUS_GROUP,ORGAN_SYSTEMS,PRIMARY_SYSTEMS,SYSTEMS,EXPLANATIONS,TRAILING_SYSTEMS,VESSEL_SYSTEMS,chunkKeysFor,contextKeysFor,explanation,regionBounds,type Atlas,type Concept,type FascialLine,type MuscleDepth,type SceneState,type SystemId,type View} from './anatomy';
+import {LINE_IDS,MODELS,embedded,listenParent,listenReplies,postToParent,readUrlRequest,type Drill,type EmbedRequest,type ModelId,type StructureBlurb} from './embed';
+import {DEFAULT_VISIBLE,MORE_SYSTEMS,MVMT_REGIONS,MVMT_SYSTEMS,NERVOUS_GROUP,ORGAN_SYSTEMS,PRIMARY_SYSTEMS,SYSTEMS,EXPLANATIONS,TRAILING_SYSTEMS,VESSEL_SYSTEMS,chunkKeysFor,contextKeysFor,explanation,regionBounds,type Atlas,type Concept,type FascialLine,type MuscleDepth,type SceneState,type SystemId,type View} from './anatomy';
+/** What the structure panel shows for the selection. `source` says where it came from: the parent frame's live library
+ * (`parent`, blurbs and drills), the bundled copy (`bundled`, blurbs only - there is no library to offer drills from), or
+ * nothing yet (`pending`). */
+interface MvmtPanel{mvmtId:string;structure:StructureBlurb|null;drills:Drill[];where:string|null;hasProgram:boolean;inherited:number;source:'parent'|'bundled'|'pending'}
+/** A structure's regions as mvmt-program's regionsOf() reads them: the primary, then any alsoRegion. */
+const regionsOf=(s:StructureBlurb)=>[s.region,...(Array.isArray(s.alsoRegion)?s.alsoRegion:s.alsoRegion?[s.alsoRegion]:[])];
+const regionName=(k:string)=>MVMT_REGIONS.find(r=>r.id===k)?.name??k;
+/** How long a parent gets to answer a select before the bundled blurbs stand in. A parent that never answers (an older
+ * mvmt-program) then behaves like no parent at all: blurbs, no drills. */
+const REPLY_GRACE_MS=1500;
 const initial:SceneState={explode:0,visible:DEFAULT_VISIBLE,selected:[],isolate:false,view:'three-quarter',rotate:false,reset:0};
 /** What is visible before any request: the URL's systems if it names them, else the defaults. Arteries, veins and
  * organs are never on by default, so the first fetch is the region (or the overview) alone. */
@@ -45,6 +55,10 @@ export default function Home(){
  const [atlas,setAtlas]=useState<Atlas|null>(null),[state,setState]=useState(()=>({...initial,visible:initialVisible()})),[progress,setProgress]=useState(0),[error,setError]=useState(''),[panel,setPanel]=useState<'layers'|'search'|null>(null),[details,setDetails]=useState(false),[about,setAbout]=useState(false),[query,setQuery]=useState(''),[chosen,setChosen]=useState<Concept|null>(null);
  const [model,setModel]=useState<ModelId>(()=>readUrlRequest().model??'bp3d'),[patient,setPatient]=useState(()=>readUrlRequest().patient??false),[region,setRegion]=useState(()=>readUrlRequest().region??'');
  const [more,setMore]=useState(false),[nervesOpen,setNervesOpen]=useState(false),[depth,setDepth]=useState<MuscleDepth>(0),[lineOn,setLineOn]=useState(false),[lineId,setLineId]=useState<string|null>(null),[lines,setLines]=useState<FascialLine[]|null>(null),[frame,setFrame]=useState<{id:string;n:number}|null>(null);
+ // The structure panel: what the selection resolves to through the id bridge, and what is known about it.
+ const [mvmt,setMvmt]=useState<MvmtPanel|null>(null),[adding,setAdding]=useState<Record<string,boolean>>({});
+ // the bundled copy of the structures' blurbs, fetched once and only when there is no parent to ask (or none that answers)
+ const bundled=useRef<Promise<Map<string,StructureBlurb>>|null>(null);
  // The URL request is applied once the manifest is in; a message that arrives before then waits here too.
  const pending=useRef<EmbedRequest|null>(readUrlRequest());
  useEffect(()=>{const abort=new AbortController();setProgress(0);setError('');setAtlas(null);setChosen(null);setDetails(false);setState({...initial,visible:initialVisible()});fetch(assetUrl(MODELS[model].manifest),{signal:abort.signal}).then(r=>{if(!r.ok)throw new Error('The anatomy catalogue could not be loaded.');return r.json();}).then(data=>setAtlas(data as Atlas)).catch(e=>{if(e.name!=='AbortError')setError(e.message);});return()=>abort.abort();},[model]);
@@ -73,7 +87,65 @@ export default function Home(){
  const visibleCount=atlas?.parts.filter(p=>inRegion(p)&&!hiddenParts.includes(p.id)&&(state.isolate?state.selected.includes(p.id):state.visible.includes(p.system)||state.selected.includes(p.id))).length??0;
  const results=useMemo(()=>{if(!atlas)return[];const term=query.toLowerCase().trim();if(!term)return ['heart','brain','liver','stomach','spleen','pancreas','urinary bladder','trachea'].map(name=>atlas.concepts.find(c=>c.name.toLowerCase()===name)).filter((x):x is Concept=>!!x);return atlas.concepts.filter(c=>c.name.toLowerCase().includes(term)||c.id.toLowerCase().includes(term)).sort((a,b)=>a.name.length-b.name.length).slice(0,80);},[atlas,query]);
  const choose=(c:Concept)=>{setChosen(c);setState(s=>({...s,selected:c.elements,isolate:false,rotate:false}));setDetails(true);setPanel(null);};
- useEffect(()=>{postToParent({type:'select',id:chosen?.id??null,name:chosen?.name??null});},[chosen]);
+ // ---- the id bridge. A selection resolves to an MVMT structure: an MVMT id directly (every structure is keyed in
+ // the bridge, with or without parts), else the structure most of its parts resolve to first. The parent frame is
+ // asked for the structure's blurbs and drills; with no parent, or none that answers in time, the bundled copy
+ // supplies the blurbs and the drills stay hidden, because they are the parent's library and not ours to guess.
+ const bridge=atlas?.layers?.mvmt;
+ const mvmtIdFor=(c:Concept|null):string|null=>{
+  if(!c||!bridge)return null;
+  if(bridge.structures[c.id])return c.id;
+  const tally=new Map<string,number>();
+  for(const e of c.elements){const first=bridge.parts[e]?.[0];if(first)tally.set(first,(tally.get(first)??0)+1);}
+  let best:string|null=null,n=0;for(const [id,k] of tally)if(k>n){best=id;n=k;}
+  return best;
+ };
+ const loadBundled=()=>bundled.current??=fetch(assetUrl('/models/mvmt-structures.json')).then(r=>{if(!r.ok)throw new Error('no bundled structures');return r.json();}).then(d=>new Map((d.structures as StructureBlurb[]).map(s=>[s.id,s])));
+ const fromBundled=(id:string)=>loadBundled().then(map=>setMvmt(cur=>{
+  if(!cur||cur.mvmtId!==id||cur.source!=='pending')return cur;
+  const s=map.get(id);if(!s)return cur;
+  const parent=s.inherits?map.get(s.inherits):null;
+  const children=[...map.values()].filter(x=>x.inherits===id).map(x=>({id:x.id,name:x.name}));
+  return {...cur,structure:{...s,parent:parent?{id:parent.id,name:parent.name}:null,children},source:'bundled'};
+ })).catch(()=>{});
+ useEffect(()=>{
+  const mvmtId=mvmtIdFor(chosen);
+  postToParent({type:'select',id:chosen?.id??null,name:chosen?.name??null,mvmtId});
+  setAdding({});
+  if(!mvmtId){setMvmt(null);return;}
+  setMvmt({mvmtId,structure:null,drills:[],where:null,hasProgram:false,inherited:0,source:'pending'});
+  if(!embedded()){fromBundled(mvmtId);return;}
+  const t=setTimeout(()=>fromBundled(mvmtId),REPLY_GRACE_MS);
+  return()=>clearTimeout(t);
+ },[chosen]); // eslint-disable-line react-hooks/exhaustive-deps
+ useEffect(()=>listenReplies(reply=>{
+  if(reply.type==='structure')setMvmt(cur=>cur&&cur.mvmtId===reply.mvmtId?{...cur,structure:reply.structure,drills:reply.drills??[],where:reply.where??null,hasProgram:!!reply.hasProgram,inherited:reply.inherited??0,source:'parent'}:cur);
+  else if(reply.type==='added'){setAdding(a=>({...a,[reply.exerciseId]:false}));setMvmt(cur=>cur&&cur.mvmtId===reply.structureId?{...cur,drills:cur.drills.map(d=>d.id===reply.exerciseId?{...d,added:reply.added}:d)}:cur);}
+ }),[]);
+ // Add goes to the parent, which adds the drill to the current phase with the same function its own panels use and
+ // answers; the button reads Added from the answer, never from a guess. An unanswered add is released after a moment.
+ const addDrill=(exerciseId:string)=>{
+  if(!mvmt)return;
+  setAdding(a=>({...a,[exerciseId]:true}));
+  postToParent({type:'add-exercise',exerciseId,structureId:mvmt.mvmtId});
+  setTimeout(()=>setAdding(a=>a[exerciseId]?{...a,[exerciseId]:false}:a),4000);
+ };
+ // A link in the panel (Part of, Breaks down into, Also part of) selects that structure's own geometry, so the model
+ // follows the panel; a structure with nothing to light keeps the current selection under its own name.
+ const goStructure=(id:string)=>{
+  if(!bridge)return;
+  const name=bridge.names[id]??concepts.get(id)?.name??id;
+  const elements=[...new Set([...(bridge.structures[id]??[]),...(concepts.get(id)?.elements??[])])].filter(e=>parts.has(e));
+  choose({id,name,elements:elements.length?elements:(chosen?.elements??[])});
+ };
+ // Every other structure claiming the selected parts, most specific first, less the family the panel already links.
+ const alsoPartOf=useMemo(()=>{
+  if(!bridge||!chosen||!mvmt?.structure)return [] as {id:string;name:string}[];
+  const skip=new Set([mvmt.mvmtId,mvmt.structure.parent?.id??'',...(mvmt.structure.children??[]).map(c=>c.id)]);
+  const seen=new Set<string>(),out:{id:string;name:string}[]=[];
+  for(const e of chosen.elements)for(const id of bridge.parts[e]??[])if(!skip.has(id)&&!seen.has(id)){seen.add(id);out.push({id,name:bridge.names[id]??id});}
+  return out;
+ },[bridge,chosen,mvmt]);
  useEffect(()=>{if(!atlas)return;return registerAtlasTools(atlas,c=>flushSync(()=>choose(c)));},[atlas]);
  const choosePart=(id:string)=>{const p=parts.get(id);if(!p)return;setChosen({id:p.conceptId,name:p.name,elements:[id]});setState(s=>({...s,selected:[id],isolate:false,rotate:false}));setDetails(true);setPanel(null);};
  const framePart=(id:string)=>{choosePart(id);setFrame(f=>({id,n:(f?.n??0)+1}));};
@@ -91,7 +163,8 @@ export default function Home(){
   if(req.region!==undefined)pickRegion(MVMT_REGIONS.some(r=>r.id===req.region)?req.region:'');
   if(req.systems)setState(s=>({...s,visible:req.systems!,selected:[],isolate:false}));
   if(req.view)setState(s=>({...s,view:req.view!,reset:s.reset+1,rotate:false}));
-  if(req.select){const id=req.select,part=parts.get(id),concept=atlas.concepts.find(c=>c.id===id)??(part?{id:part.conceptId,name:part.name,elements:[id]}:null);if(concept)choose(concept);else postToParent({type:'unresolved',id});}
+  // an MVMT structure id selects everything the bridge gives it: its own meshes and the BP3D parts matched to it
+  if(req.select){const id=req.select,part=parts.get(id),own=atlas.concepts.find(c=>c.id===id),bridged=atlas.layers?.mvmt?.structures[id];const concept=bridged?.length?{id,name:atlas.layers!.mvmt!.names[id]??own?.name??id,elements:[...new Set([...(own?.elements??[]),...bridged])].filter(e=>parts.has(e))}:own??(part?{id:part.conceptId,name:part.name,elements:[id]}:null);if(concept)choose(concept);else postToParent({type:'unresolved',id});}
   if(req.line!==undefined){if(!req.line){setLineOn(false);setLineId(null);}else if(LINE_IDS.includes(req.line)){setLineOn(true);setLineId(req.line);}else postToParent({type:'unresolved',line:req.line});}
  };
  const applyRef=useRef(apply);applyRef.current=apply;
@@ -136,7 +209,25 @@ export default function Home(){
   <footer className="studio-footer"><span>{state.explode>.8?'Drag to pan':'Drag to orbit'} <b>·</b> Pinch to zoom <b>·</b> Tap to inspect <b>·</b> Double-tap to frame</span><Button variant="ghost" onClick={()=>{setDetails(false);setPanel(null);setAbout(true);}}>Source & credits <ArrowUpRight size={12}/></Button></footer>
   {progress<100&&!error&&<div className="loading glass" role="status"><Activity size={18}/><div><strong>Preparing the anatomy</strong><span>{progress}% · {region?MVMT_REGIONS.find(r=>r.id===region)?.name:'Whole body'}</span><div className="loading-track"><i style={{width:`${progress}%`}}/></div></div></div>}
   {error&&<div className="loading glass error" role="alert"><p>{error}</p><Button variant="ghost" onClick={()=>location.reload()}>Reload viewer</Button></div>}
-  <Sheet open={details&&selectedParts.length>0} modal={false} disablePointerDismissal onOpenChange={setDetails}><SheetContent initialFocus={detailTitle} className={`detail-sheet glass ${state.isolate?'is-isolated':''}`} showCloseButton={true}><div className="detail-header"><div className="detail-accent" style={{background:system?.color}}/><div className="eyebrow">{system?.name??'ANATOMY'}{selected?.region&&<span className="eyebrow-region"> · {MVMT_REGIONS.find(r=>r.id===selected.region)?.name}</span>}</div><SheetTitle ref={detailTitle} tabIndex={-1} className="structure-title">{chosen?.name}</SheetTitle>{selectedParts.some(p=>p.source==='schematic')&&<div className="schematic-inline">{SCHEMATIC}</div>}{selected?.fitConfidence==='low'&&<div className="confidence-note">{selected.system==='landmarks'?`Fit confidence low: this landmark's rule landed ${Math.round((selected.fitResidual??0)*1000)} mm from where the fit expected it on this body.`:selected.fitRule==='canal'?`Fit confidence low: ${Math.round((selected.fitInBoneFraction??0)*100)}% of this part lies inside bone, where the vertebral canal wall should stop it.`:selected.fitRule==='envelope'?`Fit confidence low: ${Math.round((selected.fitOutsideFraction??0)*100)}% of this nerve lies outside the body and ${Math.round((selected.fitInBoneFraction??0)*100)}% inside bone.`:`Fit confidence low: ${Math.round((selected.fitFarFraction??0)*100)}% of this part sits more than 6 mm from the BodyParts3D surface.`}</div>}</div><div className="detail-scroll" key={`${chosen?.id}-${state.isolate}`}><SheetDescription className="structure-description">{chosen&&selected?explanation(chosen.name,selected.system):''}</SheetDescription>{chosen&&!EXPLANATIONS[chosen.name.toLowerCase()]&&<span className="context-note">System overview · structure identified from source anatomy</span>}<div className="structure-meta"><span>Atlas reference<strong>{chosen?.id}</strong></span><span>Selected pieces<strong>{state.selected.length.toLocaleString()}</strong></span></div>{selectedParts.length>1&&<div className="member-list"><h3>Included structures</h3>{selectedParts.slice(0,50).map(p=><Button variant="ghost" key={p.id} onClick={()=>choosePart(p.id)}><span>{p.name}</span><ChevronRight size={14}/></Button>)}{selectedParts.length>50&&<p>And {selectedParts.length-50} more modeled pieces.</p>}</div>}<a className="source-link" href={selected?.source?'https://github.com/calvinyu94-debug/mvmt-anatomy':'https://lifesciencedb.jp/bp3d/'} target="_blank" rel="noreferrer">{selected?.source==='schematic'?'Authored in mvmt-anatomy':selected?.source==='zanatomy'?'From Z-Anatomy, fitted onto this body':'View anatomical source'} <ArrowUpRight size={14}/></a></div><div className="detail-actions"><Button className={`primary-action ${state.isolate?'active':''}`} onClick={()=>setState(s=>({...s,isolate:!s.isolate,explode:0}))}><Focus size={18}/>{state.isolate?'Show surrounding anatomy':'Isolate structure'}<ChevronRight size={16}/></Button><Button variant="ghost" className="secondary-action" onClick={()=>{if(selected)framePart(selected.id);}}>Frame</Button><Button variant="ghost" className="secondary-action" onClick={()=>{setState(s=>({...s,selected:[],isolate:false}));setChosen(null);setDetails(false);}}>Clear selection</Button></div></SheetContent></Sheet>
+  <Sheet open={details&&selectedParts.length>0} modal={false} disablePointerDismissal onOpenChange={setDetails}><SheetContent initialFocus={detailTitle} className={`detail-sheet glass ${state.isolate?'is-isolated':''}`} showCloseButton={true}><div className="detail-header"><div className="detail-accent" style={{background:system?.color}}/><div className="eyebrow">{system?.name??'ANATOMY'}{selected?.region&&<span className="eyebrow-region"> · {MVMT_REGIONS.find(r=>r.id===selected.region)?.name}</span>}</div><SheetTitle ref={detailTitle} tabIndex={-1} className="structure-title">{chosen?.name}</SheetTitle>{selectedParts.some(p=>p.source==='schematic')&&<div className="schematic-inline">{SCHEMATIC}</div>}{selected?.fitConfidence==='low'&&<div className="confidence-note">{selected.system==='landmarks'?`Fit confidence low: this landmark's rule landed ${Math.round((selected.fitResidual??0)*1000)} mm from where the fit expected it on this body.`:selected.fitRule==='canal'?`Fit confidence low: ${Math.round((selected.fitInBoneFraction??0)*100)}% of this part lies inside bone, where the vertebral canal wall should stop it.`:selected.fitRule==='envelope'?`Fit confidence low: ${Math.round((selected.fitOutsideFraction??0)*100)}% of this nerve lies outside the body and ${Math.round((selected.fitInBoneFraction??0)*100)}% inside bone.`:`Fit confidence low: ${Math.round((selected.fitFarFraction??0)*100)}% of this part sits more than 6 mm from the BodyParts3D surface.`}</div>}</div><div className="detail-scroll" key={`${chosen?.id}-${state.isolate}`}>
+   {/* The MVMT structure the selection resolves to: the same sections as the Z-Anatomy selection panel in mvmt-program.
+       Patient view shows what it does and hides the practitioner-only clinical block and the drills, as there. */}
+   {mvmt&&<div className="mvmt-block">{mvmt.structure?(()=>{const s=mvmt.structure;const sameName=chosen?.name.trim().toLowerCase()===s.name.trim().toLowerCase();return <>
+    {!sameName&&<h3 className="mvmt-name">{s.name}</h3>}
+    {s.latin&&<div className="mvmt-latin">{s.latin}</div>}
+    <div className="mvmt-tags">{regionsOf(s).map(k=><span className="mvmt-tag" key={k}>{regionName(k)}</span>)}<span className="mvmt-tag">{MVMT_SYSTEMS[s.system]??s.system}</span></div>
+    {s.parent&&<div className="mvmt-parent">Part of <button type="button" className="mvmt-link" onClick={()=>goStructure(s.parent!.id)}>{s.parent.name}</button></div>}
+    {!!s.children?.length&&<div className="mvmt-sec"><span className="mvmt-lbl">Breaks down into</span><div className="mvmt-kids">{s.children.map(c=><button type="button" key={c.id} onClick={()=>goStructure(c.id)}>{c.name}</button>)}</div></div>}
+    <div className="mvmt-sec"><span className="mvmt-lbl">What it does</span><p>{s.action}</p></div>
+    {!patient&&s.clinical&&<div className="mvmt-sec mvmt-clin"><span className="mvmt-lbl">Why it matters clinically</span><p>{s.clinical}</p></div>}
+    {s.modelNote&&<p className="mvmt-model"><b>About this model</b> — {s.modelNote}</p>}
+    {!patient&&mvmt.source==='parent'&&(mvmt.drills.length?<div className="mvmt-sec"><span className="mvmt-lbl">Drills that load this{mvmt.where?` — adding to ${mvmt.where}`:''}</span>
+     {s.parent&&<p className="mvmt-note">{mvmt.drills.length>mvmt.inherited?`The first ${mvmt.inherited} are inherited from ${s.parent.name}. The ${mvmt.drills.length-mvmt.inherited===1?'last one is':`last ${mvmt.drills.length-mvmt.inherited} are`} specific to this structure.`:`All inherited from ${s.parent.name} — this structure adds none of its own.`}</p>}
+     {mvmt.drills.map(d=><div className="mvmt-drill" key={d.id}><span className="dn">{d.name}<span className="dm">{d.levelLabel} · {d.typeLabel} · {d.rx}</span></span><button type="button" className="mvmt-add" disabled={d.added||!!adding[d.id]} onClick={()=>addDrill(d.id)}>{d.added?'Added':adding[d.id]?'Adding…':'Add'}</button></div>)}
+    </div>:s.noExercises?<div className="mvmt-sec"><span className="mvmt-lbl">No drills load this</span><p>{s.noExercises}</p></div>:null)}
+    {!!alsoPartOf.length&&<div className="mvmt-sec"><span className="mvmt-lbl">Also part of</span><div className="mvmt-kids">{alsoPartOf.map(o=><button type="button" key={o.id} onClick={()=>goStructure(o.id)}>{o.name}</button>)}</div></div>}
+   </>;})():mvmt.source==='pending'?<p className="mvmt-note">Looking this up…</p>:null}</div>}
+   <SheetDescription className="structure-description">{chosen&&selected?(mvmt?.structure&&!EXPLANATIONS[chosen.name.toLowerCase()]?'':explanation(chosen.name,selected.system)):''}</SheetDescription>{chosen&&!mvmt?.structure&&!EXPLANATIONS[chosen.name.toLowerCase()]&&<span className="context-note">System overview · structure identified from source anatomy</span>}<div className="structure-meta"><span>Atlas reference<strong>{chosen?.id}</strong></span><span>Selected pieces<strong>{state.selected.length.toLocaleString()}</strong></span></div>{selectedParts.length>1&&<div className="member-list"><h3>Included structures</h3>{selectedParts.slice(0,50).map(p=><Button variant="ghost" key={p.id} onClick={()=>choosePart(p.id)}><span>{p.name}</span><ChevronRight size={14}/></Button>)}{selectedParts.length>50&&<p>And {selectedParts.length-50} more modeled pieces.</p>}</div>}<a className="source-link" href={selected?.source?'https://github.com/calvinyu94-debug/mvmt-anatomy':'https://lifesciencedb.jp/bp3d/'} target="_blank" rel="noreferrer">{selected?.source==='schematic'?'Authored in mvmt-anatomy':selected?.source==='zanatomy'?'From Z-Anatomy, fitted onto this body':'View anatomical source'} <ArrowUpRight size={14}/></a></div><div className="detail-actions"><Button className={`primary-action ${state.isolate?'active':''}`} onClick={()=>setState(s=>({...s,isolate:!s.isolate,explode:0}))}><Focus size={18}/>{state.isolate?'Show surrounding anatomy':'Isolate structure'}<ChevronRight size={16}/></Button><Button variant="ghost" className="secondary-action" onClick={()=>{if(selected)framePart(selected.id);}}>Frame</Button><Button variant="ghost" className="secondary-action" onClick={()=>{setState(s=>({...s,selected:[],isolate:false}));setChosen(null);setDetails(false);}}>Clear selection</Button></div></SheetContent></Sheet>
   <Sheet open={about} onOpenChange={setAbout}><SheetContent className="about-sheet glass"><div className="eyebrow">SOURCE & SCOPE</div><SheetTitle className="structure-title">A body, revealed.</SheetTitle><SheetDescription>The adult male reference anatomy from BodyParts3D, with MVMT's layers fitted onto it.</SheetDescription><div className="about-copy"><p><strong>Male · BodyParts3D</strong><br/>2,234 individual meshes and 3,432 named concepts from an adult male reference anatomy.</p><p><strong>MVMT layers</strong><br/>Fascia, joints & ligaments, insertions and landmarks from the Z-Anatomy atlas, fitted onto this body by landmark rules; the nerves and the spinal cord are schematic and say so.</p><p>This reference does not contain every human structure or variation. Named concepts can contain multiple pieces; each source mesh is rendered once. Colors and system groupings are designed for exploration. The geometry is simplified for the web. This is an anatomical reference, not a diagnostic or surgical tool.</p><h3>Source</h3><p>BodyParts3D, © The Database Center for Life Science, CC Attribution 4.0 International. Z-Anatomy, CC BY-SA 4.0. Human Atlas, MIT.</p><a href="https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html" target="_blank" rel="noreferrer">Dataset license <ArrowUpRight size={14}/></a><a href="https://github.com/calvinyu94-debug/mvmt-anatomy" target="_blank" rel="noreferrer">MVMT layers and the fit <ArrowUpRight size={14}/></a><a href="https://github.com/ashemag/human-atlas" target="_blank" rel="noreferrer">Human Atlas <ArrowUpRight size={14}/></a></div></SheetContent></Sheet>
  </main>;
 }
