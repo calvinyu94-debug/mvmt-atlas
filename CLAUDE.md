@@ -111,6 +111,20 @@ decompresses them itself. The pipeline after a new export from mvmt-anatomy:
 
 ## Fidelity of the authored layers (Phase 4)
 
+- **Thirteen muscles are ours, not BodyParts3D's.** The Muscles system holds
+  36 parts with `source: zanatomy` (`carried: true`, `carriedFor` naming the
+  MVMT structure): masseter, temporalis, the pterygoids, occipitofrontalis,
+  latissimus dorsi, multifidus, quadratus lumborum, transversus abdominis,
+  the internal oblique, rectus abdominis, spinalis capitis, extensor
+  digitorum brevis, which BodyParts3D as Human Atlas selected it does not
+  model. They live in the MVMT region chunks, take their depth from the
+  structure that claims them (`build-index.mjs` reports them under
+  `carriedStructures`), and light as full stations on the fascial lines (the
+  SBL's scalp, the SFL's rectus abdominis) with nothing changed in the viewer.
+  `CONCEPT_MATCHES` still lists them with an empty array: nothing in BP3D to
+  match, the belly arrives as our own mesh. Three of the 29 "missing" muscles
+  were BP3D's names (rhomboids, rotatores as "rotator", the hamstring origin),
+  four have no belly in Z-Anatomy either; `scripts/overrides.mjs` says which.
 - **BodyParts3D 4.0 has nothing to add.** The IS-A archive Human Atlas used is
   the whole release (2,234 elements); the PART-OF archive is a 1,258-element
   subset of it. Its nerves are cranial and orbital only, its "spinal cord" is

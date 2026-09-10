@@ -172,8 +172,8 @@
      ],
      "status": "full",
      "sides": {
-      "l": 37,
-      "r": 37,
+      "l": 38,
+      "r": 38,
       "unsided": 2
      }
     },
@@ -218,10 +218,10 @@
        "id": "head-jaw-occipitofrontalis"
       }
      ],
-     "status": "attachments",
+     "status": "full",
      "sides": {
-      "l": 2,
-      "r": 2,
+      "l": 5,
+      "r": 5,
       "unsided": 0
      }
     }
@@ -361,10 +361,10 @@
        "id": "lumbar-rectus-abdominis"
       }
      ],
-     "status": "attachments",
+     "status": "full",
      "sides": {
-      "l": 2,
-      "r": 2,
+      "l": 3,
+      "r": 3,
       "unsided": 0
      }
     },
@@ -561,10 +561,10 @@
        "id": "lumbar-internal-oblique"
       }
      ],
-     "status": "attachments",
+     "status": "full",
      "sides": {
-      "l": 5,
-      "r": 5,
+      "l": 6,
+      "r": 6,
       "unsided": 0
      }
     },
@@ -723,10 +723,10 @@
        "id": "lumbar-internal-oblique"
       }
      ],
-     "status": "attachments",
+     "status": "full",
      "sides": {
-      "l": 5,
-      "r": 5,
+      "l": 6,
+      "r": 6,
       "unsided": 0
      }
     },
@@ -877,8 +877,8 @@
      ],
      "status": "full",
      "sides": {
-      "l": 37,
-      "r": 37,
+      "l": 38,
+      "r": 38,
       "unsided": 2
      }
     }
@@ -1219,10 +1219,10 @@
        "id": "head-jaw-medial-pterygoid"
       }
      ],
-     "status": "attachments",
+     "status": "full",
      "sides": {
-      "l": 2,
-      "r": 2,
+      "l": 3,
+      "r": 3,
       "unsided": 0
      }
     },
@@ -1235,10 +1235,10 @@
        "id": "head-jaw-temporalis"
       }
      ],
-     "status": "attachments",
+     "status": "full",
      "sides": {
-      "l": 5,
-      "r": 5,
+      "l": 6,
+      "r": 6,
       "unsided": 0
      }
     }
@@ -1288,10 +1288,10 @@
        "id": "shoulder-lats"
       }
      ],
-     "status": "attachments",
+     "status": "full",
      "sides": {
-      "l": 2,
-      "r": 2,
+      "l": 3,
+      "r": 3,
       "unsided": 0
      }
     },
@@ -1773,10 +1773,10 @@
        "id": "shoulder-lats"
       }
      ],
-     "status": "attachments",
+     "status": "full",
      "sides": {
-      "l": 2,
-      "r": 2,
+      "l": 3,
+      "r": 3,
       "unsided": 0
      }
     },
@@ -1900,10 +1900,10 @@
        "id": "lumbar-rectus-abdominis"
       }
      ],
-     "status": "attachments",
+     "status": "full",
      "sides": {
-      "l": 2,
-      "r": 2,
+      "l": 3,
+      "r": 3,
       "unsided": 0
      }
     },
@@ -1943,10 +1943,10 @@
        "id": "shoulder-lats"
       }
      ],
-     "status": "attachments",
+     "status": "full",
      "sides": {
-      "l": 2,
-      "r": 2,
+      "l": 3,
+      "r": 3,
       "unsided": 0
      }
     },
@@ -2019,60 +2019,11 @@
  "unresolved": [],
  "attachmentsOnly": [
   {
-   "line": "SBL",
-   "structure": "head-jaw-occipitofrontalis",
-   "name": "Occipitofrontalis",
-   "latin": "m. occipitofrontalis",
-   "system": "muscular"
-  },
-  {
    "line": "SFL",
    "structure": "knee-patellar-tendon",
    "name": "Patellar Tendon",
    "latin": "ligamentum patellae",
    "system": "fascial"
-  },
-  {
-   "line": "SFL",
-   "structure": "lumbar-rectus-abdominis",
-   "name": "Rectus Abdominis",
-   "latin": "m. rectus abdominis",
-   "system": "muscular"
-  },
-  {
-   "line": "LL",
-   "structure": "lumbar-internal-oblique",
-   "name": "Internal Oblique",
-   "latin": "m. obliquus internus abdominis",
-   "system": "muscular"
-  },
-  {
-   "line": "SPL",
-   "structure": "lumbar-internal-oblique",
-   "name": "Internal Oblique",
-   "latin": "m. obliquus internus abdominis",
-   "system": "muscular"
-  },
-  {
-   "line": "DFL",
-   "structure": "head-jaw-medial-pterygoid",
-   "name": "Medial Pterygoid",
-   "latin": "m. pterygoideus medialis",
-   "system": "muscular"
-  },
-  {
-   "line": "DFL",
-   "structure": "head-jaw-temporalis",
-   "name": "Temporalis",
-   "latin": "m. temporalis",
-   "system": "muscular"
-  },
-  {
-   "line": "SFAL",
-   "structure": "shoulder-lats",
-   "name": "Latissimus Dorsi",
-   "latin": "m. latissimus dorsi",
-   "system": "muscular"
   },
   {
    "line": "SBAL",
@@ -2083,31 +2034,10 @@
   },
   {
    "line": "BFL",
-   "structure": "shoulder-lats",
-   "name": "Latissimus Dorsi",
-   "latin": "m. latissimus dorsi",
-   "system": "muscular"
-  },
-  {
-   "line": "BFL",
    "structure": "knee-patellar-tendon",
    "name": "Patellar Tendon",
    "latin": "ligamentum patellae",
    "system": "fascial"
-  },
-  {
-   "line": "FFL",
-   "structure": "lumbar-rectus-abdominis",
-   "name": "Rectus Abdominis",
-   "latin": "m. rectus abdominis",
-   "system": "muscular"
-  },
-  {
-   "line": "IFL",
-   "structure": "shoulder-lats",
-   "name": "Latissimus Dorsi",
-   "latin": "m. latissimus dorsi",
-   "system": "muscular"
   }
  ]
 }

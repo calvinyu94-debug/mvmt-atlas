@@ -6,12 +6,16 @@
    "fma": 0
   },
   "fascia": {
-   "names": 84,
+   "names": 85,
    "fma": 9
   },
   "ligaments": {
    "names": 234,
    "fma": 7
+  },
+  "muscular": {
+   "names": 18,
+   "fma": 0
   },
   "landmarks": {
    "names": 42,
@@ -1238,6 +1242,16 @@
    "fmaName": null
   },
   {
+   "sourceName": "Deep part of masseter",
+   "system": "muscular",
+   "structures": [
+    "head-jaw-masseter",
+    "head-jaw-masseter-deep"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
    "sourceName": "Deep part of tibial collateral ligament",
    "system": "ligaments",
    "structures": [
@@ -1679,6 +1693,15 @@
    "fmaName": null
   },
   {
+   "sourceName": "Epicranial aponeurosis",
+   "system": "fascia",
+   "structures": [
+    "head-jaw-occipitofrontalis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
    "sourceName": "Erector spinae.ol",
    "system": "insertions",
    "structures": [
@@ -1782,6 +1805,15 @@
    "system": "insertions",
    "structures": [
     "elbow-wrist-ecu"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Extensor digitorum brevis",
+   "system": "muscular",
+   "structures": [
+    "ankle-edb"
    ],
    "fma": null,
    "fmaName": null
@@ -3063,6 +3095,15 @@
    "fmaName": null
   },
   {
+   "sourceName": "Frontalis muscle",
+   "system": "muscular",
+   "structures": [
+    "head-jaw-occipitofrontalis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
    "sourceName": "Frontalis muscle.ol",
    "system": "insertions",
    "structures": [
@@ -3393,6 +3434,16 @@
    "fmaName": null
   },
   {
+   "sourceName": "Inferior head of lateral pterygoid muscle",
+   "system": "muscular",
+   "structures": [
+    "head-jaw-lateral-pterygoid",
+    "head-jaw-lat-pterygoid-inferior"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
    "sourceName": "Inferior pubic ligament",
    "system": "ligaments",
    "structures": [],
@@ -3492,6 +3543,16 @@
    "sourceName": "Intermuscular gluteal bursae",
    "system": "fascia",
    "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Internal abdominal oblique muscle",
+   "system": "muscular",
+   "structures": [
+    "lumbar-obliques",
+    "lumbar-internal-oblique"
+   ],
    "fma": null,
    "fmaName": null
   },
@@ -4043,6 +4104,15 @@
    "structures": [],
    "fma": "FMA55139",
    "fmaName": "lateral thyrohyoid ligament"
+  },
+  {
+   "sourceName": "Latissimus dorsi muscle",
+   "system": "muscular",
+   "structures": [
+    "shoulder-lats"
+   ],
+   "fma": null,
+   "fmaName": null
   },
   {
    "sourceName": "Latissimus dorsi muscle.el",
@@ -5647,6 +5717,15 @@
    "fmaName": null
   },
   {
+   "sourceName": "Medial pterygoid muscle",
+   "system": "muscular",
+   "structures": [
+    "head-jaw-medial-pterygoid"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
    "sourceName": "Medial pterygoid muscle.el",
    "system": "insertions",
    "structures": [
@@ -5757,6 +5836,39 @@
    "system": "fascia",
    "structures": [
     "lumbar-tl-fascia"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Multifidus colli muscle",
+   "system": "muscular",
+   "structures": [
+    "spine-transversospinalis",
+    "spine-multifidus",
+    "spine-multifidus-cervicis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Multifidus lumborum muscle",
+   "system": "muscular",
+   "structures": [
+    "lumbar-multifidus",
+    "spine-transversospinalis",
+    "spine-multifidus"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Multifidus thoracis muscle",
+   "system": "muscular",
+   "structures": [
+    "thoracic-multifidus",
+    "spine-transversospinalis",
+    "spine-multifidus"
    ],
    "fma": null,
    "fmaName": null
@@ -6144,6 +6256,15 @@
    "system": "ligaments",
    "structures": [
     "hip-obturator-membrane"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Occipitalis muscle",
+   "system": "muscular",
+   "structures": [
+    "head-jaw-occipitofrontalis"
    ],
    "fma": null,
    "fmaName": null
@@ -7059,6 +7180,15 @@
    "fmaName": null
   },
   {
+   "sourceName": "Quadratus lumborum muscle",
+   "system": "muscular",
+   "structures": [
+    "lumbar-ql"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
    "sourceName": "Quadriceps femoris muscle.el",
    "system": "insertions",
    "structures": [
@@ -7122,6 +7252,15 @@
    "sourceName": "Radioscaphocapitate ligament",
    "system": "ligaments",
    "structures": [],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Rectus abdominis muscle",
+   "system": "muscular",
+   "structures": [
+    "lumbar-rectus-abdominis"
+   ],
    "fma": null,
    "fmaName": null
   },
@@ -8069,6 +8208,17 @@
    "fmaName": null
   },
   {
+   "sourceName": "Spinalis capitis muscle",
+   "system": "muscular",
+   "structures": [
+    "spine-erector-spinae",
+    "spine-spinalis",
+    "spine-spinalis-capitis"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
    "sourceName": "Spinalis capitis muscle.el",
    "system": "insertions",
    "structures": [
@@ -8530,6 +8680,16 @@
    "fmaName": null
   },
   {
+   "sourceName": "Superficial part of masseter",
+   "system": "muscular",
+   "structures": [
+    "head-jaw-masseter",
+    "head-jaw-masseter-superficial"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
    "sourceName": "Superficial part of tibial collateral ligament",
    "system": "ligaments",
    "structures": [
@@ -8587,6 +8747,16 @@
    "system": "ligaments",
    "structures": [
     "shoulder-gh-joint"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Superior head of lateral pterygoid muscle",
+   "system": "muscular",
+   "structures": [
+    "head-jaw-lateral-pterygoid",
+    "head-jaw-lat-pterygoid-superior"
    ],
    "fma": null,
    "fmaName": null
@@ -8709,6 +8879,15 @@
    "system": "ligaments",
    "structures": [
     "ankle-dorsal-talonavicular"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Temporalis muscle",
+   "system": "muscular",
+   "structures": [
+    "head-jaw-temporalis"
    ],
    "fma": null,
    "fmaName": null
@@ -9162,6 +9341,15 @@
    "structures": [
     "ankle-syndesmosis",
     "ankle-transverse-tibiofibular"
+   ],
+   "fma": null,
+   "fmaName": null
+  },
+  {
+   "sourceName": "Transversus abdominis muscle",
+   "system": "muscular",
+   "structures": [
+    "lumbar-tva"
    ],
    "fma": null,
    "fmaName": null
