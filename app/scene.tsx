@@ -133,7 +133,8 @@ export default function AnatomyScene({atlas,state,onSelect,onFrame,onProgress,on
    // Only the gzipped chunks ship (GitHub Pages serves them as raw bytes), so decoding is not optional.
    if(!chunk.gzip)throw new Error('This anatomy catalogue has no compressed geometry.');if(typeof DecompressionStream==='undefined')throw new Error('This browser cannot decompress the anatomy files. Please use a current browser.');
    const t0=performance.now();
-   const response=await fetch(assetUrl(chunk.gzip),{signal:abort.signal});const t1=performance.now();const buffer=await decodeModelResponse(response,chunk.bytes,true);const t2=performance.now();if(disposed||!(wantedKeys.includes(key)||wantedContext.includes(key)))return;
+   // the byte counts version the URL: a chunk cached from an earlier build is never read at this manifest's offsets
+   const response=await fetch(assetUrl(chunk.gzip)+'?v='+chunk.bytes+'-'+chunk.gzipBytes,{signal:abort.signal});const t1=performance.now();const buffer=await decodeModelResponse(response,chunk.bytes,true);const t2=performance.now();if(disposed||!(wantedKeys.includes(key)||wantedContext.includes(key)))return;
    const groups=new Map<string,T.BufferGeometry[]>(),own:T.BufferGeometry[]=[],parts:number[]=[];
    const layouts=layoutsIn(key);
    if(kind==='context'&&!layouts.length){console.error('context set '+key+' names no parts: atlas.contexts is out of step with atlas.parts');throw new Error('context set '+key+' is empty');}
