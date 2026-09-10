@@ -144,6 +144,19 @@ decompresses them itself. The pipeline after a new export from mvmt-anatomy:
 
 ## Fidelity of the authored layers (Phase 4)
 
+- **The carried sheets are separated in the export and copied whole in the
+  overview.** The abdominal wall rendered shattered because the carried
+  sheets shared surfaces with each other and with BodyParts3D's external
+  oblique (the export's `LAYER_STACKS` now holds them 2 mm apart; the story
+  is in mvmt-anatomy's fit report), and in the overview because the sheets
+  fell to the sloppy simplifier and the external oblique, decimated to 12%
+  with a 3% error bound, wobbled through the gaps. `build-overview.mjs`
+  copies carried parts and the BodyParts3D sheets named in the export's
+  stacks whole (`atlas.overview.copiedWhole`). `validate-atlas.mjs` fails if
+  two carried parts in one region are inside each other on more than 2% of
+  their triangles (parts of one muscle the export lists as siblings are
+  exempt); it samples 800 centroids per part, so a pair at the threshold can
+  read a fraction over what the export measured at 1,200.
 - **Thirteen muscles are ours, not BodyParts3D's.** The Muscles system holds
   36 parts with `source: zanatomy` (`carried: true`, `carriedFor` naming the
   MVMT structure): masseter, temporalis, the pterygoids, occipitofrontalis,
