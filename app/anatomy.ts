@@ -23,7 +23,12 @@ export const SYSTEMS: {id:SystemId;name:string;color:string;description:string}[
  {id:'landmarks',name:'Landmarks',color:'#2B5F9E',description:'Palpable bony landmarks, each resolved by its anatomical rule on the bones of this body.'},
  {id:'connective',name:'Connective tissue',color:'#B6C2CB',description:'Cartilage, ligaments, and other connective tissues support, connect, and separate structures. Their roles include stabilizing joints and distributing mechanical loads.'},
 ];
-export interface Part {id:string;name:string;conceptId:string;system:SystemId;chunk:number;positions:number;normals:number;indices:number;vertexCount:number;indexCount:number;bounds:[number[],number[]];source?:'zanatomy'|'schematic';sourceName?:string;region?:string;spans?:string[];structures?:string[];authored?:boolean;fitConfidence?:'low'|'high';fitResidual?:number;landmark?:string}
+/** fitConfidence is judged by one rule per system (mvmt-anatomy tools/bp3d_export.py), named in fitRule: `surface` for
+ * ligaments and fascia (fitFarFraction of sampled vertices further than 6 mm from any BP3D bone or muscle surface), `canal`
+ * for the central nerves (fitInBoneFraction inside bone; fitWallClearance is the median distance to the canal wall, recorded
+ * not judged), `envelope` for the peripheral nerves (fitOutsideFraction beyond BP3D's skin, fitInBoneFraction inside bone;
+ * no surface-distance test). Landmarks carry the fit's own residual instead. Low means more than 20% by the system's rule. */
+export interface Part {id:string;name:string;conceptId:string;system:SystemId;chunk:number;positions:number;normals:number;indices:number;vertexCount:number;indexCount:number;bounds:[number[],number[]];source?:'zanatomy'|'schematic';sourceName?:string;region?:string;spans?:string[];structures?:string[];authored?:boolean;fitConfidence?:'low'|'high';fitRule?:'surface'|'canal'|'envelope';fitFarFraction?:number;fitMedianDistance?:number;fitInBoneFraction?:number;fitOutsideFraction?:number;fitWallClearance?:number;fitResidual?:number;landmark?:string}
 export interface Concept {id:string;name:string;elements:string[]}
 export interface Chunk {url:string;bytes:number;gzip?:string;gzipBytes?:number;region?:string;bp3dRegion?:string;systems?:string[]|string;triangles?:number;parts?:number}
 export interface Layout {chunk:number;positions:number;normals:number;indices:number;vertexCount:number;indexCount:number}

@@ -126,11 +126,19 @@ decompresses them itself. The pipeline after a new export from mvmt-anatomy:
   tubes rebuilt from their centrelines in mvmt-anatomy's export, tapered and
   continuous with their plexus; the cord follows published cross-sections
   with both enlargements, roots at every level, thirty cauda strands.
-- `fitConfidence: low` on a carried-over part means more than 20% of its
-  sampled vertices lie further than 6 mm from any BP3D bone or muscle
-  surface; patient view hides every such part. For the cord and roots this
-  measures clearance from the canal wall, not the fit, and flags them
-  wholesale - a decision for CYU, recorded in the Phase 4 PR.
+- `fitConfidence: low` on a carried-over part is judged by one rule per
+  system, named in the part's `fitRule` and set in mvmt-anatomy's
+  `bp3d_export.py`: `surface` for ligaments and fascia (more than 20% of
+  sampled vertices further than 6 mm from any BP3D bone or muscle surface),
+  `canal` for the central nerves (more than 20% inside bone; the median
+  clearance from the canal wall is recorded, not judged), `envelope` for the
+  peripheral nerves (more than 20% outside BP3D's skin or inside bone; no
+  surface-distance test). Patient view hides every low part. The detail sheet
+  words the note by the rule. The single surface rule of Phase 4 flagged the
+  cord for sitting in the middle of its canal, and applying the canal rule
+  found that the cord below C7 had been authored through the vertebral
+  bodies; the fix and the counts are in mvmt-anatomy's
+  `verification/bp3d-fit-report.md`.
 
 ## The embed API
 
