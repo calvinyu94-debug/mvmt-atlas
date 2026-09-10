@@ -67,8 +67,14 @@ decompresses them itself. The pipeline after a new export from mvmt-anatomy:
   `scripts/overrides.mjs` homes the thoracic wall in the thorax; the thoracic
   context went from 7.66 to 5.57 MB gzipped and the shoulder's from 5.48 to
   7.57, because the same sheets span 71% of the shoulder's two bone boxes.
-  The contexts are now head-jaw 1.23, cervical 2.34, shoulder 7.57, thoracic
-  5.57, lumbar 3.05, hip 0.48, knee 1.26, elbow-wrist 0.03, ankle-foot 0.01 MB.
+  At the 15% spanning fraction the contexts were head-jaw 1.23, cervical 2.34,
+  shoulder 7.57, thoracic 5.57, lumbar 3.05, hip 0.48, knee 1.26, elbow-wrist
+  0.03, ankle-foot 0.01 MB; a shoulder view fetched the whole rib cage as copies.
+  **The spanning fraction is 50% since 2026-09-09** (`SPAN_FRACTION`; a part spans
+  a region when its centroid is in the box or half its triangles are): head-jaw
+  0.74, cervical 1.29, shoulder 4.86, thoracic 3.79, lumbar 1.20, hip 0.23, knee
+  0.51 MB, and elbow-wrist and ankle-foot have no context at all (12.6 MB in all,
+  from 21.5). The fraction is recorded per part in `spanFractions`.
 - **The context cap (`CONTEXT_CAP_BYTES`, `SPAN_FRACTION` in
   `rechunk-bp3d.mjs`) is a guard that currently catches nothing.** It drops a
   neighbour's part from a context when under 15% of its triangles are inside

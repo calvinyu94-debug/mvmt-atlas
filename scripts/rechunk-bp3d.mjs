@@ -57,7 +57,7 @@ for(const p of atlas.parts){
  assigned[p.id]={home,spans:[]};
 }
 // spanning: a part reaches into another region when its centroid lies inside that region's box or
-// at least 15% of its triangles do. The box is the region as the fit knows it: the box around its
+// at least SPAN_FRACTION of its triangles do. The box is the region as the fit knows it: the box around its
 // landmark anchors, grown by SPAN_MARGIN. The union of the region's parts was tried first and is
 // not a region - the tibia belongs to the knee and reaches the ankle, the forearm hangs beside the
 // abdomen - and a bounds corner alone was looser still.
@@ -84,7 +84,11 @@ for(const r of atlas.regions){
  r.bounds=[regionBox[r.id][0][0].map((v,i)=>Math.min(...regionBox[r.id].map(b=>b[0][i]))),regionBox[r.id][0][1].map((v,i)=>Math.max(...regionBox[r.id].map(b=>b[1][i])))];
 }
 const inside=(pt,[lo,hi])=>pt[0]>=lo[0]&&pt[0]<=hi[0]&&pt[1]>=lo[1]&&pt[1]<=hi[1]&&pt[2]>=lo[2]&&pt[2]<=hi[2];
-const SPAN_FRACTION=0.15;
+// A part spans another region when its centroid lies in that region's box or at least half of its triangles do.
+// It was 15% until 2026-09-09: at 15% the abdominal wall, the latissimus and the intercostals reached two or
+// three contexts each, and a shoulder view fetched the whole rib cage as copies. The fraction is recorded per
+// part (spanFractions), so the number is reviewable against the record.
+const SPAN_FRACTION=0.5;
 // returns the regions the part spans and, for every region whose box its bounds touch, the fraction of its
 // triangles inside that box - the context cap below reads the fraction, so it is measured for every box, not
 // only until the first hit
@@ -137,7 +141,7 @@ packInto('body-organs',atlas.parts.filter(p=>!p.source&&!REGIONAL.has(p.system)&
 // context chunks: for each region, a copy of the parts that reach into it from its neighbours
 // (BP3D spanning parts and MVMT spanning parts), so a region view can draw its surroundings
 // dimmed without fetching a whole neighbour. Copies, so atlas.contexts carries their own layouts.
-// The cap: a part whose home is a neighbour, that has under 15% of its triangles inside the region (it is in the
+// The cap: a part whose home is a neighbour, that has under SPAN_FRACTION of its triangles inside the region (it is in the
 // context because its centroid fell in the box) and that is larger than 200 KB is left out of the context and
 // listed under atlas.contexts[region].excluded. The thoracic context had grown to 6.35 MB gzipped on the
 // centroid rule: the long back and chest sheets whose centroid sits in the thorax with most of their triangles
