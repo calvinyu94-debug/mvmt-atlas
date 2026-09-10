@@ -6,7 +6,7 @@
 //   node scripts/build-index.mjs <anatomy.json from mvmt-program> <structure-meshes.json>
 // (anatomy.json is scripts/extract-anatomy.mjs run over mvmt-program's index.html.)
 import fs from 'node:fs';
-import {CONCEPT_MATCHES} from './overrides.mjs';
+import {ABSENT_STRUCTURES,CONCEPT_MATCHES,PART_MATCHES} from './overrides.mjs';
 const dir=new URL('../public/models/',import.meta.url);
 const [anatomyPath,joinPath]=process.argv.slice(2);
 if(!anatomyPath||!joinPath)throw new Error('usage: build-index.mjs <anatomy.json> <structure-meshes.json>');
@@ -107,11 +107,17 @@ console.log(JSON.stringify({muscleDepth:atlas.layers.muscleDepth.summary,fascial
 // container from the join (Talocrural Joint holding exactly the lateral ligaments) goes to the
 // named structure, as v3Rank does in mvmt-program.
 const containers=new Set(join.structures.filter(x=>x.container).map(x=>x.id));
+// the part-level hand table, checked whole like the concept one
+for(const [key,ids] of Object.entries(PART_MATCHES)){
+ if(!structureNames.has(key))throw new Error(`PART_MATCHES names a structure mvmt-program does not have: ${key}`);
+ const missing=ids.filter(id=>!parts.has(id));
+ if(missing.length)throw new Error(`${key}: PART_MATCHES names a part this atlas lacks: ${missing.join(', ')}`);
+}
 const partsOf={},claimsOf=new Map();
 for(const s of anatomy){
  const own=byId.get(s.id)?.elements??[];
  const bp=bp3dFor(s).flatMap(c=>c.elements);
- const els=[...new Set([...own,...bp])].filter(e=>parts.has(e));
+ const els=[...new Set([...own,...bp,...(PART_MATCHES[s.name]??[])])].filter(e=>parts.has(e));
  partsOf[s.id]=els;
  for(const e of els){if(!claimsOf.has(e))claimsOf.set(e,new Set());claimsOf.get(e).add(s.id);}
 }
@@ -125,6 +131,12 @@ const bp3dParts=atlas.parts.filter(p=>!p.source);
 const cov={};for(const p of bp3dParts){const c=cov[p.system]=cov[p.system]||{parts:0,withStructure:0,without:0};c.parts++;if(bridgeParts[p.id])c.withStructure++;else c.without++;}
 const covered=bp3dParts.filter(p=>BRIDGE_SYSTEMS.includes(p.system));
 const noGeometry=anatomy.filter(s=>!partsOf[s.id].length).map(s=>s.id);
+// every structure without geometry is a reviewed absence with a reason, never a silent gap; and a
+// listed one that has since gained geometry is a stale entry to remove
+const unexplained=noGeometry.filter(id=>!ABSENT_STRUCTURES[id]);
+if(unexplained.length)throw new Error(`structures with no geometry and no reason in ABSENT_STRUCTURES: ${unexplained.join(', ')}`);
+const stale=Object.keys(ABSENT_STRUCTURES).filter(id=>!anat.has(id)||partsOf[id].length);
+if(stale.length)throw new Error(`ABSENT_STRUCTURES lists structures that now have geometry or do not exist: ${stale.join(', ')}`);
 atlas.layers.mvmt={note:'The id bridge. parts: every part id (BP3D and MVMT layers) to the MVMT structure ids that claim it, in resolution order (the most specific group first, then the rest by specificity); structures: every MVMT structure id to the part ids it claims, its own exported meshes and the BP3D concepts name-matched or hand-matched to it (scripts/overrides.mjs CONCEPT_MATCHES). The blurbs live in mvmt-structures.json.',
  parts:bridgeParts,structures:partsOf,names:Object.fromEntries(anatomy.map(s=>[s.id,s.name])),
  summary:{structures:anatomy.length,structuresWithParts:anatomy.length-noGeometry.length,structuresWithoutParts:noGeometry.length,bp3dParts:bp3dParts.length,bp3dPartsInScope:covered.length,bp3dPartsWithStructure:covered.filter(p=>bridgeParts[p.id]).length,bp3dPartsWithout:covered.filter(p=>!bridgeParts[p.id]).length,bySystem:cov}};
@@ -154,8 +166,8 @@ for(const sy of BRIDGE_SYSTEMS){
 }
 md.push('','## structures resolving to BP3D parts (in scope)','','| Structure | System | BP3D parts | BP3D concepts |','|---|---|---|---|');
 for(const s of anatomy){const bp=partsOf[s.id].filter(e=>parts.get(e)&&!parts.get(e).source);if(!bp.length)continue;md.push(`| ${s.name} (\`${s.id}\`) | ${s.system} | ${bp.length} | ${bp3dFor(s).map(c=>c.name).join(', ')} |`);}
-md.push('','## structures with no geometry in this atlas','','No BP3D concept and no carried mesh, so a click can never reach them and the panel only ever shows them by search or by link.','','| Structure | System | Region |','|---|---|---|');
-for(const id of noGeometry){const s=anat.get(id);md.push(`| ${s.name} (\`${s.id}\`) | ${s.system} | ${s.region} |`);}
+md.push('','## structures with no geometry in this atlas','','No BP3D concept and no carried mesh, so a click can never reach them and the panel only ever shows them by search or by link. Each is a reviewed absence: the reason is `ABSENT_STRUCTURES` in `scripts/overrides.mjs`, and the build stops on a structure without one.','','| Structure | System | Region | Why |','|---|---|---|---|');
+for(const id of noGeometry){const s=anat.get(id);md.push(`| ${s.name} (\`${s.id}\`) | ${s.system} | ${s.region} | ${ABSENT_STRUCTURES[id]} |`);}
 fs.mkdirSync(new URL('../verification/bridge/',import.meta.url),{recursive:true});
 fs.writeFileSync(new URL('../verification/bridge/coverage.md',import.meta.url),md.join('\n')+'\n');
 console.log(JSON.stringify({bridge:atlas.layers.mvmt.summary}));
