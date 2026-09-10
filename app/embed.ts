@@ -65,6 +65,23 @@ export function listenParent(handler:(request:EmbedRequest)=>void){
  return()=>window.removeEventListener('message',on);
 }
 
+/** What the parent knows about a structure: mvmt-program's ANATOMY entry, less the exercise names, plus its parent and
+ * children by id so the panel can navigate the hierarchy. The same shape comes from the bundled copy standalone. */
+export interface StructureBlurb{id:string;name:string;latin?:string;region:string;alsoRegion?:string|string[];system:string;layer?:number;inherits?:string;action:string;clinical?:string;noExercises?:string;modelNote?:string;parent?:{id:string;name:string}|null;children?:{id:string;name:string}[]}
+/** A drill that loads a structure, as the parent's library resolves it: level, type and dose spelled out, and whether
+ * the current phase already holds it. */
+export interface Drill{id:string;name:string;level:number;levelLabel:string;type:string;typeLabel:string;rx:string;added:boolean}
+/** The parent's answer to a select. `where` names the phase (or "this handout") a drill would be added to, null with no
+ * program open; `inherited` is how many of the drills come from the structure's parent (they lead the list). */
+export interface StructureReply{type:'structure';mvmtId:string;structure:StructureBlurb|null;drills:Drill[];where:string|null;hasProgram:boolean;inherited?:number}
+export interface AddedReply{type:'added';exerciseId:string;structureId:string;added:boolean}
+/** Listens for the parent's structure and added replies. Like `set`, they only change what is shown, so no origin check. */
+export function listenReplies(handler:(reply:StructureReply|AddedReply)=>void){
+ const on=(e:MessageEvent)=>{const d=e.data;if(!d||typeof d!=='object')return;const t=(d as {type?:unknown}).type;if(t==='structure'||t==='added')handler(d as StructureReply|AddedReply);};
+ window.addEventListener('message',on);
+ return()=>window.removeEventListener('message',on);
+}
+
 export function postToParent(message:Record<string,unknown>){
  if(!embedded())return;
  try{window.parent.postMessage(message,'*');}catch{/* a parent that refuses messages is not this viewer's problem */}

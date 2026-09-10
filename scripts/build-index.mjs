@@ -1,7 +1,10 @@
 // The indexes the viewer reads beside the geometry, rebuilt from atlas.json alone (idempotent, no
-// chunk files touched): muscle depth for every BP3D and MVMT muscle part, and the twelve fascial
-// lines resolved to concept ids on this body. Run after merge-layers.mjs and rechunk-bp3d.mjs.
+// chunk files touched): muscle depth for every BP3D and MVMT muscle part, the twelve fascial
+// lines resolved to concept ids on this body, and the id bridge (every part to the MVMT structures
+// that claim it, every structure to its parts) with the bundled copy of the structures' blurbs and
+// the coverage table. Run after merge-layers.mjs and rechunk-bp3d.mjs.
 //   node scripts/build-index.mjs <anatomy.json from mvmt-program> <structure-meshes.json>
+// (anatomy.json is scripts/extract-anatomy.mjs run over mvmt-program's index.html.)
 import fs from 'node:fs';
 import {CONCEPT_MATCHES} from './overrides.mjs';
 const dir=new URL('../public/models/',import.meta.url);
@@ -57,7 +60,7 @@ atlas.layers=atlas.layers||{};
 atlas.layers.muscleDepth={note:'1 superficial, 2 deep, from MVMT ANATOMY layer through name-matched BP3D concepts and our own carried muscles; a muscle without an entry is shown under every depth setting',parts:depth,
  summary:{muscularParts:muscles.length,bp3dMuscularParts:muscles.filter(p=>!p.source).length,carriedMuscularParts:muscles.filter(p=>p.source).length,classified,superficial:muscles.filter(p=>depth[p.id]===1).length,deep:muscles.filter(p=>depth[p.id]===2).length,structuresMatched:matchedStructures,structuresUnmatched:unmatched.length,structuresCarried:carriedStructures.length},
  unmatchedStructures:unmatched,carriedStructures};
-fs.writeFileSync(new URL('atlas.json',dir),JSON.stringify(atlas));
+// atlas.json is written once, after the bridge at the end
 
 // ---- fascial lines: named-structure storage, each station resolved to concept ids on this atlas.
 // A station's `status` says what those concepts hold, so the viewer can say it on the row rather
@@ -89,3 +92,70 @@ for(const l of lines){
  for(const st of l.stations)console.log(`  ${st.status.padEnd(11)} l${st.sides.l} r${st.sides.r} u${st.sides.unsided}  ${st.name}  <- ${st.resolve.map(r=>r.kind==='mvmt'?r.id:r.name).join(', ')}`);
 }
 console.log(JSON.stringify({muscleDepth:atlas.layers.muscleDepth.summary,fascialLines:lines.length,stations:lines.reduce((n,l)=>n+l.stations.length,0),full:lines.reduce((n,l)=>n+l.stations.filter(s=>s.status==='full').length,0),attachmentsOnly:attachmentsOnly.map(u=>u.structure),unresolved:unresolved.map(u=>u.structure)}));
+
+// ---- the id bridge: what a click on any part resolves to. Every part (BP3D's and ours) to the
+// MVMT structures that claim it, and every structure to the parts it claims. A structure claims
+// its own exported meshes (the concept under its id) and the BP3D concepts bp3dFor gives it, so
+// the bridge is the same answer muscle depth and the fascial lines already read, applied to the
+// whole map rather than to muscles and stations.
+//
+// A part claimed by several structures lists them in resolution order, and the viewer takes the
+// first: the most specific *group* (a structure with no `inherits`), then the rest by
+// specificity. That is mvmt-program's own default (Show named parts off): a click on the deep part
+// of masseter answers Masseter, and Masseter, Deep Part is a link under "Breaks down into".
+// Specificity is the number of parts claimed, fewest first; a tie between a named structure and a
+// container from the join (Talocrural Joint holding exactly the lateral ligaments) goes to the
+// named structure, as v3Rank does in mvmt-program.
+const containers=new Set(join.structures.filter(x=>x.container).map(x=>x.id));
+const partsOf={},claimsOf=new Map();
+for(const s of anatomy){
+ const own=byId.get(s.id)?.elements??[];
+ const bp=bp3dFor(s).flatMap(c=>c.elements);
+ const els=[...new Set([...own,...bp])].filter(e=>parts.has(e));
+ partsOf[s.id]=els;
+ for(const e of els){if(!claimsOf.has(e))claimsOf.set(e,new Set());claimsOf.get(e).add(s.id);}
+}
+const rank=(a,b)=>{const na=partsOf[a].length,nb=partsOf[b].length;if(na!==nb)return na-nb;const ca=containers.has(a),cb=containers.has(b);if(ca!==cb)return ca?1:-1;return a<b?-1:a>b?1:0;};
+const order=ids=>{const sorted=[...ids].sort(rank);const group=sorted.find(id=>!anat.get(id).inherits);return group?[group,...sorted.filter(id=>id!==group)]:sorted;};
+const bridgeParts={};for(const [e,set] of claimsOf)bridgeParts[e]=order(set);
+// coverage: BP3D's own parts, by system, with and without a structure. Muscles, bones, joints &
+// ligaments and fascia are the four systems the bridge is for; the rest is reported, not worked.
+const BRIDGE_SYSTEMS=['muscular','skeletal','connective','fascia'];
+const bp3dParts=atlas.parts.filter(p=>!p.source);
+const cov={};for(const p of bp3dParts){const c=cov[p.system]=cov[p.system]||{parts:0,withStructure:0,without:0};c.parts++;if(bridgeParts[p.id])c.withStructure++;else c.without++;}
+const covered=bp3dParts.filter(p=>BRIDGE_SYSTEMS.includes(p.system));
+const noGeometry=anatomy.filter(s=>!partsOf[s.id].length).map(s=>s.id);
+atlas.layers.mvmt={note:'The id bridge. parts: every part id (BP3D and MVMT layers) to the MVMT structure ids that claim it, in resolution order (the most specific group first, then the rest by specificity); structures: every MVMT structure id to the part ids it claims, its own exported meshes and the BP3D concepts name-matched or hand-matched to it (scripts/overrides.mjs CONCEPT_MATCHES). The blurbs live in mvmt-structures.json.',
+ parts:bridgeParts,structures:partsOf,names:Object.fromEntries(anatomy.map(s=>[s.id,s.name])),
+ summary:{structures:anatomy.length,structuresWithParts:anatomy.length-noGeometry.length,structuresWithoutParts:noGeometry.length,bp3dParts:bp3dParts.length,bp3dPartsInScope:covered.length,bp3dPartsWithStructure:covered.filter(p=>bridgeParts[p.id]).length,bp3dPartsWithout:covered.filter(p=>!bridgeParts[p.id]).length,bySystem:cov}};
+fs.writeFileSync(new URL('atlas.json',dir),JSON.stringify(atlas));
+
+// the bundled copy of the structures' text, for a viewer with no parent frame to ask: what the
+// structure does and why it matters, never the drills (those come from the parent's library, which
+// the practitioner may have extended). clinical is practitioner-only there and here alike.
+const STRUCTURE_FIELDS=['id','name','latin','region','alsoRegion','system','layer','inherits','action','clinical','noExercises','modelNote'];
+const structures=anatomy.map(s=>Object.fromEntries(STRUCTURE_FIELDS.filter(k=>s[k]!==undefined).map(k=>[k,s[k]])));
+fs.writeFileSync(new URL('mvmt-structures.json',dir),JSON.stringify({note:"mvmt-program's ANATOMY without the drill lists: name, Latin, region, system, what it does (action) and why it matters clinically (clinical, practitioner-only). Read by the viewer when it has no parent frame to ask; embedded in mvmt-program the parent answers from its live library instead.",generatedFrom:'mvmt-program index.html ANATOMY via scripts/extract-anatomy.mjs',structures}));
+
+// the coverage table, for review: which BP3D parts resolve to a structure and which do not, and
+// which structures have no geometry in this atlas at all
+const base=n=>n.replace(/\b(right|left)\s+/i,'').replace(/\s+of (right|left) /i,' of ').replace(/\s+\((right|left)\)/i,'');
+const md=[];
+md.push('# Id bridge coverage','',`Generated by \`scripts/build-index.mjs\` on ${new Date().toISOString().slice(0,10)}. Which BodyParts3D parts resolve to an MVMT structure through \`atlas.layers.mvmt\`, and which do not. The four systems the bridge is for are muscles, bones, joints & ligaments (BP3D's \`connective\`) and fascia; the others are counted, not worked. Every MVMT layer part (\`source: zanatomy\` or \`schematic\`) carries its structures from the export and is not listed here.`,'','## BodyParts3D parts by system','','| System | Parts | With a structure | Without |','|---|---|---|---|');
+for(const sy of Object.keys(cov).sort((a,b)=>(BRIDGE_SYSTEMS.includes(b)?1:0)-(BRIDGE_SYSTEMS.includes(a)?1:0)||a.localeCompare(b))){const c=cov[sy];md.push(`| ${sy}${BRIDGE_SYSTEMS.includes(sy)?'':' (out of scope)'} | ${c.parts} | ${c.withStructure} | ${c.without} |`);}
+md.push('',`In scope: **${atlas.layers.mvmt.summary.bp3dPartsWithStructure} of ${covered.length}** parts resolve to a structure; ${atlas.layers.mvmt.summary.bp3dPartsWithout} do not.`);
+for(const sy of BRIDGE_SYSTEMS){
+ const without=covered.filter(p=>p.system===sy&&!bridgeParts[p.id]);
+ md.push('',`## ${sy}: parts without a structure (${without.length})`,'');
+ if(!without.length){md.push('None.');continue;}
+ const groups={};for(const p of without){const b=base(p.name);(groups[b]=groups[b]||{n:0,regions:new Set()}).n++;groups[b].regions.add(p.region??'?');}
+ md.push('| BP3D part | Sides | Region |','|---|---|---|');
+ for(const b of Object.keys(groups).sort((a,c)=>a.localeCompare(c)))md.push(`| ${b} | ${groups[b].n} | ${[...groups[b].regions].join(', ')} |`);
+}
+md.push('','## structures resolving to BP3D parts (in scope)','','| Structure | System | BP3D parts | BP3D concepts |','|---|---|---|---|');
+for(const s of anatomy){const bp=partsOf[s.id].filter(e=>parts.get(e)&&!parts.get(e).source);if(!bp.length)continue;md.push(`| ${s.name} (\`${s.id}\`) | ${s.system} | ${bp.length} | ${bp3dFor(s).map(c=>c.name).join(', ')} |`);}
+md.push('','## structures with no geometry in this atlas','','No BP3D concept and no carried mesh, so a click can never reach them and the panel only ever shows them by search or by link.','','| Structure | System | Region |','|---|---|---|');
+for(const id of noGeometry){const s=anat.get(id);md.push(`| ${s.name} (\`${s.id}\`) | ${s.system} | ${s.region} |`);}
+fs.mkdirSync(new URL('../verification/bridge/',import.meta.url),{recursive:true});
+fs.writeFileSync(new URL('../verification/bridge/coverage.md',import.meta.url),md.join('\n')+'\n');
+console.log(JSON.stringify({bridge:atlas.layers.mvmt.summary}));
