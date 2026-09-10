@@ -243,10 +243,20 @@ the app when it is not.
   the leg's interosseous membrane for the forearm's; audit
   `verification/bridge/coverage.md` (the "structures resolving to BP3D
   parts" table) after any change to the table or to `ANATOMY`.
-- BP3D holds no lumbar vertebrae group and no thoracic discs that MVMT has a
-  structure for, and no coccyx at all; teeth, gingivae and the laryngeal,
-  ocular, lingual and palatal parts have no MVMT counterpart. Those are the
-  in-scope parts the coverage table lists as without a structure.
+- **A structure with no geometry is a reviewed absence, never a silent gap.**
+  `ABSENT_STRUCTURES` in `scripts/overrides.mjs` names every structure the
+  bridge leaves without parts and says why (joints are not parts in BP3D;
+  no bursae; a canal is a space between parts; the text-only nerves), and
+  `build-index.mjs` stops on a structure without a reason and on a listed
+  one that has gained geometry. All 35 were checked against every BP3D
+  concept name on 2026-09-10 and none has a counterpart; the coverage table
+  carries the reasons. `PART_MATCHES` is the part-level companion to
+  `CONCEPT_MATCHES`, for a BP3D part whose own concept is a parent holding
+  other parts (BP3D's one unnamed disc, the T12-L1, is the case).
+- BP3D has no coccyx; teeth, gingivae and the laryngeal, ocular, lingual and
+  palatal parts have no MVMT counterpart. Those are the in-scope parts the
+  coverage table lists as without a structure. The lumbar vertebrae and the
+  thoracic discs landed with mvmt-program's Batch N and resolve now.
 
 ## Theme
 

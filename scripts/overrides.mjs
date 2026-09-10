@@ -129,7 +129,46 @@ export const CONCEPT_MATCHES={
  'Metacarpals and Phalanges':['metacarpal bone','phalanx of finger'],
  'Tarsal Bones':['tarsal bone'],
  'Metatarsals and Phalanges':['metatarsal bone','phalanx of toe','sesamoid bone of foot'],
+ 'Lumbar Vertebrae':['set of lumbar vertebrae'],                              // the parts (First Lumbar Vertebra ...) match on their own
+ 'Thoracic Discs':['intervertebral disk of thoracic vertebra'],              // T1-T2 to T11-T12; the T12-L1 disc is in PART_MATCHES below
  'Interosseous Membrane':['interosseous membrane of forearm'],   // the token match took the forearm's and the leg's alike; the leg's is its own structure
  'Adductor Magnus':['adductor magnus','adductor minimus'],   // adductor minimus is the upper part of magnus, a BP3D part of its own
  'Digastric':['digastric','intermediate tendon'],           // the tendon between the bellies is a BP3D part of its own
+};
+
+// BP3D parts that stand for a structure but cannot be named by concept: their own concept is a parent
+// that holds other parts too. Keyed by structure name like CONCEPT_MATCHES, listing BP3D part ids;
+// these add to the structure's parts rather than replacing its concept match. The build stops on a
+// part id the atlas lacks.
+export const PART_MATCHES={
+ // BP3D's one unnamed disc, "Intervertebral disk" (concept FMA10446, the parent of all 23), sits between T12 and L1
+ // by its bounds: it is the T12-L1 disc, and the thoracic discs end there
+ 'Thoracic Discs':['FJ3211'],
+};
+
+// Structures with no geometry in this atlas at all - no BP3D concept, no carried mesh - and why. Every
+// structure the bridge leaves without parts must be listed here with a reason, and a listed structure
+// that gains geometry must be taken out: the build stops on either, so the coverage table's "no
+// geometry" list is always a reviewed one and never a silent gap. Reviewed 2026-09-10 against every
+// BP3D concept name (nerves, canals, sheaths, retinacula, bursae, joints, the two muscles): none of
+// these has a BodyParts3D counterpart, as selected by Human Atlas.
+const NO_JOINTS='joints are not parts in BodyParts3D; the bones on either side are, and are mapped';
+const NO_BURSAE='BodyParts3D has no bursae';
+const A_SPACE='a space between structures BodyParts3D has, with no wall of its own to draw';
+const TEXT_ONLY_NERVE="BodyParts3D's nerves are cranial and orbital; this is one of the nineteen peripheral nerves that are text-only by design (the ten with geometry are our schematic nerves)";
+export const ABSENT_STRUCTURES={
+ 'cervical-facets':NO_JOINTS,'thoracic-facets':NO_JOINTS,'lumbar-facets':NO_JOINTS,
+ 'joint-atlanto-occipital':NO_JOINTS,'joint-atlantoaxial':NO_JOINTS,'joint-uncovertebral':NO_JOINTS,'joint-sternocostal':NO_JOINTS,
+ 'shoulder-scapulothoracic':'not a synovial joint: a gliding plane between the scapula and the rib cage, both of which are mapped',
+ 'thoracic-tl-junction':'a region of the column rather than a part: T12, L1 and the disc between them each resolve to their own structure',
+ 'shoulder-scapulothoracic-bursa':NO_BURSAE,'ankle-retrocalcaneal-bursa':NO_BURSAE,
+ 'elbow-wrist-guyons-canal':A_SPACE,'elbow-wrist-cubital-tunnel':A_SPACE,'hip-adductor-canal':A_SPACE,
+ 'lumbar-rectus-sheath':'BodyParts3D has no abdominal fascia; the sheath is the aponeuroses of the obliques, which it does not model apart from the muscles',
+ 'knee-patellar-retinacula':'BodyParts3D has no retinacula at the knee (its only retinaculum is at the wrist, mapped to Flexor Retinaculum)',
+ 'lumbar-psoas-minor':'not modelled in BodyParts3D as selected by Human Atlas, and Z-Anatomy has no belly for it either (Articularis Genus, the other such muscle, reaches the atlas through its carried attachment patches)',
+ 'nerve-spinal-accessory':TEXT_ONLY_NERVE,'nerve-greater-occipital':TEXT_ONLY_NERVE,'nerve-phrenic':TEXT_ONLY_NERVE,'nerve-facial':TEXT_ONLY_NERVE,
+ 'nerve-dorsal-scapular':TEXT_ONLY_NERVE,'nerve-long-thoracic':TEXT_ONLY_NERVE,'nerve-suprascapular':TEXT_ONLY_NERVE,'nerve-axillary':TEXT_ONLY_NERVE,
+ 'nerve-musculocutaneous':TEXT_ONLY_NERVE,'nerve-thoracodorsal':TEXT_ONLY_NERVE,'nerve-pectoral':TEXT_ONLY_NERVE,'nerve-intercostal':TEXT_ONLY_NERVE,
+ 'nerve-superior-cluneal':TEXT_ONLY_NERVE,'nerve-obturator':TEXT_ONLY_NERVE,'nerve-superior-gluteal':TEXT_ONLY_NERVE,'nerve-inferior-gluteal':TEXT_ONLY_NERVE,
+ 'nerve-lat-fem-cutaneous':TEXT_ONLY_NERVE,'nerve-saphenous':TEXT_ONLY_NERVE,
 };
